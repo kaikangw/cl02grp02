@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+
+<div id="data_header">
+    <h1> {{ title }} </h1>
+</div>
+<br>
+<br>
+
+<div class="data-wrapper">
+    <div id="data_options" class="btn-group-vertical left-side" role="toolbar">
+        <h2>Data</h2>
+        <br>
+
+        <div class="mr-2" aria-label="data_1">
+            <button id="data_1" type="button" class="btn btn-secondary data_choice">Data 1</button>
+        </div>
+        <div class="mr-2" aria-label="data_2">
+            <button id="data_2" type="button" class="btn btn-secondary data_choice">Data 2</button>
+        </div>
+        <div class="mr-2" aria-label="data_3">
+            <button id="data_3" type="button" class="btn btn-secondary data_choice">Data 3</button>
+        </div>
+        <div class="mr-2" aria-label="data_4">
+            <button id="data_4" type="button" class="btn btn-secondary data_choice">Data 4</button>
+        </div>
+        <div class="mr-2" aria-label="data_5">
+            <button id="data_5" type="button" class="btn btn-secondary data_choice">Data 5</button>
+        </div>
+
+    </div>
+
+    <div id="data_image" class="right-side">
+        <canvas id="graph" width="400px" height="400px"></canvas>
+    </div>
+</div>
+
+
+{% block Javascript %}
+<!-- Script for graph -->
+<script>
+    // bar chart 1 data
+    var data_1 = {
+        labels: ['January', 'February', 'March'],
+
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [30, 120, 90]
+            },
+            {
+                fillColor: "rgba(100,220,220,0.7)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [10, 70, 110]
+            }
+        ]
+    };
+
+    // bar chart 2 data
+    var data_2 = {
+        labels: ['Apr', 'May', 'June'],
+
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [50, 100, 140]
+            },
+            {
+                fillColor: "rgba(100,220,220,0.7)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [40, 70, 200]
+            }
+        ]
+    };
+
+    var data_3 = {
+        labels: ['July', 'Aug', 'Sept'],
+
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [110, 20, 240]
+            },
+            {
+                fillColor: "rgba(100,220,220,0.7)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [60, 90, 100]
+            }
+        ]
+    };
+
+    var data_4 = {
+        labels: ['Oct', 'Nov', 'Dec'],
+
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [70, 50, 140]
+            },
+            {
+                fillColor: "rgba(100,220,220,0.7)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [60, 90, 100]
+            }
+        ]
+    };
+
+    var data_5 = {
+        labels: ['John', 'Alice', 'Brandon'],
+
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [200, 10, 160]
+            },
+            {
+                fillColor: "rgba(100,220,220,0.7)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [40, 30, 20]
+            }
+        ]
+    };
+
+    //Setting the default graph
+    var context = document.querySelector('#graph').getContext('2d');
+    new Chart(context).Line(data_1);
+
+    //Button 
+    $("#data_1").on("click", function () {
+        var context1 = document.querySelector('#graph').getContext('2d');
+        new Chart(context1).Line(data_1);
+    });
+    $("#data_2").on("click", function () {
+        var context2 = document.querySelector('#graph').getContext('2d');
+        new Chart(context2).Line(data_2);
+    });
+    $("#data_3").on("click", function () {
+        var context3 = document.querySelector('#graph').getContext('2d');
+        new Chart(context3).Line(data_3);
+    });
+    $("#data_4").on("click", function () {
+        var context4 = document.querySelector('#graph').getContext('2d');
+        new Chart(context4).Line(data_4);
+    });
+    $("#data_5").on("click", function () {
+        var context5 = document.querySelector('#graph').getContext('2d');
+        new Chart(context5).Line(data_5);
+    });
+
+</script>
+
+
+{% endblock %}
+
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+
+<table id="audits_avaliable" class="table table-bordered table-hover">
+    <caption>Audits</caption>
+    <thead class="thead dark">
+        <tr>
+            <th scope="col">Tenant</th>
+            <th scope="col">Auditor</th>
+            <th scope="col">Date Done</th>
+            <th scope="col"># of Non Compliances</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tenant,details in audits.items() %}
+        <a href="{{ url_for('audit_result', result=tenant) }}" class="stretched-link">
+        <tr>
+            <td>{{details["tenant"]}}</td>
+            <td>{{details["Auditor"]}}</td>
+            <td>{{details["done"]}}</td>
+            <td>{{details["non_compliance"]}}</td>
+        </tr>
+        </a>
+        {% endfor %}
+    </tbody>
+    </div>
+
+    {% endblock %}

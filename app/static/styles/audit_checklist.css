@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
+.checklist-container{
+  margin:  5% 5%;
+  box-shadow: inset 0 0 15px rgba(131, 102, 102, 0.2);
+  border-radius: 20px;
+  padding: 3%;
+}
+
+.btn-box button{
+  width: 110px;
+  height: 35px;
+  margin: 0 10px;
+  background: linear-gradient(to right, #373134, #635b4a,#373134);
+  border-radius: 10px;
+  border: 8px;
+  color: #fff;
+  cursor: pointer;
+} 
+
+.btn-box{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 3%;
+}
+.checklist_left {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.checklist_right{
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+} 
+
+.step{
+  display: none;
+}
+.step.active{
+  display: block;
+}

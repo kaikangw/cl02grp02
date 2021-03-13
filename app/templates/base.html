@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="HandheldFriendly" content="true">
+        <title>EzCheck</title>
+        {% block head %}
+        <!-- Required meta tags -->
+       
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+        <!-- Extensions -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+
+        <!-- CSS for different pages -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/audit_checklist.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/mainpage.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/view_data.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/view_audits.css')}}"/>
+        
+        {% endblock %}
+
+    </head>
+
+    <body>
+       <header>
+        <!--- Navbar -->
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: darkorange; font-size:  x-large;" >
+            <a class="navbar-brand " style="font-size: xx-large;" href="{{url_for('main_page')}}">EzCheck</a>
+
+            <!--- Navbar will become a dropdown when the screen size is too small-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon" ></span>
+            </button>
+            
+            <!--- Navbar categories-->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link px-3" href="{{url_for('directory_page')}}">Directory</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle px-3" href="{{url_for('main_page')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Audit
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: rgba(255, 255, 255, 0.5);">
+                    <a class="dropdown-item px-3" href="{{url_for('create_audit')}}">Create</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item px-3" href="{{url_for('audits')}}">View</a>
+                
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3" href="{{url_for('data_page')}}">Data</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Account
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: rgba(255, 255, 255, 0.5);">
+                    <a class="dropdown-item px-3"  href="{{url_for('settings')}}">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item px-3" href="{{url_for('login_page')}}">Log Out</a>
+                  </div>
+                </li>
+                
+              </ul>
+            </div>
+          </nav>
+       </header>
+        
+        <div id="container">
+          {% block content %}{% endblock %} 
+        </div>
+        <div id="footer">
+            {% block footer %}
+            {% endblock %}
+
+        </div>
+    </body>
+</html>

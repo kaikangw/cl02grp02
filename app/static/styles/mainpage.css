@@ -1,0 +1,109 @@
+/* For broadcasts*/
+#mainpage_message_headline {
+    font-weight: normal;
+    letter-spacing: .125rem;
+    text-transform: uppercase;
+}
+
+div#mainpage_broadcast{
+    overflow: auto;
+    height: 90%;
+    align-items: center;
+    align-content: center;
+}
+
+#mainpage_broadcast::-webkit-scrollbar{
+    display:none;
+}
+
+#main_broadcast_card{
+    width: 60%;
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+}
+
+#main_audit_details{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+/*previous webpage design*/
+
+/*
+
+#mainpage_timer{
+    width: 100%;
+    padding: 10px;
+    flex:1;
+    font-size: medium;
+}
+
+#mainpage_headline {
+    font-weight: normal;
+    letter-spacing: .125rem;
+    text-transform: uppercase;
+    font-size: x-large;
+}
+
+li#mainpage_clock {
+    display: inline-block;
+    list-style-type: none;
+    padding: 1em;
+    text-transform: uppercase;
+}
+
+li#mainpage_clock span {
+    display: block; 
+}
+
+#countdown{
+    font-size: large;
+}
+
+#mainpage_audit{
+    height: 50%;
+}
+
+
+div#mainpage_reminders{
+    margin: 0 auto;
+    height: 55%;
+    width: 100%;
+    overflow: auto;
+    align-items: center;
+    text-align: center;
+}
+
+#c_cards{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#main_content{
+    text-align: center;
+    font-size: small;
+    border:none;
+}
+
+#mainpage_reminders::-webkit-scrollbar{
+    display:none;
+}
+
+/*Not sure what these are lmao*/
+@media all and (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    li {
+        font-size: 1.125rem;
+        padding: .75rem;
+    }
+
+    li span {
+        font-size: 3.375rem;
+    }
+}
+*/

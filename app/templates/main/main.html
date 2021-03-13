@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% block JavaScript %}
+<!-- Script for Timer -->
+<script>
+    (function () {
+        const second = 1000,
+            minute = second * 60,
+            hour = minute * 60,
+            day = hour * 24;
+
+        let tenantdue = "{{ duedate }}",
+            countDown = new Date(tenantdue).getTime(),
+            x = setInterval(function () {
+
+                let now = new Date().getTime(),
+                    distance = countDown - now;
+
+                document.getElementById("days").innerText = Math.floor(distance / (day)),
+                    document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+                    document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+                    document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+
+                //do something later when date is reached
+                if (distance < 0) {
+                    let headline = document.getElementById("headline"),
+                        countdown = document.getElementById("countdown"),
+                        content = document.getElementById("content");
+
+                    headline.innerText = "Tenancy Due";
+                    countdown.style.display = "none";
+                    content.style.display = "block";
+
+                    clearInterval(x);
+                }
+                //seconds
+            }, 0)
+    }());
+</script>
+{% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<div id="mainpage" style="height: 100%;">
+    <div id="mainpage_broadcast">
+        <br>
+        <h1 id="mainpage_message_headline">Latest Broadcast Messages</h1>
+        <br>
+        <br>
+        {% for sender, value in broadcast.items() %}
+        <div id="main_broadcast_card" class="card" style="border-radius: 20px;">
+            <h5 class="card-header"> {{value["title"]}} </h5>
+            <div class="card-body">
+                <p class="card-text text-left">{{ value["content"]}}</p>
+            </div>
+
+            <div class="card-footer text-muted text-left"> Sent on: {{value["timestamp"]}}</div>
+        </div>
+        <br>
+        {% endfor%}
+    </div>
+
+    <!--<button id="main_audit_details" type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Audit Details" data-content="<a href='view_audit'>Click to see non-compliances </a>">Audit Details</button>
+    <script>$("[data-toggle=popover]").popover({html:true})</script>-->
+    
+</div>
+
+{% endblock %}

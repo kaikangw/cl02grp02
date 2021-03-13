@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="file1">    
+    <input type="file" accept="image/*" capture>
+    <input type="submit">
+</form>
+
+
+{% endblock %}

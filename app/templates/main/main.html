@@ -3,7 +3,7 @@
 {% block head %}
 {{ super() }}
 {% block JavaScript %}
-<!-- Script for Timer -->
+<!-- Script for Timer 
 <script>
     (function () {
         const second = 1000,
@@ -38,33 +38,38 @@
                 //seconds
             }, 0)
     }());
-</script>
+</script>-->
+
 {% endblock %}
 {% endblock %}
 
 {% block content %}
+<script>
+    $(document).on('click','.card_delete',function() {
+        var selectedRowForDeletion = $(this).closest("#main_broadcast_card");
+        selectedRowForDeletion.remove();
+    });
+</script>
 
 <div id="mainpage" style="height: 100%;">
+    <br>
+        <h1 id="mainpage_message_headline">Latest Broadcast Messages <i class="fas fa-envelope"></i></h1>
+    <br>
     <div id="mainpage_broadcast">
-        <br>
-        <h1 id="mainpage_message_headline">Latest Broadcast Messages</h1>
-        <br>
+        
         <br>
         {% for sender, value in broadcast.items() %}
-        <div id="main_broadcast_card" class="card" style="border-radius: 20px;">
-            <h5 class="card-header"> {{value["title"]}} </h5>
+        <div id="main_broadcast_card" class="card border border-warning" >
+            <h5 id="broadcast-title" class="card-header"> {{value["title"]}} <button type="button" style="border: none;" class="card_delete "><i id="icon" class="fas fa-minus-circle"></i></button></h5>
             <div class="card-body">
                 <p class="card-text text-left">{{ value["content"]}}</p>
             </div>
 
-            <div class="card-footer text-muted text-left"> Sent on: {{value["timestamp"]}}</div>
+            <div class="card-footer text-muted text-left" > Sent on: {{value["timestamp"]}}</div>
         </div>
         <br>
         {% endfor%}
     </div>
-
-    <!--<button id="main_audit_details" type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Audit Details" data-content="<a href='view_audit'>Click to see non-compliances </a>">Audit Details</button>
-    <script>$("[data-toggle=popover]").popover({html:true})</script>-->
     
 </div>
 

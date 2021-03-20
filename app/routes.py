@@ -1,11 +1,15 @@
 from re import I
-from flask import render_template, redirect, url_for, request,session
+from flask import render_template, redirect, url_for, request,session, flash
+import os
 from app import app, db, mail
 from app.models import Audit
 from app.forms import AuditForm
 from datetime import datetime
 from app.email import send_password_reset_email
 
+#Images Folder
+UPLOAD_FOLDER = os.path.join('static','images')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #route for home
 @app.route('/', methods=["GET", "POST"])
@@ -35,7 +39,7 @@ def login_page():
 
 @app.route('/main')
 def main_page():
-    broadcast_message = {"Auditor 1":{"title":"Reminder", "timestamp":"19:00:00", "content":"hello world, I am here"},"Auditor 2":{"title":"Warning", "timestamp":"20:00:00", "content":"Please comply!!"}}
+    broadcast_message = {"Auditor 1":{"title":"Reminder", "timestamp":"19:00:00", "content":"jgsdjiojfs"},"Auditor 2":{"title":"Warning", "timestamp":"20:00:00", "content":"Please comply!!"}, "Auditor 3": {"title":"Time to Eat", "timestamp":"22:00:00", "content":"Food's ready!"},"Auditor 4":{"title":"Tellonme", "timestamp":"19:00:00", "content":"hello world, I am here"},"Auditor 5":{"title":"Alert", "timestamp":"19:00:00", "content":"hello world, I am here"}}
     return render_template("main/main.html", broadcast= broadcast_message)
 
 
@@ -53,12 +57,6 @@ def create_audit():
             else:
                 j+= int(score)
         part1_score = (j/(len(part1)-k))*0.1*100
-        
-
-
-
-            
-
         part2 = [form.generalenv1.data, form.generalenv2.data, form.generalenv3.data, form.generalenv4.data, form.generalenv5.data, form.generalenv6.data, form.generalenv7.data, form.generalenv8.data, form.generalenv9.data, form.generalenv10.data, form.generalenv11.data, form.generalenv12.data, form.generalenv13.data, form.generalenv14.data, form.generalenv15.data,
                     form.handhygiene1.data, form.handhygiene2.data]
         
@@ -122,7 +120,8 @@ def audit_result(result):
     if result == "100000":
         result = Audit.query.order_by(Audit.id.desc()).first()
         audit_details = {result.tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":result.remarks, "Due":result.rectification}}
-        return render_template('audit/audit_results.html', results = audit_details )
+        images = os.listdir('./app/static/images')
+        return render_template('audit/audit_result.html', results = audit_details, images = images )
     else:
         audits = {"100000":{"done":"19/05/20", "Auditor":"Tom", "non_compliance":10, "tenant":"Kopitiam"}}
         return render_template("audit/view_audits.html", audits=audits)
@@ -139,6 +138,7 @@ def audits():
 @app.route('/data')
 def data_page():
     if session['clearance'] == "tenant":
+        flash("Not enough clearance to view page")
         return redirect(url_for('main_page'))
     else:
         return render_template("audit/view_data.html")
@@ -146,8 +146,8 @@ def data_page():
 #directory
 @app.route('/directory')
 def directory_page():
-    data = {"Shop A": "#01-01", "Shop B":"#01-02", "Shop C":"#01-03", "Shop D":"#01-04", "SHop E":"#01-05"}
-    return render_template("directory/directory.html", data=data)
+    data = {"Shop A":{"location":"#01-01", "description":"A is a pastry shop"},"Shop B":{"location":"#01-02", "description":"B is a mechanical shop"},"Shop C":{"location":"#01-03", "description":"C is a pasta shop"},"Shop D":{"location":"#01-04", "description":"D is a clothing shop"},"Shop E":{"location":"#01-05", "description":"E is a steak shop"},"Shop F":{"location":"#01-06", "description":"F is a sports shop"}}
+    return render_template("directory/directory_1.html", data=data)
 
 #admin
 @app.route('/admin')

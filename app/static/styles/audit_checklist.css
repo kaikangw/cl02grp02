@@ -1,3 +1,9 @@
+div#audit_header{
+  width: 100%;
+  font-weight: bold;
+  letter-spacing: .125rem;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
 .checklist-container{
   margin:  5% 5%;
@@ -39,4 +45,13 @@
 }
 .step.active{
   display: block;
+}
+
+/*audit results*/
+
+div#audit_gallery{
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2vw;
 }

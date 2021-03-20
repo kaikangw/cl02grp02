@@ -7,19 +7,22 @@
 {% block content %}
 
 {% for tenant, results in results.items() %}
-<div id="results_card" class="card">
-    <div class="card-header">
+<div id="results_card" class="card" style="border-color: orange;">
+    <div class="card-header" style="background-color: rgba(128, 128, 128, 0.089); border-color: orange;">
         <h1>{{tenant}}</h1>
-        <ul class="nav nav-tabs card-header-tabs" id="results-list" role="tablist">
-            <li class="nav-item">
+        <ul class="nav nav-tabs card-header-tabs" id="results-list" role="tablist" >    
+            <li class="nav-item" style="border-color: orange;">
                 <a class="nav-link active" role="tab" href="#results_details" aria-controls="results_details" aria-selected="true">Details</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" role="tab" href="#results_remarks" aria-controls="results_remarks" aria-selected="false">Additional Remarks</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" role="tab" href="#results_images" aria-controls="results_images" aria-selected="false"> Images</a>
+            </li>
         </ul>
     </div>
-    <div class="card-body">
+    <div class="card-body" >
         <div class="tab-content mt-2">
             <div id="results_details" class="tab-pane active" role="tabpanel">
                 <p class="card-text text-left"><strong>1. Professionalism & Staff Hygiene (10%): </strong>{{
@@ -41,13 +44,18 @@
             </div>
             <div id="results_images" class="tab-pane" role="tabpanel">
                 <p class="card-text text-left"><strong>Images</strong></p>
-                
+                <div class="audit-gallery">
+                    {% for name in images %}
+                    <image src="{{ url_for('static', filename='images/'+name) }}" alt="audits"></image>
+                    {% endfor %}
+                </div>
             </div>
+
         </div>
         
     </div>
 
-    <div class="card-footer text-muted">
+    <div class="card-footer text-muted" style="background-color: rgba(128, 128, 128, 0.089); border-color: orange;">
         Rectification Timeframe: {{ results["Due"] }} days left
     </div>
 </div>

@@ -29,66 +29,16 @@ div#mainpage_broadcast{
     bottom: 0;
 }
 
-/*previous webpage design*/
-
-/*
-
-#mainpage_timer{
-    width: 100%;
-    padding: 10px;
-    flex:1;
-    font-size: medium;
+i#id::before{
+    background-color: transparent !important;
 }
 
-#mainpage_headline {
-    font-weight: normal;
+#broadcast-title{
     letter-spacing: .125rem;
-    text-transform: uppercase;
-    font-size: x-large;
 }
 
-li#mainpage_clock {
-    display: inline-block;
-    list-style-type: none;
-    padding: 1em;
-    text-transform: uppercase;
-}
-
-li#mainpage_clock span {
-    display: block; 
-}
-
-#countdown{
-    font-size: large;
-}
-
-#mainpage_audit{
-    height: 50%;
-}
-
-
-div#mainpage_reminders{
-    margin: 0 auto;
-    height: 55%;
-    width: 100%;
-    overflow: auto;
-    align-items: center;
-    text-align: center;
-}
-
-#c_cards{
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#main_content{
-    text-align: center;
-    font-size: small;
-    border:none;
-}
-
-#mainpage_reminders::-webkit-scrollbar{
-    display:none;
+i#icon::before{
+    background:transparent !important   ;
 }
 
 /*Not sure what these are lmao*/
@@ -106,4 +56,3 @@ div#mainpage_reminders{
         font-size: 3.375rem;
     }
 }
-*/

@@ -18,12 +18,26 @@ div#container{
         Cantarell, 
         "Helvetica Neue", 
         sans-serif,
-        'Nunito Sans';
+        'Nunito Sans' !important;
 }
 
-.navbar .dropdown-menu{
-    background-color: transparent;
-    color: white;
-    border: transparent;
-    text-align: left;
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+.dropdown > .dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+
+i::before{
+    background:transparent !important;
+}
+
+ul.navbar-nav{
+    align-items:left;
+}
+
+a:hover{
+    background-color: rgba(255, 255, 255, 0.198) !important;
+    
 }

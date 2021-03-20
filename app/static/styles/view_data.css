@@ -1,20 +1,29 @@
+
 div#data_options{
     float:left;
     margin-top: 10px;
     padding: 10px;
     height:90%;
-    width: 30%;
+    width: 20%;
     align-items: center;
+}
+
+
+div#data_options #button-holder{
+    width: 80%;
+}
+
+div#data_options #button-holder button{
+    width: 100%;
+    font-weight: normal;
+    letter-spacing: .125rem;
 }
 
 #data_image{
     float: right;
-    border: 1px solid black;
     width: auto;
     height: 90%;
     width: 70%;
-    margin-top: 10px;
-    
 }
 
 #left-side {
@@ -49,4 +58,15 @@ div#data_options{
     width:200px;
     margin-bottom: 10%;
     border-radius: 10px;
+}
+
+
+
+@media(min-width:768px){    
+    .data_choice{
+        width:200px;
+        margin-bottom: 10%;
+        border-radius: 10px;
+    }
+    
 }

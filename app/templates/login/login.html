@@ -5,10 +5,18 @@
     <title>EzCheck</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/login.css')}}"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script>
+      if ("{{alert}}" !== "None"){
+        alert("{{alert}}");
+      }
+      
+    </script>
     
   </head>
   <body>
-    <div id="desperate">
+  
+      
+     
       <form action="/" class="login-form" method="POST">
         <h1 style="font-size: xxx-large;">Login</h1>
         <img class="img-singhealth2" src="{{ url_for('static', filename='images/singhealth2.png')}}" alt="">
@@ -30,7 +38,7 @@
         </div>
       
       </form>
-    </div>
+    
       
 
       <script type="text/javascript">

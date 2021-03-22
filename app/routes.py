@@ -19,28 +19,18 @@ def login_page():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-        user_id = sign_in_with_email_and_password(username,password)
-
+        token = sign_in_with_email_and_password(username,password)
+        user_id = token.get("localId")
         if( user_id is not None ):
             ##query database to check
-            session['username'] = username
+            session['userId'] = user_id
             session['clearance'] = "auditor"
             return redirect(url_for('main_page'))
-
-        #Default account
-       #if username == "auditor" and password == "auditor":
-       #    session['clearance'] = "auditor"
-       #    return redirect(url_for('main_page'))
-
-       #elif username == "tenant" and password == "tenant":
-       #    session['clearance'] = "tenant"
-       #    return redirect(url_for('main_page'))
-
-       #elif username == "admin" and password == "admin":
-       #    session['clearance'] = "admin"
-       #    return redirect(url_for('admin_main'))
-
-    return render_template("login/login.html")
+        else:
+            return render_template("login/login.html", alert = "Incorrect Username or Password")
+    
+    return render_template("login/login.html", alert = None)
+    
 
 @app.route('/main')
 def main_page():
@@ -116,7 +106,7 @@ def create_audit():
         db.session.add(audit)
         db.session.commit()
         send_password_reset_email('audit.html')
-        return redirect(url_for('result'))
+        return render_template('audit/audit_result.html')
         
     return render_template('audit/create_audit.html', form=form)
 

@@ -6,18 +6,20 @@
 
 {% block content %}
 <div class="checklist-container">
-  <form class="step Form1">
+  <form class="Form1">
     <table class="table table-bordered">
       <thread>
         <tr>
           <th colspan="2">A) Professionalism & Staff Hygiene (10%)</th>
           <th colspan="3">Point(s) Awarded</th>
+          <th>Upload Images & Comments</th>
         </tr>
         <tr>
           <th colspan="2">Professionalism</th>
           <td>0</td>
           <td>1</td>
           <td>NA</td>
+          <th><a href="{{url_for('audit_comments', heading='Professionalism')}}">+</a></th>
         </tr>
       </thread>
       <tbody>
@@ -28,6 +30,7 @@
           <td><input type="radio" id="0" name="1" /></td>
           <td><input type="radio" id="1" name="1" /></td>
           <td><input type="radio" id="NA" name="1" /></td>
+          <td rowspan="4"></td>
         </tr>
         <tr>
           <td><span class="number">2.</span></td>
@@ -57,6 +60,7 @@
           <td>0</td>
           <td>1</td>
           <td>NA</td>
+          <th><a href="{{url_for('audit_comments', heading='Staff Hygiene')}}">+</a></th>
         </tr>
       </thread>
       <tbody>
@@ -66,6 +70,7 @@
           <td><input type="radio" id="0" name="4" /></td>
           <td><input type="radio" id="1" name="4" /></td>
           <td><input type="radio" id="NA" name="4" /></td>
+          <td rowspan="10"></td>
         </tr>
         <tr>
           <td><span class="number">2.</span></td>
@@ -140,25 +145,22 @@
         </tr>
       </tbody>
     </table>
-    <div class="btn-box">
-      <div class="right">
-        <button class="next">Next</button>
-      </div>
-    </div>
   </form>
 
-  <form class="step Form2 active">
+  <form class="Form2 ">
     <table class="table table-bordered">
       <thread>
         <tr>
           <th colspan="2">B) Housekeeping & General Cleanliness (20%)</th>
           <th colspan="3">Point(s) Awarded</th>
+          <th>Upload Images & Comments</th>
         </tr>
         <tr>
           <th colspan="2">General Environment Cleanliness</th>
           <td>0</td>
           <td>1</td>
           <td>NA</td>
+          <th><a href="audit_additional_info_B1.html">+</a></th>
         </tr>
       </thread>
       <tbody>
@@ -169,6 +171,7 @@
           <td><input type="radio" id="0" name="12" /></td>
           <td><input type="radio" id="1" name="12" /></td>
           <td><input type="radio" id="NA" name="12" /></td>
+          <td rowspan="15"></td>
         </tr>
         <tr>
           <td><span class="number">2.</span></td>
@@ -285,6 +288,7 @@
           <td>0</td>
           <td>1</td>
           <td>NA</td>
+          <th><a href="audit_additional_info_B2.html">+</a></th>
         </tr>
       </thread>
       <tbody>
@@ -295,6 +299,7 @@
           <td><input type="radio" id="0" name="12" /></td>
           <td><input type="radio" id="1" name="12" /></td>
           <td><input type="radio" id="NA" name="12" /></td>
+          <td rowspan="2"></td>
         </tr>
         <tr>
           <td><span class="number">2.</span></td>
@@ -306,28 +311,22 @@
         </tr>
       </tbody>
     </table>
-    <div class="btn-box">
-      <div class="left">
-        <button class="back">Back</button>
-      </div>
-      <div class="right">
-        <button class="next">Next</button>
-      </div>
-    </div>
   </form>
 
-  <form class="step Form3 ">
+  <form class="Form3 ">
     <table class="table table-bordered">
       <thread>
         <tr>
           <th colspan="2">C Food Hygiene (35%)</th>
           <th colspan="3">Point(s) Awarded</th>
+          <th>Upload Images & Comments</th>
         </tr>
         <tr>
           <th colspan="2">Storage & Preparation of Food</th>
           <td>0</td>
           <td>1</td>
           <td>NA</td>
+          <th><a href="audit_additional_info_C1.html">+</a></th>
         </tr>
       </thread>
       <tbody>
@@ -337,6 +336,7 @@
           <td><input type="radio" id="0" name="12" /></td>
           <td><input type="radio" id="1" name="12" /></td>
           <td><input type="radio" id="NA" name="12" /></td>
+          <td rowspan="26"></td>
         </tr>
         <tr>
           <td><span class="number">2.</span></td>
@@ -538,6 +538,7 @@
           <td>0</td>
           <td>1</td>
           <td>NA</td>
+          <th><a href="audit_additional_info_C2.html">+</a></th>
         </tr>
       </thread>
       <tbody>
@@ -548,6 +549,7 @@
           <td><input type="radio" id="0" name="12" /></td>
           <td><input type="radio" id="1" name="12" /></td>
           <td><input type="radio" id="NA" name="12" /></td>
+          <td rowspan="11"></td>
         </tr>
         <tr>
           <td><span class="number">2.</span></td>
@@ -631,28 +633,22 @@
         </tr>
       </tbody>
     </table>
-    <div class="btn-box">
-      <div class="left">
-        <button class="back">Back</button>
-      </div>
-      <div class="right">
-        <button class="next">Next</button>
-      </div>
-    </div>
   </form>
 
-  <form class="step Form4 ">
+  <form class="Form4 ">
     <table class="table table-bordered">
       <thread>
         <tr>
           <th colspan="2">D) Healthier Choice in line with HPB’s Healthy Eating’s Initiative (15%))</th>
           <th colspan="3">Point(s) Awarded</th>
+          <th>Upload Images & Comments</th>
         </tr>
         <tr>
           <th colspan="2">Food</th>
           <td>0</td>
           <td>1</td>
           <td>NA</td>
+          <th><a href="audit_additional_info_D1.html">+</a></th>
         </tr>
       </thread>
       <tbody>
@@ -664,6 +660,7 @@
           <td><input type="radio" id="0" name="12" /></td>
           <td><input type="radio" id="1" name="12" /></td>
           <td><input type="radio" id="NA" name="12" /></td>
+          <td rowspan="7"></td>
         </tr>
         <tr>
           <td><span class="number">2.</span></td>
@@ -715,6 +712,7 @@
           <td>0</td>
           <td>1</td>
           <td>NA</td>
+          <th><a href="audit_additional_info_D2.html">+</a></th>
         </tr>
       </thread>
       <tbody>
@@ -724,6 +722,7 @@
           <td><input type="radio" id="0" name="12" /></td>
           <td><input type="radio" id="1" name="12" /></td>
           <td><input type="radio" id="NA" name="12" /></td>
+          <td rowspan="11"></td>
         </tr>
         <tr>
           <td><span class="number">2.</span></td>
@@ -749,28 +748,22 @@
         </tr>
       </tbody>
     </table>
-    <div class="btn-box">
-      <div class="left">
-        <button class="back">Back</button>
-      </div>
-      <div class="right">
-        <button class="next">Next</button>
-      </div>
-    </div>
   </form>
 
-  <form class="step Form5 ">
+  <form class="Form5 ">
     <table class="table table-bordered">
       <thread>
         <tr>
           <th colspan="2">E) Workplace Safety & Health (20%)</th>
           <th colspan="3">Point(s) Awarded</th>
+          <th>Upload Images & Comments</th>
         </tr>
         <tr>
           <th colspan="2">General Safety</th>
           <td>0</td>
           <td>1</td>
           <td>NA</td>
+          <th><a href="audit_additional_info_E1.html">+</a></th>
         </tr>
       </thread>
       <tbody>
@@ -781,6 +774,7 @@
           <td><input type="radio" id="0" name="12" /></td>
           <td><input type="radio" id="1" name="12" /></td>
           <td><input type="radio" id="NA" name="12" /></td>
+          <td rowspan="11"></td>
         </tr>
         <tr>
           <td><span class="number">2.</span></td>
@@ -862,6 +856,7 @@
           <td>0</td>
           <td>1</td>
           <td>NA</td>
+          <th><a href="audit_additional_info_E2.html">+</a></th>
         </tr>
       </thread>
       <tbody>
@@ -872,6 +867,7 @@
           <td><input type="radio" id="0" name="12" /></td>
           <td><input type="radio" id="1" name="12" /></td>
           <td><input type="radio" id="NA" name="12" /></td>
+          <td rowspan="3"></td>
         </tr>
         <tr>
           <td><span class="number">2.</span></td>
@@ -894,6 +890,7 @@
           <td>0</td>
           <td>1</td>
           <td>NA</td>
+          <th><a href="audit_additional_info_E3.html">+</a></th>
         </tr>
       </thread>
       <tbody>
@@ -903,6 +900,7 @@
           <td><input type="radio" id="0" name="12" /></td>
           <td><input type="radio" id="1" name="12" /></td>
           <td><input type="radio" id="NA" name="12" /></td>
+          <td rowspan="4"></td>
         </tr>
         <tr>
           <td><span class="number">2.</span></td>
@@ -930,16 +928,12 @@
       </tbody>
     </table>
     <div class="btn-box">
-      <div class="checklist_left">
-        <button class="back">Back</button>
-      </div>
       <div class="checklist_right">
-        <button class="next">Submit</button>
+        <button class="submit">Submit</button>
       </div>
     </div>
   </form>
 
 </div>
-<script src="./try.js"></script>
 {% endblock %}
 

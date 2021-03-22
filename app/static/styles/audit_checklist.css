@@ -6,10 +6,12 @@ div#audit_header{
 
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
 .checklist-container{
-  margin:  5% 5%;
+  margin: 5% -5%;
   box-shadow: inset 0 0 15px rgba(131, 102, 102, 0.2);
   border-radius: 20px;
   padding: 3%;
+  position: absolute;
+  text-align: left;
 }
 
 .btn-box button{
@@ -26,7 +28,6 @@ div#audit_header{
 .btn-box{
   display: flex;
   justify-content: space-between;
-  padding-bottom: 3%;
 }
 .checklist_left {
   display: flex;

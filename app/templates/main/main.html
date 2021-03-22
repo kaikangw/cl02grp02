@@ -59,8 +59,8 @@
         
         <br>
         {% for sender, value in broadcast.items() %}
-        <div id="main_broadcast_card" class="card border border-warning" >
-            <h5 id="broadcast-title" class="card-header"> {{value["title"]}} <button type="button" style="border: none;" class="card_delete "><i id="icon" class="fas fa-minus-circle"></i></button></h5>
+        <div id="main_broadcast_card" class="card " style="border-color: darkorange;">
+            <h5 id="broadcast-title" class="card-header" style="border-color: darkorange;"> {{value["title"]}} <button type="button" style="border: none;" class="card_delete "><i id="icon" class="fas fa-minus-circle"></i></button></h5>
             <div class="card-body">
                 <p class="card-text text-left">{{ value["content"]}}</p>
             </div>

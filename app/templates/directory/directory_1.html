@@ -8,13 +8,13 @@
 
 <div id="directory-grid">
     {% for name,items in data.items() %}
-    <div id="directory-grid-card" class="card" style="border-color:orange;">
-        <div class="card-header" style="background-color:rgba(255, 166, 0, 0.863);">{{name}}</div>
+    <div id="directory-grid-card" class="card" style="border-color:darkorange;">
+        <div class="card-header" style="background-color:darkorange;">{{name}}</div>
         <div class="card-body">
             <p class="card-text" style="font-style: bold;">
                 Located at: {{items['location']}}
             </p>
-            <a tabindex="0" class="btn" role="button" data-toggle="popover" data-trigger="focus" title="{{name}}" data-content="{{items['description']}}" style="background-color: rgba(245, 245, 245, 0.308); border-color: rgba(255, 166, 0, 0.253);" >Description</a>
+            <a tabindex="0" class="btn" role="button" data-toggle="popover" data-trigger="focus" title="{{name}}" data-content="{{items['description']}}" style="background-color: rgba(245, 245, 245, 0.308); border-color:rgba(255, 140, 0, 0.363);" >Description</a>
         </div>
     </div>
     {% endfor %}

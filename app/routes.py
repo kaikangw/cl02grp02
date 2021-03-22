@@ -6,6 +6,7 @@ from app.models import Audit
 from app.forms import AuditForm
 from datetime import datetime
 from app.email import send_password_reset_email
+from .sign_in_with_email_and_password import sign_in_with_email_and_password
 
 #Images Folder
 UPLOAD_FOLDER = os.path.join('static','images')
@@ -18,22 +19,26 @@ def login_page():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
+        user_id = sign_in_with_email_and_password(username,password)
 
-        ##query database to check
-        session['username'] = username
-
-        #Default account
-        if username == "auditor" and password == "auditor":
+        if( user_id is not None ):
+            ##query database to check
+            session['username'] = username
             session['clearance'] = "auditor"
             return redirect(url_for('main_page'))
 
-        elif username == "tenant" and password == "tenant":
-            session['clearance'] = "tenant"
-            return redirect(url_for('main_page'))
+        #Default account
+       #if username == "auditor" and password == "auditor":
+       #    session['clearance'] = "auditor"
+       #    return redirect(url_for('main_page'))
 
-        elif username == "admin" and password == "admin":
-            session['clearance'] = "admin"
-            return redirect(url_for('admin_main'))
+       #elif username == "tenant" and password == "tenant":
+       #    session['clearance'] = "tenant"
+       #    return redirect(url_for('main_page'))
+
+       #elif username == "admin" and password == "admin":
+       #    session['clearance'] = "admin"
+       #    return redirect(url_for('admin_main'))
 
     return render_template("login/login.html")
 
@@ -115,11 +120,21 @@ def create_audit():
         
     return render_template('audit/create_audit.html', form=form)
 
-@app.route("/audit/result/<result>", methods=['get'])
-def audit_result(result):
-    if result == "100000":
+@app.route("/audit/create/<heading>", methods=["GET"])
+def audit_comments(heading):
+    return render_template("audit/audit_additional_info_A1.html", heading = heading)
+
+
+@app.route("/audit/result/<audit_id>", methods=['get'])
+def audit_result(audit_id):
+    if audit_id == "100000":
         result = Audit.query.order_by(Audit.id.desc()).first()
         audit_details = {result.tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":result.remarks, "Due":result.rectification}}
+        images = os.listdir('./app/static/images')
+        return render_template('audit/audit_result.html', results = audit_details, images = images )
+    elif audit_id == "100001":
+        result = Audit.query.order_by(Audit.id.desc()).first()
+        audit_details = {"Popular":{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":result.remarks, "Due":result.rectification}}
         images = os.listdir('./app/static/images')
         return render_template('audit/audit_result.html', results = audit_details, images = images )
     else:
@@ -130,7 +145,7 @@ def audit_result(result):
 
 @app.route('/audits')
 def audits():
-    audits = {"100000":{"done":"19/05/20", "Auditor":"Tom", "non_compliance":10, "tenant":"Kopitiam"}}
+    audits = {"100000":{"done":"19/05/20", "Auditor":"Tom", "non_compliance":10, "tenant":"Kopitiam"}, "100001":{"done":"21/05/20", "Auditor":"Amy", "non_compliance":2, "tenant":"Popular"}}
     return render_template("audit/view_audits.html", audits = audits)
 
 

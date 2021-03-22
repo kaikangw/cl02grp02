@@ -8,9 +8,10 @@
     
   </head>
   <body>
-
+    <div id="desperate">
       <form action="/" class="login-form" method="POST">
         <h1 style="font-size: xxx-large;">Login</h1>
+        <img class="img-singhealth2" src="{{ url_for('static', filename='images/singhealth2.png')}}" alt="">
 
         <div class="form-group txtb">
           <input type="text" name="username">
@@ -26,10 +27,11 @@
 
         <div class="rm">
           <label><input type="checkbox" checked="checked" id="rememberMe">Remember Me</label>
-          <span class="txtb">Forgot <a href="#">password?</a></span>
         </div>
       
       </form>
+    </div>
+      
 
       <script type="text/javascript">
       $(".txtb input").on("focus",function(){

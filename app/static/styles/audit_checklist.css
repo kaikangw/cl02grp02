@@ -14,10 +14,18 @@ div#audit_header{
   text-align: left;
 }
 
+th{
+  font-weight: 700;
+}
+
+.checklist-li{
+  font-size: 0.9rem !important;
+}
+
 .btn-box button{
   width: 110px;
   height: 35px;
-  margin: 0 10px;
+  margin: 10px 10px;
   background: linear-gradient(to right, #373134, #635b4a,#373134);
   border-radius: 10px;
   border: 8px;

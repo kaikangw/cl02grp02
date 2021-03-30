@@ -112,7 +112,7 @@ def create_audit():
 
 @app.route("/audit/create/<heading>", methods=["GET"])
 def audit_comments(heading):
-    return render_template("audit/audit_additional_info_A1.html", heading = heading)
+    return render_template("audit/audit_additional_info.html", heading = heading)
 
 
 @app.route("/audit/result/<audit_id>", methods=['get'])

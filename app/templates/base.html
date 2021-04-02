@@ -80,8 +80,11 @@
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
                     <a class="dropdown-item px-3 mx-auto"  href="{{url_for('settings')}}" style="color: white;">Settings</a>
                     
-                    <a class="dropdown-item px-3 justify-content-center" href="{{url_for('login_page')}}" style="color: white;">Log Out</a>
+                    <a class="dropdown-item px-3 justify-content-center" id="logout" href="{{url_for('login_page')}}" style="color: white;">Log Out</a>
                   </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 " href="{{url_for('chat_page')}}" style="color: white;">Chats  <i class="fas fa-address-book fa-fw"></i></a>
                 </li>
                 
               </ul>

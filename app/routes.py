@@ -112,7 +112,7 @@ def create_audit():
 
 @app.route("/audit/create/<heading>", methods=["GET"])
 def audit_comments(heading):
-    return render_template("audit/audit_additional_info_A1.html", heading = heading)
+    return render_template("audit/audit_additional_info.html", heading = heading)
 
 
 @app.route("/audit/result/<audit_id>", methods=['get'])
@@ -153,6 +153,19 @@ def data_page():
 def directory_page():
     data = {"Shop A":{"location":"#01-01", "description":"A is a pastry shop"},"Shop B":{"location":"#01-02", "description":"B is a mechanical shop"},"Shop C":{"location":"#01-03", "description":"C is a pasta shop"},"Shop D":{"location":"#01-04", "description":"D is a clothing shop"},"Shop E":{"location":"#01-05", "description":"E is a steak shop"},"Shop F":{"location":"#01-06", "description":"F is a sports shop"}}
     return render_template("directory/directory_1.html", data=data)
+
+#chatpage
+@app.route('/chat')
+def chat_page():
+    chat_recipients = {"Alan":{"Message":"Hello"}, "Barry":{"Message":"Help Please"}, "Cal":{"Message":"Mr Bean needs help"}}
+    return render_template("chat/chat_main.html", chatInfo = chat_recipients)
+
+@app.route('/chat/<recipient>')
+def chat(recipient):
+    #query for particular recipient
+    if recipient == "Alan":
+        content = {"Alan":{"Message":"Hello", "Timestamp":"25-05-2021 1900"}}
+    return render_template("chat/chat_private.html",recipient=recipient, chatContent = content)
 
 #admin
 @app.route('/admin')

@@ -11,10 +11,12 @@
 </div>
 <br>
 <div id="availChats">
-    {% for recipient, c in chatInfo.items() %}
-    <div id="chat_card" class="card " style="border-color: darkorange;">
+    {% for recipient in chatRecipients %}
+    <div id="chat_card" class="card" style="border-color: darkorange; width: 50%;">
         <h5 id="broadcast-title" class="card-header" style="border-color: darkorange;"> {{recipient}}</h>
-        <a href="{{ url_for('chat', recipient=recipient) }}" class="btn btn-primary">To Chat</a>
+        <br>
+        <br>
+        <a href="{{ url_for('chat', user=recipient) }}" class="btn btn-primary">To Chat</a>
     </div>
     <br>
     

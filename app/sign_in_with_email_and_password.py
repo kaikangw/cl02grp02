@@ -3,6 +3,7 @@ import json
 import os
 import requests
 import pprint
+from app.models import User
 
 FIREBASE_WEB_API_KEY = "AIzaSyBXCtNbzv8EOVmvl4TVnsWmKLU5RYNF__8"
 #os.environ.get("FIREBASE_WEB_API_KEY")
@@ -31,6 +32,18 @@ def sign_in_with_email_and_password(email: str, password: str, return_secure_tok
 
     return r.json()
 
+def accountType(userid):
+    t = User.query.get(userid).type
+    return t
+
+def getusername(userid):
+    name = User.query.get(userid).username
+    return name 
+
+def getuserid(username):
+    print(username) 
+    thisid = User.query.filter(User.username == username).first()
+    return thisid.id
 
 if __name__ == "__main__":
     args = get_args()

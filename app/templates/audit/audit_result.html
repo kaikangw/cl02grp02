@@ -40,7 +40,9 @@
             </div>
             <div id="results_remarks" class="tab-pane" role="tabpanel">
                 <p class="card-text text-left"><strong>Additional Remarks: </strong></p>
-                <p class="card-text text-left">{{ results["Remarks"] }}</p>
+                {% for comment in results["Remarks"] %}
+                <p class="card-text text-left">{{ comment["senderId"] }}: {{comment["comment"]}}</p>
+                {% endfor %}
             </div>
             <div id="results_images" class="tab-pane" role="tabpanel">
                 <p class="card-text text-left"><strong>Images</strong></p>

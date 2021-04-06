@@ -2,15 +2,20 @@ from re import I
 from flask import render_template, redirect, url_for, request,session, flash
 import os
 from app import app, db, mail
-from app.models import Audit
+from app.models import Audit, Messages, Comments, Broadcasts, User
 from app.forms import AuditForm
 from datetime import datetime
 from app.email import send_password_reset_email
-from .sign_in_with_email_and_password import sign_in_with_email_and_password
+from app.sign_in_with_email_and_password import sign_in_with_email_and_password, accountType, getusername, getuserid
+from app.Pull_Message import pull_messages
+from app.View_Comments import pull_comments
+from app.Send_Message import send_msg
+from app.Chatlog import makeList
 
 #Images Folder
 UPLOAD_FOLDER = os.path.join('static','images')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+currentFriend = 0
 
 #route for home
 @app.route('/', methods=["GET", "POST"])
@@ -24,7 +29,9 @@ def login_page():
         if( user_id is not None ):
             ##query database to check
             session['userId'] = user_id
-            session['clearance'] = "auditor"
+            session['username'] = getusername(user_id)
+            session['clearance'] = accountType(user_id)
+            
             return redirect(url_for('main_page'))
         else:
             return render_template("login/login.html", alert = "Incorrect Username or Password")
@@ -119,7 +126,8 @@ def audit_comments(heading):
 def audit_result(audit_id):
     if audit_id == "100000":
         result = Audit.query.order_by(Audit.id.desc()).first()
-        audit_details = {result.tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":result.remarks, "Due":result.rectification}}
+        remarks = pull_comments("1", "hygene")
+        audit_details = {result.tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":remarks, "Due":result.rectification}}
         images = os.listdir('./app/static/images')
         return render_template('audit/audit_result.html', results = audit_details, images = images )
     elif audit_id == "100001":
@@ -157,15 +165,30 @@ def directory_page():
 #chatpage
 @app.route('/chat')
 def chat_page():
-    chat_recipients = {"Alan":{"Message":"Hello"}, "Barry":{"Message":"Help Please"}, "Cal":{"Message":"Mr Bean needs help"}}
-    return render_template("chat/chat_main.html", chatInfo = chat_recipients)
+    chat_recipients = makeList(session["userId"])
+    return render_template("chat/chat_main.html", chatRecipients = chat_recipients)
 
-@app.route('/chat/<recipient>')
-def chat(recipient):
+@app.route('/chat/<user>', methods=["POST", "GET"])
+def chat(user):
+    global currentFriend
     #query for particular recipient
-    if recipient == "Alan":
-        content = {"Alan":{"Message":"Hello", "Timestamp":"25-05-2021 1900"}}
-    return render_template("chat/chat_private.html",recipient=recipient, chatContent = content)
+    my_id = session["userId"]
+    friend = getuserid(user)
+    currentFriend = friend
+    message = pull_messages(my_id, friend)
+    for k in message:
+        k["currentUser"] = session["username"]
+    return render_template("chat/chat_private.html", chatContent = message, me = session["username"], convoPartner = user )
+    
+
+@app.route('/update', methods=["POST"])
+def update_chat():
+    if request.method == "POST":
+        msg = request.form['message']
+        id = session["userId"]
+        send_msg(id,currentFriend,msg)
+        return redirect(url_for("chat", user=getusername(currentFriend)))
+    
 
 #admin
 @app.route('/admin')

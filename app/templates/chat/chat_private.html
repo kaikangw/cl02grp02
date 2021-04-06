@@ -6,20 +6,62 @@
 {% endblock %}
 
 {% block content %}
-{% for k,v in chatContent.items() %}
-<h1>{{ k }}</h1>
 
 
-<div id="main_broadcast_card" class="card " style="border-color: darkorange;">
+
+<section class="msger">
+    <header class="msger-header">
+      <div class="msger-header-title">
+        <i class="fas fa-comment-alt"></i> {{convoPartner}}
+      </div>
+      <div class="msger-header-options">
+        <span><i class="fas fa-cog"></i></span>
+      </div>
+    </header>
+  
+    <main class="msger-chat">
+        
+        {% for v in chatContent %}
+        
+        {% if v["senderId"] == v["currentUser"] %}
+        <div class="msg right-msg">
+            <div
+            class="msg-img"
+            style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+           ></div>
+            <div class="msg-bubble">
+               
+                <div class="msg-info">
+                    <div class="msg-info-name">{{ v["currentUser"] }}</div>
+                    <div class="msg-info=timestamp">{{ v["timestamp"] }}</div>
+                </div>
+
+                <div class="msg-text">{{ v["content"] }}</div>
+            </div>
+        </div>
+
+        {% elif v["senderId"] != v["currentUser"] %}
+        <div class = "msg left-msg">
+            <div
+         class="msg-img"
+         style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+        ></div>
+            <div class="msg-bubble">
+                <div class="msg-info">
+                    <div class="msg-info-name">{{ v["senderId"] }}</div>
+                <div class="msg-info=timestamp">{{ v["timestamp"] }}</div>
+                </div>
+                <div class="msg-text">{{v["content"]}}</div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </main>
     
-    <div class="card-body">
-       
-        <p class="card-text text-left">{{ v["Message"] }}</p>
-   
-    </div>
-
-    <div class="card-footer text-muted text-left" > Sent on: {{ v["Timestamp"]}}</div>
-</div>
-<br>
-{% endfor %}
+    <form class="msger-inputarea" action="{{url_for('update_chat')}}" method="POST">
+      <input type="text" class="msger-input" placeholder="Enter your message..." name="message">
+      <button type="submit" value="submit" class="msger-send-btn">Send</button>
+    </form>
+  </section>
+ 
 {% endblock %}

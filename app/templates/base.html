@@ -34,6 +34,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/mainpage.css')}}"/>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/view_data.css')}}"/>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/directory.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/chat.css')}}"/>
         
         {% endblock %}
 
@@ -73,6 +74,9 @@
                 <li class="nav-item ">
                   <a class="nav-link px-3" href="{{url_for('data_page')}}" style="color: white;">Data  <i class="fas fa-chart-line fa-fw"></i></a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 " href="{{url_for('chat_page')}}" style="color: white;">Chats  <i class="fas fa-address-book fa-fw"></i></a>
+                </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link px-3 dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
                   Account <i class="far fa-user-circle fa-fw"></i>
@@ -83,9 +87,7 @@
                     <a class="dropdown-item px-3 justify-content-center" id="logout" href="{{url_for('login_page')}}" style="color: white;">Log Out</a>
                   </div>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link px-3 " href="{{url_for('chat_page')}}" style="color: white;">Chats  <i class="fas fa-address-book fa-fw"></i></a>
-                </li>
+               
                 
               </ul>
             </div>

@@ -12,6 +12,7 @@ firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://ezcheck-aa2cc-default-rtdb.firebaseio.com/'
 })
 
+comment_id = 0
 
 def get_comment_arg():
     parser = argparse.ArgumentParser(description="Upload a comment")
@@ -23,12 +24,14 @@ def get_comment_arg():
     parser.add_argument("--imagepaths", required=True, help="path of images to be uploaded")
     return parser.parse_args()
 
-def add_to_database(audit_id: int, body: str, image_path: str, section: str, sender_id: int, receiver_id: int):
-    comment = Comments(audit_id = audit_id, body = body, image_path = image_path, section = section, sender_id = sender_id, receiver_id = receiver_id)
+def add_to_database(audit_id: int, body: str, section: str, sender_id: int, receiver_id: int):
+    comment = Comments(audit_id = audit_id, body = body, section = section, sender_id = sender_id, receiver_id = receiver_id)
     comment.save()
+    global comment_id
+    comment_id = comment.id
  
 def upload_image(audit_id: int, section: str, image_path: str):
-    storage_path = audit_id + "/" + section
+    storage_path = str(audit_id) + "/" + section + "/" + str(comment_id)
     bucket = storage.bucket()
     file_name = image_path
     blob = bucket.blob(storage_path)
@@ -37,6 +40,8 @@ def upload_image(audit_id: int, section: str, image_path: str):
     
 if __name__ == "__main__":
     arg = get_comment_arg()
-    # image_path = upload_image(arg.auditid, arg.sectionname, arg.imagepaths)
-    add_to_database(arg.auditid, arg.body, arg.imagepaths, arg.section, arg.senderid, arg.receiverid)
-
+    add_to_database(arg.auditid, arg.body, arg.section, arg.senderid, arg.receiverid)
+    image_path = upload_image(arg.auditid, arg.sectionname, arg.imagepaths)
+    comment = Comments.query.get(comment_id)
+    comment.image_path = image_path
+    db.session.commit()

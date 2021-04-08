@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 from jinja2 import TemplateNotFound
-from app.create_user import create_account
+from app.generalFunctions import create_account
 
 adminstrator = Blueprint('admin', __name__)
 

@@ -6,7 +6,7 @@ from sqlalchemy import or_, and_
 
 # in: user id
 # out: list of other users this user is in a convo with
-
+output = []
 
 def get_user_arg():
     parser = argparse.ArgumentParser(description="Get chat logs")

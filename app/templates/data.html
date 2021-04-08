@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <form method="post" id="vform">
+        {{ form.hidden_tag() }}
+        {{ form.auditee1 }}
+        {{ form.auditee2 }}
+        {{ form.submit() }}
+    </form>
+    <div id="data_header">
+        <h1> {{ title }} </h1>
+    </div>
+    <br>
+    <br>
+
+    <div class="data-wrapper">
+        <div id="data_options" class="btn-group-vertical left-side" role="toolbar">
+            <h2>Data</h2>
+            <br>
+
+            <div class="mr-2" aria-label="data_1">
+                <button id="data_1" type="button" class="btn btn-secondary data_choice">Performance Scores</button>
+            </div>
+
+        </div>
+
+        <figure class="highcharts-figure">
+            <div id="data_images" style="display:none"></div>
+        </figure>
+    </div>
+{% endblock %}
+
+{% block chartscript %}
+    <script>
+        $(document).ready(function () {
+            $('#data_1').click(function(){
+                $('#data_images').show();
+            });
+            $("#vform").submit(function (event) {
+                event.preventDefault();
+                var post_url = "{{ url_for('search_query') }}";
+                var form_data = new FormData(this);
+                $.ajax({
+                    url: post_url,
+                    type: 'POST',
+                    data: form_data,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    error: function () {
+                        alert("Server is not Responding");
+                        location.reload();
+                    },
+                }).done(function (result) {
+                    console.log(result.audtr1)
+                    Highcharts.chart('data_images', {
+                        chart: {
+                            type: 'line'
+                        },
+                        title: {
+                            text: ' '
+                        },
+                        xAxis: {
+                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                        },
+                        yAxis: {
+                            title: {
+                                text: ' '
+                            }
+                        },
+                        plotOptions: {
+                            line: {
+                                dataLabels: {
+                                    enabled: true
+                                },
+                                enableMouseTracking: false
+                            }
+                        },
+                        exporting: {
+                            buttons: {
+                                contextButton: {
+                                    menuItems: [
+                                        'viewFullscreen',
+                                    ]
+                                }
+                            }
+                        },
+                        series: [{
+                            name: result.auditor1_name,
+                            data: result.audtr1
+                        }, {
+                            name: result.auditor2_name,
+                            data: result.audtr2
+                        }]
+                    });
+                })
+            })
+        })
+    </script>
+{% endblock %}

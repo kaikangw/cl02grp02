@@ -15,3 +15,8 @@ def send_msg(senderid, recipientid, body):
     db.session.add(msg)
     db.session.commit()
 
+if __name__ == "__main__":
+    arg = get_message_arg()
+    msg = Messages(sender_id = arg.senderid, recipient_id = arg.receiverid, body = arg.body)
+    db.session.add(msg)
+    db.session.commit()

@@ -6,32 +6,47 @@
 
 {% block content %}
 <script>
-    $(document).on('click','.card_delete',function() {
+    $(document).on('click', '.card_delete', function () {
         var selectedRowForDeletion = $(this).closest("#main_broadcast_card");
         selectedRowForDeletion.remove();
     });
+
+
 </script>
 
 <div id="mainpage" style="height: 100%;">
+    {% for alert in alert %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+
+        {{alert}}
+
+    </div>
+    {% endfor %}
+
     <br>
-        <h1 id="mainpage_message_headline">Latest Broadcast Messages <i class="fas fa-envelope"></i></h1>
+    <h1 id="mainpage_message_headline">Latest Broadcast Messages <i class="fas fa-envelope"></i></h1>
     <br>
     <div id="mainpage_broadcast">
-        
+
         <br>
         {% for sender, value in broadcast.items() %}
         <div id="main_broadcast_card" class="card " style="border-color: darkorange;">
-            <h5 id="broadcast-title" class="card-header" style="border-color: darkorange;"> {{value["title"]}} <button type="button" style="border: none;" class="card_delete "><i id="icon" class="fas fa-minus-circle"></i></button></h5>
+            <h5 id="broadcast-title" class="card-header" style="border-color: darkorange;"> {{value["title"]}} <button
+                    type="button" style="border: none;" class="card_delete "><i id="icon"
+                        class="fas fa-minus-circle"></i></button></h5>
             <div class="card-body">
                 <p class="card-text text-left">{{ value["content"]}}</p>
             </div>
 
-            <div class="card-footer text-muted text-left" > Sent on: {{value["timestamp"]}}</div>
+            <div class="card-footer text-muted text-left"> Sent on: {{value["timestamp"]}}</div>
         </div>
         <br>
         {% endfor%}
     </div>
-    
+
 </div>
+
 
 {% endblock %}

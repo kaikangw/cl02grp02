@@ -127,4 +127,12 @@ class AuditForm(FlaskForm):
     auditee = SelectField('Auditee:', 
                             choices=[('Kopitiam', 'Kopitiam')])
     
+class ResultForm(FlaskForm):
+    auditee1 = SelectField('Auditee:',
+                           choices=[('kopitiam', 'Kopitiam')])
+    auditee2 = SelectField('Auditee:',
+                           choices=[('mrbean', 'Mr Bean')])
+    submit = SubmitField('submit')
+
+
 

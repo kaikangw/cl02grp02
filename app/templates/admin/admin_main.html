@@ -6,7 +6,23 @@
 {% endblock %}
 
 {% block content %}
-<button id="create" onclick="{{ url_for('create_account') }}">Create Account</button>
-<button  id="edit"  onclick="{{ url_for('edit_account') }}">Edit Account</button>
-<button  id="delete" onclick="{{ url_for('delete_account') }}">Delete Account</button>
+<h1 id="headline">Adminstrator Actions</h1>
+<hr>
+
+<a type="button" id="account" name="createAccount" href="{{ url_for('admin.createAccount') }}">
+    <h2 id="account">Create Account <i class="fas fa-user-alt"></i></h2>  
+</a>
+<br><br>
+<a type="button" id="account" name="editAccount" href="{{ url_for('admin.editAccount') }}">
+    <h2 id="account">Edit Account <i class="fas fa-user-edit"></i></h2>  
+</a>
+<br><br>
+<a type="button" id="account" name="deleteAccount" href="{{ url_for('admin.deleteAccount') }}">
+    <h2 id="account">Delete Account <i class="fas fa-user-alt-slash"></i></h2>  
+</a>
+<br><br>
+
+<a type="button" id="logout" href="{{url_for('login_page')}}"><h5>Log Out</h5></a>
+
+
 {% endblock %}

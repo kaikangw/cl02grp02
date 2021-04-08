@@ -6,5 +6,7 @@
 {% endblock %}
 
 {% block content %}
-
-{% end block %}
+<a type="button" id="back" href="{{url_for('admin.admin_page')}}"><i class="fas fa-chevron-left"></i></a>
+<input type="text" placeholder="Search..." id="search">
+<button type="submit"><i class="fa fa-search"></i></button>
+{% endblock %}

@@ -7,4 +7,37 @@
 
 {% block content %}
 
+<div class="testbox">
+    <a type="button" id="back" href="{{url_for('admin.admin_page')}}"><i class="fas fa-chevron-left"></i></a>  <h1 id="registration">Registration <i class="fas fa-users"></i></h1>
+
+    <form name="createUser" action="/admin/create" method="POST">
+        <hr>
+        <div id="input-group">
+            <label id="icon" for="email"><i class="far fa-envelope"></i></label>
+            <input type="text" class="form-input" name="email" id="email" placeholder="Email" required />
+        </div>
+        <div id="input-group">
+            <label id="icon" for="username"><i class="far fa-user"></i></label>
+            <input type="text" class="form-input" name="username" id="username" placeholder="Name" required />
+        </div>
+        <div id="input-group">
+            <label id="icon" for="password"><i class="fas fa-shield-alt"></i></label>
+            <input type="text" class="form-input" name="password" id="password" placeholder="Password" required />
+        </div>
+        <div id="input-group"><label for="accountType" id="icon"><i class="far fa-user-circle"></i></label>
+            <select class="form-input" name="accountType" id="accountType">
+                <option value="admin">Admin</option>
+                <option value="auditor">Auditor</option>
+                <option value="tenant">Tenant</option>
+            </select>
+        </div>
+        <hr>
+        <button id="registerBtn" type="submit" value="register">Register</button>
+    </form>
+    <br>
+    {% for alert in get_flashed_messages() %}
+    {{alert}}
+    {% endfor %}
+
+</div>
 {% endblock %}

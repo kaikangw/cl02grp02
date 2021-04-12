@@ -36,13 +36,17 @@ def add_to_database(audit_id: int, body: str, image_path: str, section: str, sen
 
 
  
-def upload_image(audit_id: int, section: str, image_path: str):
-    storage_path = audit_id + "/" + section
-    bucket = storage.bucket()
-    file_name = image_path
-    blob = bucket.blob(storage_path)
-    blob.upload_from_filename(file_name)
-    return storage_path
+def upload_image(audit_id: int, section: str, image_path: list):
+    current_path = 0
+    #image_path should be a list
+    for x in image_path:
+        storage_path = str(audit_id) + "/" + section + str(current_path)
+        bucket = storage.bucket()
+        file_name = x
+        blob = bucket.blob(storage_path)
+        blob.upload_from_filename(file_name)
+        current_path += 1
+    return str(audit_id) + "/" + section
     
 if __name__ == "__main__":
     arg = get_comment_arg()

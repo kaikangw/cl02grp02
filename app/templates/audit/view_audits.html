@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div id="audit_header">
+    <h1> Audits <i class="fas fa-book-open fa-fw"></i></h1>
+</div>
+<br>
+<table id="audits_avaliable" class="table table-hover">
+    <caption>Audits</caption>
+    <thead class="thead" style="background-color: #f06c1ab0;">
+        <tr >
+            <th scope="col">Tenant</th>
+            <th scope="col">Auditor</th>
+            <th scope="col">Date Done</th>
+            <th scope="col"># of Non Compliances</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for audit_id,details in audits.items() %}
+        <tr>
+            <td>{{details["tenant"]}}</td>
+            <td>{{details["Auditor"]}}</td>
+            <td>{{details["done"]}}</td>
+            <td>{{details["non_compliance"]}} <a href="{{ url_for('audits.audit_result', audit_id=audit_id) }}"><i class="far fa-arrow-alt-circle-right fa-fw" style="color: darkorange; padding-left: 30px;"></i></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </div>
+
+    {% endblock %}

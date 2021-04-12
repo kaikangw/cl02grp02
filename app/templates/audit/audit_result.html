@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+
+{% for tenant, results in results.items() %}
+<div id="results_card" class="card" style="border-color: darkorange;">
+    <div class="card-header" style="background-color: rgba(128, 128, 128, 0.089); border-color: darkorange;">
+        <h1>{{tenant}}</h1>
+        <ul class="nav nav-tabs card-header-tabs" id="results-list" role="tablist" >    
+            <li class="nav-item" style="border-color: darkorange;">
+                <a class="nav-link active" role="tab" href="#results_details" aria-controls="results_details" aria-selected="true">Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" role="tab" href="#results_remarks" aria-controls="results_remarks" aria-selected="false">Additional Remarks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" role="tab" href="#results_images" aria-controls="results_images" aria-selected="false"> Images</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body" >
+        <div class="tab-content mt-2">
+            <div id="results_details" class="tab-pane active" role="tabpanel">
+                <p class="card-text text-left"><strong>1. Professionalism & Staff Hygiene (10%): </strong>{{
+                    results["PSH"] }}</p>
+                <p class="card-text text-left"><strong>2. Housekeeping & General Cleanliness (20%): </strong>{{
+                    results["HGC"] }}</p>
+                <p class="card-text text-left"><strong>3. Food Hygiene (35%): </strong>{{ results["FH"] }}</p>
+                <p class="card-text text-left"><strong>4. Public & Safety Healthcare (15%): </strong>{{ results["HEI"]
+                    }}</p>
+                <p class="card-text text-left"><strong>5. Work & Safety Healthcare(20%): </strong>{{ results["WSH"] }}
+                </p>
+                <br>
+                <br>
+                <h2 class="card-text text-left"><strong>Total: </strong>{{ results["Total"] }}/100</h2>
+            </div>
+            <div id="results_remarks" class="tab-pane" role="tabpanel">
+                <p class="card-text text-left"><strong>Additional Remarks: </strong></p>
+                {% for comment in results["Remarks"] %}
+                <p class="card-text text-left">{{ comment["senderId"] }}: {{comment["comment"]}}</p>
+                {% endfor %}
+            </div>
+            <div id="results_images" class="tab-pane" role="tabpanel">
+                <p class="card-text text-left"><strong>Images</strong></p>
+                <div class="audit-gallery">
+                    {% for name in images %}
+                    <image src="{{ url_for('static', filename='images/'+name) }}" alt="audits"></image>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
+    <div class="card-footer text-muted" style="background-color: rgba(128, 128, 128, 0.089); border-color: darkorange;">
+        Rectification Timeframe: {{ results["Due"] }} days left
+    </div>
+</div>
+
+<script>
+    $('#results-list a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+</script>
+
+
+
+
+{% endfor %}
+
+{% endblock %}

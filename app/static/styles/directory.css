@@ -1,0 +1,13 @@
+#directory-grid { 
+    padding: 50px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2vw;
+}
+
+#directory-grid-card div.card-header {
+    font-weight: bold;
+    letter-spacing: .125rem;
+    text-transform: uppercase;
+}

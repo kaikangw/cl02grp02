@@ -1,0 +1,58 @@
+/* For broadcasts*/
+#mainpage_message_headline {
+    font-weight: normal;
+    letter-spacing: .125rem;
+    text-transform: uppercase;
+}
+
+div#mainpage_broadcast{
+    overflow: auto;
+    height: 90%;
+    align-items: center;
+    align-content: center;
+}
+
+#mainpage_broadcast::-webkit-scrollbar{
+    display:none;
+}
+
+#main_broadcast_card{
+    width: 60%;
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+}
+
+#main_audit_details{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+i#id::before{
+    background-color: transparent !important;
+}
+
+#broadcast-title{
+    letter-spacing: .125rem;
+}
+
+i#icon::before{
+    background:transparent !important   ;
+}
+
+/*Not sure what these are lmao*/
+@media all and (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    li {
+        font-size: 1.125rem;
+        padding: .75rem;
+    }
+
+    li span {
+        font-size: 3.375rem;
+    }
+}

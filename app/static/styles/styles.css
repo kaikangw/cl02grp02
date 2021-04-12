@@ -1,0 +1,43 @@
+div#container{
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    text-align: center;
+    display: inline-block;
+    width: 80%;
+    height: 75%;
+    font-family: -apple-system, 
+        BlinkMacSystemFont, 
+        "Segoe UI", 
+        Roboto, 
+        Oxygen-Sans, 
+        Ubuntu, 
+        Cantarell, 
+        "Helvetica Neue", 
+        sans-serif,
+        'Nunito Sans' !important;
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+.dropdown > .dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+
+i::before{
+    background:transparent !important;
+}
+
+ul.navbar-nav{
+    align-items:left;
+}
+
+a:hover{
+    background-color: rgba(255, 255, 255, 0.198) !important;
+    
+}

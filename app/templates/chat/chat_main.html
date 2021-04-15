@@ -7,19 +7,18 @@
 
 {% block content %}
 <div id="chat_main">
-  <h1 id="chatpage_headline">Chats</h1>
+  <h1 id="chatpage_headline">Chats <i class="far fa-comment-alt"></i></h1>
 </div>
 <br>
-<div id="availChats">
+<div id="availChats" class="card-columns">
   {% for recipient in chatRecipients %}
-  <div id="chat_card" class="card" style="border-color: darkorange; width: 50%;">
+  <div id="chat_card" class="card" style="border-color: darkorange;">
     <h5 id="broadcast-title" class="card-header" style="border-color: darkorange;"> {{recipient}}</h>
       <br>
       <br>
       <a id="tochat" href="{{ url_for('chat', user=recipient) }}" class="btn btn-primary">To Chat</a>
   </div>
   <br>
-
   {% endfor %}
 </div>
 

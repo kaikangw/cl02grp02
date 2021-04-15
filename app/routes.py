@@ -41,6 +41,7 @@ def login_page():
         
             else:
                 return redirect(url_for('main_page'))
+                
         else:
             return render_template("login/login.html", alert = "Incorrect Username or Password")
     
@@ -321,6 +322,17 @@ def saved_audit():
         dates.append(d)
     return render_template("saved_audit.html", dates=dates)
 
+#broadcast message
+@app.route('/create_broadcast', methods=["GET","POST"])
+def create_broadcast():
+
+    if request.method == "POST":
+        recipient = request.form["broadcastTo"]
+        print(recipient)
+        broadcast = request.form["broadcastMsg"]
+        print(broadcast)
+        render_template("broadcast/broadcast.html")
+    return render_template("broadcast/broadcast.html")
 
 #blueprints
 app.register_blueprint(adminstrator, url_prefix="/admin")

@@ -35,6 +35,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/view_data.css')}}"/>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/directory.css')}}"/>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/chat.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/broadcast.css')}}"/>
         
         {% endblock %}
 
@@ -60,6 +61,8 @@
                 <li class="nav-item">
                   <a class="nav-link px-3 " href="{{url_for('directory_page')}}" style="color: white;">Directory  <i class="fas fa-address-book fa-fw"></i></a>
                 </li>
+                
+                {% if session["clearance"] == "auditor" %}
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle px-3 white" href="{{url_for('main_page')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
                     Audit  <i class="fas fa-book fa-fw"></i>
@@ -76,9 +79,13 @@
                   <a class="nav-link px-3" href="{{url_for('data_page')}}" style="color: white;">Data  <i class="fas fa-chart-line fa-fw"></i></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link px-3 " href="{{url_for('chat_page')}}" style="color: white;">Chats  <i class="fas fa-address-book fa-fw"></i></a>
+                  <a class="nav-link px-3 " href="{{url_for('chat_page')}}" style="color: white;">Chats  <i class="far fa-comments"></i></i></a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item">
+                  <a class="nav-link px-3 " href="{{url_for('create_broadcast')}}" style="color: white;">Broadcast  <i class="fas fa-bullhorn"></i></a>
+                </li>
+              
+                <li class="nav-item dropdown float-right">
                   <a class="nav-link px-3 dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
                   Account <i class="far fa-user-circle fa-fw"></i>
                   </a>
@@ -88,8 +95,31 @@
                     <a class="dropdown-item px-3 justify-content-center" id="logout" href="{{url_for('login_page')}}" style="color: white;">Log Out</a>
                   </div>
                 </li>
+                {% else %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle px-3 white" href="{{url_for('main_page')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                    Audit  <i class="fas fa-book fa-fw"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
+                    <a class="dropdown-item px-3" href="{{url_for('audits.view_audits')}}" style="color: white;">View</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 " href="{{url_for('chat_page')}}" style="color: white;">Chats  <i class="far fa-comments"></i></i></a>
+                </li>
+                <li class="nav-item dropdown float-right">
+                  <a class="nav-link px-3 dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                  Account <i class="far fa-user-circle fa-fw"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
+                    <a class="dropdown-item px-3 mx-auto"  href="{{url_for('settings')}}" style="color: white;">Settings</a>
+                    
+                    <a class="dropdown-item px-3 justify-content-center" id="logout" href="{{url_for('login_page')}}" style="color: white;">Log Out</a>
+                  </div>
+                </li>
+
+                {% endif %}
                
-                
               </ul>
             </div>
           </nav>

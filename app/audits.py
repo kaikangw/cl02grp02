@@ -5,10 +5,12 @@ from app import db
 from app.models import Audit, Messages, Comments, Broadcasts, User
 from app.forms import AuditForm, ResultForm
 from app.generalFunctions import pull_comments
+from datetime import datetime
+from app.email import send_audit_mail
 
 audits = Blueprint('audits', __name__)
-
-@audits.route("/create")
+#changed back to audit.html as the form is still not working
+@audits.route("/create", methods=["GET","POST"])
 def create_audit():    
     form = AuditForm()
     if form.validate_on_submit():
@@ -74,10 +76,11 @@ def create_audit():
         audit = Audit(part1_score = int(part1_score), part2_score = int(part2_score), part3_score= int(part3_score), part4_score = int(part4_score), part5_score = int(part5_score), total_score = int(total), auditor = form.auditor.data, tenant = form.auditee.data, rectification = form.rectification.data, timestamp = datetime.now(), remarks = form.remarks.data)
         db.session.add(audit)
         db.session.commit()
-        send_audit_mail('audit.html', form)
-        return render_template('audit/audit_result.html')
+        #send_audit_mail('audit.html', form)
+        latest_audit =  Audit.query.order_by(Audit.id.desc()).first()
+        return render_template(url_for("audits.audit_result",audit_id = latest_audit.id)  )
         
-    return render_template('audit/create_audit.html', form=form)
+    return render_template('audit/audit.html', form=form)
 
 @audits.route("/comments-for-<heading>", methods=["GET"])
 def audit_comments(heading):

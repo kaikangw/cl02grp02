@@ -24,7 +24,8 @@ class Audit(db.Model):
     comments = db.relationship("Comments", backref = 'audit', lazy = 'dynamic')
 
     def __repr__(self):
-        return '<Time {time}, Score {score}, part 1 {part1}, part 2 {part2}, part 3 {part3}, part 4 {part4}, part 5 {part5}>'.format(score = self.total_score, part2= self.part2_score, part1 = self.part1_score, part3 = self.part3_score, part4 = self.part4_score, part5 = self.part5_score, time = self.timestamp)
+        return '<Time {time}, Score {score}, Tenant {tenant}>'.format(score = self.total_score, time = self.timestamp, tenant = self.tenant)
+
 
 #all stuff i'm adding
 
@@ -33,7 +34,7 @@ class User(db.Model):
     username = db.Column(db.String(64), index = True, unique = True)
     email = db.Column(db.String(120), index = True, unique = True)
     type = db.Column(db.String(20)) #tenant/auditor/admin
-
+    institution = db.Column(db.String(64))
     messages_sent = db.relationship('Messages', foreign_keys='Messages.sender_id', backref='author', lazy='dynamic')
     messages_received = db.relationship('Messages', foreign_keys='Messages.recipient_id', backref='recipient', lazy='dynamic')
     

@@ -106,199 +106,94 @@ def settings():
     return render_template("login/login.html")
 
 
-# ajax request url
-@app.route('/search_query', methods=['GET', 'POST'])
-def search_query():
-    auditor1 = request.form['auditee1']
-    auditor2 = request.form['auditee2']
-    result1 = Audit.query.filter_by(auditor=auditor1)
-    result2 = Audit.query.filter_by(auditor=auditor2)
-    mo = []
-    for data in result1:
-        datetime_in_data = str(data.timestamp)
-        dates_data = datetime_in_data.split(' ')
-        m = dates_data[0].split('-')
-        mo.append(m[1])
-    months = []
-    for data in result2:
-        datestime_in_data = str(data.timestamp)
-        dates_in_data = datestime_in_data.split(' ')
-        month = dates_in_data[0].split('-')
-        months.append(month[1])
-    print(mo)
-    print(months)
-    audtr1 = []
-    audtr2 = []
-    if '01' in mo:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 1).order_by(Audit.id.desc()).first()
-        audtr1.append(ts.total_score)
-
-    else:
-        audtr1.append(0)
-
-    if '02' in mo:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 2).order_by(Audit.id.desc()).first()
-        audtr1.append(ts.total_score)
-
-    else:
-        audtr1.append(0)
-
-    if '03' in mo:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 3).order_by(Audit.id.desc()).first()
-        audtr1.append(ts.total_score)
-
-    else:
-        audtr1.append(0)
-
-    if '04' in mo:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 4).order_by(Audit.id.desc()).first()
-        audtr1.append(ts.total_score)
-
-    else:
-        audtr1.append(0)
-
-    if '05' in mo:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 5).order_by(Audit.id.desc()).first()
-        audtr1.append(ts.total_score)
-
-    else:
-        audtr1.append(0)
-
-    if '06' in mo:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 6).order_by(Audit.id.desc()).first()
-        audtr1.append(ts.total_score)
-
-    else:
-        audtr1.append(0)
-
-    if '07' in mo:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 7).order_by(Audit.id.desc()).first()
-        audtr1.append(ts.total_score)
-
-    else:
-        audtr1.append(0)
-
-    if '08' in mo:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 8).order_by(Audit.id.desc()).first()
-        audtr1.append(ts.total_score)
-
-    else:
-        audtr1.append(0)
-
-    if '09' in mo:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 9).order_by(Audit.id.desc()).first()
-        audtr1.append(ts.total_score)
-
-    else:
-        audtr1.append(0)
-
-    if '10' in mo:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 10).order_by(Audit.id.desc()).first()
-        audtr1.append(ts.total_score)
-    else:
-        audtr1.append(0)
-
-    if '11' in mo:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 11).order_by(Audit.id.desc()).first()
-        audtr1.append(ts.total_score)
-    else:
-        audtr1.append(0)
-
-    if '12' in mo:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 12).order_by(Audit.id.desc()).first()
-        audtr1.append(ts.total_score)
-    else:
-        audtr1.append(0)
-
-
-    if '01' in months:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 1).order_by(Audit.id.desc()).first()
-        audtr2.append(ts.total_score)
-
-    else:
-        audtr2.append(0)
-
-    if '02' in months:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 2).order_by(Audit.id.desc()).first()
-        audtr2.append(ts.total_score)
-
-    else:
-        audtr2.append(0)
-
-    if '03' in months:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 3).order_by(Audit.id.desc()).first()
-        audtr2.append(ts.total_score)
-
-    else:
-        audtr2.append(0)
-
-    if '04' in months:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 4).order_by(Audit.id.desc()).first()
-        audtr2.append(ts.total_score)
-
-    else:
-        audtr2.append(0)
-
-    if '05' in months:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 5).order_by(Audit.id.desc()).first()
-        audtr2.append(ts.total_score)
-
-    else:
-        audtr2.append(0)
-
-    if '06' in months:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 6).order_by(Audit.id.desc()).first()
-        audtr2.append(ts.total_score)
-
-    else:
-        audtr2.append(0)
-
-    if '07' in months:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 7).order_by(Audit.id.desc()).first()
-        audtr2.append(ts.total_score)
-
-    else:
-        audtr2.append(0)
-
-    if '08' in months:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 8).order_by(Audit.id.desc()).first()
-        audtr2.append(ts.total_score)
-
-    else:
-        audtr2.append(0)
-
-    if '09' in months:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 9).order_by(Audit.id.desc()).first()
-        audtr2.append(ts.total_score)
-
-    else:
-        audtr2.append(0)
-
-    if '10' in months:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 10).order_by(Audit.id.desc()).first()
-        audtr2.append(ts.total_score)
-    else:
-        audtr2.append(0)
-
-    if '11' in months:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 11).order_by(Audit.id.desc()).first()
-        audtr2.append(ts.total_score)
-    else:
-        audtr2.append(0)
-
-    if '12' in months:
-        ts = Audit.query.filter(extract('month', Audit.timestamp) == 12).order_by(Audit.id.desc()).first()
-        audtr2.append(ts.total_score)
-    else:
-        audtr2.append(0)
-
-    return {'audtr1':audtr1, 'audtr2':audtr2, 'auditor1_name':auditor1, 'auditor2_name':auditor2}
 
 @app.route('/data', methods=['GET', 'POST'])
 def data_page():
-    if check_admin():
-        form = ResultForm()
-        return render_template("data.html", form=form)
+    #if check_admin():
+    
+    form = ResultForm()
+    if form.validate_on_submit():
+        option = form.option.data
+        if  option == 'tenant':
+            title = "TOP 5 WORST PERFORMNG TENANTS"
+            month = datetime.now().month
+            tenants = Audit.query.filter(extract('month',Audit.timestamp)==month).order_by(Audit.total_score.asc()).all()
+            tenants = tenants[1:6]
+            tenant_list = []
+            for tenant in tenants:
+                t = {'score':tenant.total_score,'tenant':tenant.tenant}
+                tenant_list.append(t)
+            return render_template("audit/compare.html",tenants = tenant_list, title = title)  
+
+        elif option == 'individual':
+            title = "TOP 5 WORST PERFORMNG INDIVIDUAL SCORES"
+            part1 = "Professionalism & Staff Hygiene"
+            part2 = "Housekeeping & General Cleanliness"
+            part3 = "Food Hygiene"
+            part4 = "Healthier Choice in line with HPB’s Healthy Eating’s Initiative "
+            part5 = "Workplace Safety & Health  "
+            month = datetime.now().month
+            tenants_part1 = Audit.query.filter(extract('month',Audit.timestamp)==month).order_by(Audit.part1_score.asc(),Audit.tenant.asc()).all()
+            tenants_part2 = Audit.query.filter(extract('month',Audit.timestamp)==month).order_by(Audit.part2_score.asc(),Audit.tenant.asc()).all()
+            tenants_part3 = Audit.query.filter(extract('month',Audit.timestamp)==month).order_by(Audit.part3_score.asc(),Audit.tenant.asc()).all()
+            tenants_part4 = Audit.query.filter(extract('month',Audit.timestamp)==month).order_by(Audit.part4_score.asc(),Audit.tenant.asc()).all()           
+            tenants_part5 = Audit.query.filter(extract('month',Audit.timestamp)==month).order_by(Audit.part5_score.asc(),Audit.tenant.asc()).all()
+            tenants_part1 = tenants_part1[1:6]
+            tenants_part2 = tenants_part2[1:6]
+            tenants_part3 = tenants_part3[1:6]
+            tenants_part4 = tenants_part4[1:6]
+            tenants_part5 = tenants_part5[1:6]
+            tenant_list1 = []
+            tenant_list2 = []
+            tenant_list3 = []
+            tenant_list4 = []
+            tenant_list5 = []
+            for tenant in tenants_part1:
+                t1 = {'score':tenant.part1_score,'tenant':tenant.tenant}
+                tenant_list1.append(t1)            
+            for tenant in tenants_part2:
+                t2 = {'score':tenant.part2_score,'tenant':tenant.tenant}
+                tenant_list2.append(t2)            
+            for tenant in tenants_part3:
+                t3 = {'score':tenant.part3_score,'tenant':tenant.tenant}
+                tenant_list3.append(t3)            
+            for tenant in tenants_part4:
+                t4 = {'score':tenant.part4_score,'tenant':tenant.tenant}
+                tenant_list4.append(t4)           
+            for tenant in tenants_part5:
+                t5 = {'score':tenant.part5_score,'tenant':tenant.tenant}
+                tenant_list5.append(t5)
+            return render_template("audit/individual.html", title = title, part1 = part1, part2 = part2, part3 = part3, part4 = part4, part5 = part5,tenant_list1=tenant_list1,tenant_list2=tenant_list2,tenant_list3=tenant_list3,tenant_list4=tenant_list4,tenant_list5=tenant_list5)  
+     #   else if option == 'institution':
+    return render_template("data.html", form=form)
+
+@app.route('/data/individual', methods=['GET', 'POST'])
+def data_individual():
+    form = AuditForm()
+    '''
+    if form.validate_on_submit():
+        option = form.auditee.data
+        tenants = Audit.query.filter(Audit.tenant=="kopitiam").order_by(Audit.timestamp.asc()).all()    
+        score = []
+        for tenant in tenants:
+            score.append(tenant.total_score)
+'''
+
+    return render_template('individual.html', form=form)
+
+@app.route('/search_query', methods=['GET', 'POST'])
+def search_query():
+    print("searching")
+    tenant = request.form['auditee']
+    tenants = Audit.query.filter(Audit.tenant==tenant).order_by(Audit.timestamp.asc()).all()    
+    score = []
+    for tenant in tenants:
+        score.append(tenant.total_score)
+    return {'tenant':score,'tenant_name':tenant}
+'''
+
+    return render_template("data.html", form=form)
+    
     else:
         alert = ["You don't have the clearance to view this!"]
         broadcast_message = {"Auditor 1":{"title":"Reminder", "timestamp":"19:00:00", "content":"jgsdjiojfs"},
@@ -308,7 +203,7 @@ def data_page():
             "Auditor 5":{"title":"Alert", "timestamp":"19:00:00", "content":"hello world, I am here"}}
             
         return render_template("main/main.html",broadcast= broadcast_message, alert = alert)
-
+'''
 @app.route('/saved', methods=['GET', 'POST'])
 def saved_audit():
     audit = Audit.query.all()

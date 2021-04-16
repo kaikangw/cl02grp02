@@ -125,13 +125,11 @@ class AuditForm(FlaskForm):
                                     (7,'7 Days')])
 
     auditee = SelectField('Auditee:', 
-                            choices=[('Kopitiam', 'Kopitiam')])
+                            choices=[('kopitiam', 'Kopitiam')])
     
 class ResultForm(FlaskForm):
-    auditee1 = SelectField('Auditee:',
-                           choices=[('kopitiam', 'Kopitiam')])
-    auditee2 = SelectField('Auditee:',
-                           choices=[('mrbean', 'Mr Bean')])
+    option = SelectField('option:',
+                           choices=[('tenant', 'Worst performing tenants'),('individual', 'Worst performing individual scores'),('institution', 'Worst performing institutions ')])
     submit = SubmitField('submit')
 
 

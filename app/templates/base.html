@@ -72,9 +72,20 @@
 
                   </div>
                 </li>
-                <li class="nav-item ">
-                  <a class="nav-link px-3" href="{{url_for('data_page')}}" style="color: white;">Data  <i class="fas fa-chart-line fa-fw"></i></a>
-                </li>
+
+
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle px-3 white" href="{{url_for('main_page')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                    Data  <i class="fas fa-chart-line fa-fw"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
+                    <a class="dropdown-item px-3" href="{{url_for('data_page')}}" style="color: white;">Compare</a>
+          
+                    <a class="dropdown-item px-3" href="{{url_for('data_individual')}}" style="color: white;">View</a>
+                  </div>
+
+
                 <li class="nav-item">
                   <a class="nav-link px-3 " href="{{url_for('chat_page')}}" style="color: white;">Chats  <i class="fas fa-address-book fa-fw"></i></a>
                 </li>

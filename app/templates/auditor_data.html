@@ -5,24 +5,23 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{title}}</h1>
-		<table class="table table-striped">
-		    {% for data in auditor_dict %}
-			    <thead>
-			    <h2>{{data}}</h2>
-			    <tr>
-			        <th>Date</th>
-			        <th>Tenant</th>
-			    </tr>
-			    </thead>
-			    <tbody>
-			    {% for items in auditor_dict[data] %}
-			        <tr>
-			            <td>{{ data }}</td>
-			            <td>{{ items }}</td>
-			        </tr>
-			    {% endfor %}
-			    </tbody>
+    <table class="table table-striped">
+        <thead>
+        <h1>{{title}}</h1>
+        {% for month in auditor %}
+		    <tr>
+		        <th>Date</th>
+		        <th>Tenant</th>
+		    </tr>
+		    </thead>
+		    <tbody>
+		    {% for record in month %}
+		        <tr>
+		            <td>{{ record[1] }}</td>
+		            <td>{{ record[0] }}</td>
+		        </tr>
 		    {% endfor %}
-		</table>
+		    </tbody>
+	    {% endfor %}
+    </table>
 {% endblock %}

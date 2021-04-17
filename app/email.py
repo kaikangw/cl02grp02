@@ -20,7 +20,9 @@ def send_audit_mail(html,form):
     with open("output.html", "w") as fh:
         fh.write(output_from_parsed_template)
     options = {"enable-local-file-access": None}
-    pdfkit.from_file('output.html', 'audit.pdf', options = options)
+    path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    pdfkit.from_file('output.html', 'audit.pdf', options = options,configuration=config)
 
     send_email('Audit', 
                sender=app.config['ADMINS'][0],

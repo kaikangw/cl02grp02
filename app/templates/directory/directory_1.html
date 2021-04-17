@@ -5,18 +5,22 @@
 {% endblock %}
 
 {% block content %}
+<h1>{{title}}</h1>
 
 <div id="directory-grid">
-    {% for name,items in data.items() %}
-    <div id="directory-grid-card" class="card" style="border-color:darkorange;">
-        <div class="card-header" style="background-color:darkorange;">{{name}}</div>
-        <div class="card-body">
-            <p class="card-text" style="font-style: bold;">
-                Located at: {{items['location']}}
-            </p>
-            <a tabindex="0" class="btn" role="button" data-toggle="popover" data-trigger="focus" title="{{name}}" data-content="{{items['description']}}" style="background-color: rgba(245, 245, 245, 0.308); border-color:rgba(255, 140, 0, 0.363); width: 80%; height: 5%;" >Description</a>
+    {%for data in tenants_list%}
+        <div id="directory-grid-card" class="card" style="border-color:darkorange;">
+            <div class="card-header" style="background-color:darkorange;">{{data[0]}}</div>
+            <div class="card-body">
+                <p class="card-text" style="font-style: bold;">
+                    Located at: {{data[1]}}
+                </p>
+                <p class="card-text" style="font-style: bold;">
+                    Tenancy: {{data[3]}} Days
+                </p>
+                <a tabindex="0" class="btn" role="button" data-toggle="popover" data-trigger="focus" title="{{name}}" data-content="{{data[2]}}" style="background-color: rgba(245, 245, 245, 0.308); border-color:rgba(255, 140, 0, 0.363); width: 80%; height: 5%;" >Description</a>
+            </div>
         </div>
-    </div>
     {% endfor %}
 </div>
 

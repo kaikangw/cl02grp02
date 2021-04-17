@@ -137,4 +137,13 @@ class NewForm(FlaskForm):
                         choices=[('auditorA', 'Auditor A')])
     submit = SubmitField('submit')
 
+class ShopForm(FlaskForm):
+    institution = SelectField('institution:', 
+                            choices=[('CGH', 'CGH')])
+    submit = SubmitField('submit')
 
+
+class GraphForm(FlaskForm):
+    auditee = SelectField('Auditee:', 
+                            choices=[('kopitiam', 'Kopitiam')])
+    submit = SubmitField('submit')

@@ -5,7 +5,7 @@ from app import app, db, mail
 from app.adminstrator import adminstrator
 from app.audits import audits
 from app.models import Audit, Messages, Comments, Broadcasts, User
-from app.forms import AuditForm, ResultForm, NewForm
+from app.forms import AuditForm, ResultForm, NewForm, ShopForm, GraphForm
 from datetime import datetime
 from sqlalchemy import func, extract
 from app.email import send_audit_mail
@@ -54,10 +54,21 @@ def main_page():
 
 
 #directory
-@app.route('/directory')
+@app.route('/directory',methods=['GET', 'POST'])
 def directory_page():
+    form = ShopForm()
+    if form.validate_on_submit():
+        institution = form.institution.data
+        tenants = User.query.filter(User.institution==institution).order_by(User.username.asc()).all()
+        tenants_list = []
+        title = institution
+        for t in tenants:
+            tenants_list.append([t.username,t.location,t.description,t.tenancy])
+        return render_template("directory/directory_1.html", title = title, tenants_list = tenants_list)
+    '''
     data = {"Shop A":{"location":"#01-01", "description":"A is a pastry shop"},"Shop B":{"location":"#01-02", "description":"B is a mechanical shop"},"Shop C":{"location":"#01-03", "description":"C is a pasta shop"},"Shop D":{"location":"#01-04", "description":"D is a clothing shop"},"Shop E":{"location":"#01-05", "description":"E is a steak shop"},"Shop F":{"location":"#01-06", "description":"F is a sports shop"}}
-    return render_template("directory/directory_1.html", data=data)
+    '''
+    return render_template("directory/directory_2.html", form = form )
 
 #chatpage
 @app.route('/chat')
@@ -164,13 +175,37 @@ def data_page():
                 t5 = {'score':tenant.part5_score,'tenant':tenant.tenant}
                 tenant_list5.append(t5)
             return render_template("audit/individual.html", title = title, part1 = part1, part2 = part2, part3 = part3, part4 = part4, part5 = part5,tenant_list1=tenant_list1,tenant_list2=tenant_list2,tenant_list3=tenant_list3,tenant_list4=tenant_list4,tenant_list5=tenant_list5)  
-       # else if option == 'institution':
+
+        elif option == 'institution':
+            title1 = "CGH"
+            title2 = "KKH"
+            title3 = "SGH"
+            title4 = "SKH"
+            cgh = []
+            kkh = []
+            sgh = []
+            skh = []
+            month = datetime.now().month
+            audits = Audit.query.filter(extract('month',Audit.timestamp)==month).order_by(Audit.total_score.asc(),Audit.tenant.asc()).all()
+            audits = audits[1:]
+            for a in audits:
+                tenant = a.tenant
+                user = User.query.filter(User.username == tenant).first()
+                if user.institution == title1:
+                    cgh.append([tenant,a.total_score])
+                if user.institution == title2:
+                    kkh.append([tenant,a.total_score])
+                if user.institution == title3:
+                    sgh.append([tenant,a.total_score])
+                if user.institution== title4:
+                    skh.append([tenant,a.total_score])
+            return render_template("institution_compare.html", title1=title1, title2=title2, title3=title3, title4=title4, cgh = cgh, kkh = kkh, sgh = sgh, skh = skh)
 
     return render_template("data.html", form=form)
 
 @app.route('/data/individual', methods=['GET', 'POST'])
 def data_individual():
-    form = AuditForm()
+    form = GraphForm()
     '''
     if form.validate_on_submit():
         option = form.auditee.data
@@ -196,20 +231,51 @@ def search_query():
 def data_frequency():
     form = NewForm()
     if form.validate_on_submit():
-
         auditor = form.auditor.data
         auditor = Audit.query.filter(Audit.auditor==auditor).order_by(Audit.timestamp.desc()).all() 
         month = datetime.now().month
-        auditor_dict = {}
+        auditor_dict = []
         audit_list = []   
+        small_list = []
         for a in auditor:
-            if a.timestamp.month != month:
+            if a.timestamp.month != month :
+                small_list.append(month)
                 month = a.timestamp.month
-                auditor_dict[a.timestamp] = audit_list
+                auditor_dict.append( audit_list)
                 audit_list = []
-            audit_list.append(a.tenant)
-        return render_template("auditor_data.html", auditor = auditor_dict, title = form.auditor.data  ) 
-    return render_template("frequency.html", form = form)
+                if a == auditor[len(auditor)-1]:
+                    audit_list.append([a.tenant,a.timestamp])
+                    month = a.timestamp.month
+                    small_list.append(month)
+                    auditor_dict.append( audit_list)
+                    break
+            audit_list.append([a.tenant,a.timestamp])
+        return render_template("auditor_data.html", auditor = auditor_dict, title = form.auditor.data ) 
+
+    title1 = "CGH"
+    title2 = "KKH"
+    title3 = "SGH"
+    title4 = "SKH"
+    cgh = []
+    kkh = []
+    sgh = []
+    skh = []
+    month = datetime.now().month
+    audits = Audit.query.filter(extract('month',Audit.timestamp)==month).order_by(Audit.timestamp.desc()).all()
+    audits = audits[:-1]
+    for a in audits:
+        tenant = a.tenant
+        user = User.query.filter(User.username == tenant).first()
+        if user.institution == title1:
+            cgh.append([a.timestamp,a.auditor, a.tenant])
+        if user.institution == title2:
+            kkh.append([a.timestamp,a.auditor, a.tenant])
+        if user.institution == title3:
+            sgh.append([a.timestamp,a.auditor, a.tenant])
+        if user.institution== title4:
+            skh.append([a.timestamp,a.auditor, a.tenant])
+
+    return render_template("frequency.html", form = form, title1=title1, title2=title2, title3=title3, title4=title4, cgh = cgh, kkh = kkh, sgh = sgh, skh = skh)
 
 '''
 
@@ -226,18 +292,6 @@ def data_frequency():
             
         return render_template("main/main.html",broadcast= broadcast_message, alert = alert)
 '''
-@app.route('/saved', methods=['GET', 'POST'])
-def saved_audit():
-    audit = Audit.query.all()
-    dates = []
-    for data in audit:
-        date = str(data.timestamp)
-        date = date.split(' ')
-        date = date[0]
-        d = {'date':date, 'auditor':data.auditor, 'tenant': data.tenant}
-        dates.append(d)
-    return render_template("saved_audit.html", dates=dates)
-
 
 #blueprints
 app.register_blueprint(adminstrator, url_prefix="/admin")

@@ -33,12 +33,14 @@ class User(db.Model):
     username = db.Column(db.String(64), index = True, unique = True)
     email = db.Column(db.String(120), index = True, unique = True)
     type = db.Column(db.String(20)) #tenant/auditor/admin
-    institution = db.Column(db.String(64))
+    institution = db.Column(db.String(64), index = True)
     messages_sent = db.relationship('Messages', foreign_keys='Messages.sender_id', backref='author', lazy='dynamic')
     messages_received = db.relationship('Messages', foreign_keys='Messages.recipient_id', backref='recipient', lazy='dynamic')
-    
+    tenancy = db.Column(db.Integer)
+    description = db.Column(db.String(64))
+    location = db.Column(db.String(64))
     def __repr__(self):
-        return '<User {username}, email {email}, id {id}>'.format(username = self.username, email = self.email, id = self.id)
+        return '<User {username}, email {email}, id {id}, institution {institution}>'.format(username = self.username, email = self.email, id = self.id, institution = self.institution)
 
 class Comments(db.Model):
     _N = 6

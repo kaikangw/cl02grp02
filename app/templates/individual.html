@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <form method="post" id="vform">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.auditee.label }}
+            {{ form.auditee }}
+        </p>        
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+{% endblock %}
+
+{% block chartscript %}
+    <script>
+        $(document).ready(function () {
+            $('#data_1').click(function(){
+                $('#data_images').show();
+            });
+            $("#vform").submit(function (event) {
+                event.preventDefault();
+                var post_url = "{{ url_for('search_query') }}";
+                var form_data = new FormData(this);
+                $.ajax({
+                    url: post_url,
+                    type: 'POST',
+                    data: form_data,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    error: function () {
+                        alert("Server is not Responding");
+                        location.reload();
+                    },
+                }).done(function (result) {
+                    console.log(result.tenant)
+                    Highcharts.chart('data_images', {
+                        chart: {
+                            type: 'line'
+                        },
+                        title: {
+                            text: ' '
+                        },
+                        xAxis: {
+                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                        },
+                        yAxis: {
+                            title: {
+                                text: ' '
+                            }
+                        },
+                        plotOptions: {
+                            line: {
+                                dataLabels: {
+                                    enabled: true
+                                },
+                                enableMouseTracking: false
+                            }
+                        },
+                        exporting: {
+                            buttons: {
+                                contextButton: {
+                                    menuItems: [
+                                        'viewFullscreen',
+                                    ]
+                                }
+                            }
+                        },
+                        series: [{
+                            name: result.tenant_name,
+                            data: result.tenant
+                        }]
+                    });
+                })
+            })
+        })
+    </script>
+{% endblock %}

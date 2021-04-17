@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        {{ form.auditor.label }}
+        {{ form.auditor }}
+        {{ form.submit() }}
+    </form>
+    
+{% endblock %}

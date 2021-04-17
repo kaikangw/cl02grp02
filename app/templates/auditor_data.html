@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{title}}</h1>
+		<table class="table table-striped">
+		    {% for data in auditor_dict %}
+			    <thead>
+			    <h2>{{data}}</h2>
+			    <tr>
+			        <th>Date</th>
+			        <th>Tenant</th>
+			    </tr>
+			    </thead>
+			    <tbody>
+			    {% for items in auditor_dict[data] %}
+			        <tr>
+			            <td>{{ data }}</td>
+			            <td>{{ items }}</td>
+			        </tr>
+			    {% endfor %}
+			    </tbody>
+		    {% endfor %}
+		</table>
+{% endblock %}

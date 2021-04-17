@@ -7,11 +7,10 @@ class Audit(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     timestamp = db.Column(db.DateTime, index=True)
     #added foreign keys to auditor and tenant
-    auditor = db.Column(db.String(64), db.ForeignKey('user.username'), nullable=False)
+    auditor = db.Column(db.String(64), db.ForeignKey('user.username'),nullable=False)
     tenant = db.Column(db.String(64), db.ForeignKey('user.username'), nullable=False)
     audit_ref = db.relationship("User", foreign_keys = [auditor])
     tenant_ref = db.relationship("User", foreign_keys = [tenant])
-    
     part1_score = db.Column(db.Integer)
     part2_score = db.Column(db.Integer)
     part3_score = db.Column(db.Integer)

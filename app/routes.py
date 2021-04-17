@@ -5,7 +5,7 @@ from app import app, db, mail
 from app.adminstrator import adminstrator
 from app.audits import audits
 from app.models import Audit, Messages, Comments, Broadcasts, User
-from app.forms import AuditForm, ResultForm
+from app.forms import AuditForm, ResultForm, NewForm
 from datetime import datetime
 from sqlalchemy import func, extract
 from app.email import send_audit_mail
@@ -164,7 +164,8 @@ def data_page():
                 t5 = {'score':tenant.part5_score,'tenant':tenant.tenant}
                 tenant_list5.append(t5)
             return render_template("audit/individual.html", title = title, part1 = part1, part2 = part2, part3 = part3, part4 = part4, part5 = part5,tenant_list1=tenant_list1,tenant_list2=tenant_list2,tenant_list3=tenant_list3,tenant_list4=tenant_list4,tenant_list5=tenant_list5)  
-     #   else if option == 'institution':
+       # else if option == 'institution':
+
     return render_template("data.html", form=form)
 
 @app.route('/data/individual', methods=['GET', 'POST'])
@@ -190,7 +191,28 @@ def search_query():
     for tenant in tenants:
         score.append(tenant.total_score)
     return {'tenant':score,'tenant_name':tenant}
+
+@app.route('/data/frequency', methods=['GET', 'POST'])
+def data_frequency():
+    form = NewForm()
+    if form.validate_on_submit():
+
+        auditor = form.auditor.data
+        auditor = Audit.query.filter(Audit.auditor==auditor).order_by(Audit.timestamp.desc()).all() 
+        month = datetime.now().month
+        auditor_dict = {}
+        audit_list = []   
+        for a in auditor:
+            if a.timestamp.month != month:
+                month = a.timestamp.month
+                auditor_dict[a.timestamp] = audit_list
+                audit_list = []
+            audit_list.append(a.tenant)
+        return render_template("auditor_data.html", auditor = auditor_dict, title = form.auditor.data  ) 
+    return render_template("frequency.html", form = form)
+
 '''
+
 
     return render_template("data.html", form=form)
     

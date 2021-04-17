@@ -132,5 +132,9 @@ class ResultForm(FlaskForm):
                            choices=[('tenant', 'Worst performing tenants'),('individual', 'Worst performing individual scores'),('institution', 'Worst performing institutions ')])
     submit = SubmitField('submit')
 
+class NewForm(FlaskForm):
+    auditor = SelectField('Auditor:', 
+                        choices=[('auditorA', 'Auditor A')])
+    submit = SubmitField('submit')
 
 

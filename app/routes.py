@@ -63,11 +63,8 @@ def directory_page():
 #chatpage
 @app.route('/chat')
 def chat_page():
-    print(session["userId"])
     chat_recipients = makeList(session["userId"])
     avail_recipients = get_user_list(session["userId"])
-    print(chat_recipients)
-    print(avail_recipients)
     return render_template("chat/chat_main.html", chatRecipients = chat_recipients, availRecipients = avail_recipients)
 
 @app.route('/chat/<user>', methods=["POST", "GET"])

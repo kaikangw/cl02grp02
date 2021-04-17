@@ -6,9 +6,9 @@
 
 {% block content %}
 
-<div id="directory-grid">
+<div id="directory-page" class="card-columns">
     {% for name,items in data.items() %}
-    <div id="directory-grid-card" class="card" style="border-color:darkorange;">
+    <div id="directory-card" class="card" style="border-color:darkorange;">
         <div class="card-header" style="background-color:darkorange;">{{name}}</div>
         <div class="card-body">
             <p class="card-text" style="font-style: bold;">

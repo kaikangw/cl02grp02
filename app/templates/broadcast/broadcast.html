@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+
+{% block content %}
+<div id="header">
+    <h1 id="broadcast-title">Create Broadcast Message <i class="fas fa-podcast"></i></h1>
+</div>
+<br>
+<br>
+<div id="sendBroadcast">
+    <form id="send_broadcast" method="POST" style="margin-top: 5%;">
+        <div id="broadcast-recipient">
+            <h5>Recipients: </h5>
+            <select name="broadcastTo" id="broadcastTo">
+            <option id="auditors" value="auditors">Auditors</option>
+            <option id="tenants" value="tenants">Tenants</option>
+            <option id="all" value="all">All</option>
+        </select>
+        </div>
+        
+        <br>
+        <br>
+        
+        <textarea id="broadcastMsg" name="broadcastMsg"  placeholder="  Write message here..."></textarea>
+        <div id="bbuttondiv">
+            <button type="submit" class="broadcastMsg">Broadcast</button>
+        </div>
+    </form>
+</div>
+
+
+
+{% endblock %}

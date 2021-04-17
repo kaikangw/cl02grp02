@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+    <table class="table table-striped">
+        <thead>
+        <h1>{{title1}}</h1>
+        <tr>
+            <th>Tenant</th>
+            <th>Score</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in cgh %}
+            <tr>
+
+                <td>{{ data[0]}}</td>
+                <td>{{ data[1] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table table-striped">
+        <thead>
+        <h1>{{title2}}</h1>
+        <tr>
+            <th>Tenant</th>
+            <th>Score</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in kkh %}
+            <tr>
+
+                <td>{{ data[0]}}</td>
+                <td>{{ data[1] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table table-striped">
+        <thead>
+        <h1>{{title3}}</h1>
+        <tr>
+            <th>Tenant</th>
+            <th>Score</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in sgh %}
+            <tr>
+
+                <td>{{ data[0]}}</td>
+                <td>{{ data[1] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table table-striped">
+        <thead>
+        <h1>{{title4}}</h1>
+        <tr>
+            <th>Tenant</th>
+            <th>Score</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in skh %}
+            <tr>
+
+                <td>{{ data[0]}}</td>
+                <td>{{ data[1] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

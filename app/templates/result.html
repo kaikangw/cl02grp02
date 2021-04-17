@@ -1,0 +1,14 @@
+<!--html page for the result of the quiz-->
+{% extends "base.html" %}
+
+{% block content %}
+<p>Tenant: {{ tenant }}</p>
+<p>1. Professionalism & Staff Hygiene (10%): {{ part1 }}</p> 
+<p>2. Housekeeping & General Cleanliness (20%): {{ part2 }}</p> 
+<p>3. Food Hygiene (35%): {{ part3 }}</p> 
+<p>4. Healthier Choice in line with HPB’s Healthy Eating’s Initiative (15%) {{ part4 }}</p> 
+<p>5. Workplace Safety & Health (20%) {{ part5 }}</p> 
+<h1>Total results: {{ result }}/100</h1> 
+<p>Remarks: {{ remarks }}</p> 
+<h2>Rectification Timeframe: {{ rectification }} days </h2> 
+{% endblock %}

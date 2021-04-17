@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="HandheldFriendly" content="true">
+        <title>EzCheck</title>
+        {% block head %}
+        <!-- Required meta tags -->
+       
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+        <!-- Extensions -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+        <script src="https://kit.fontawesome.com/c6bc12f920.js" crossorigin="anonymous"></script>
+
+        <!-- CSS for different pages -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/audit_checklist.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/mainpage.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/view_data.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/directory.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/chat.css')}}"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/broadcast.css')}}"/>
+        
+        {% endblock %}
+
+    </head>
+
+    <body>
+       <header>
+        <!--- Navbar -->
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #f06d1a; font-size:  x-large;" >
+            <a class="navbar-brand px-3" style="font-size: xx-large;" href="{{url_for('main_page')}}">
+              <!--<img src="{{ url_for('static', filename='images/singhealth.png')}}" width="50" height="10%" class="d-inline-block align-top" alt="">-->
+              EzCheck
+            </a>
+
+            <!--- Navbar will become a dropdown when the screen size is too small-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon" ></span>
+            </button>
+            
+            <!--- Navbar categories-->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link px-3 " href="{{url_for('directory_page')}}" style="color: white;">Directory  <i class="fas fa-address-book fa-fw"></i></a>
+                </li>
+                
+                {% if session["clearance"] == "auditor" %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle px-3 white" href="{{url_for('main_page')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                    Audit  <i class="fas fa-book fa-fw"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
+                    <a class="dropdown-item px-3" href="{{url_for('audits.create_audit')}}" style="color: white;">Create</a>
+          
+                    <a class="dropdown-item px-3" href="{{url_for('audits.view_audits')}}" style="color: white;">View</a>
+
+                  </div>
+                </li>
+
+
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle px-3 white" href="{{url_for('main_page')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                    Data  <i class="fas fa-chart-line fa-fw"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
+                    <a class="dropdown-item px-3" href="{{url_for('data_page')}}" style="color: white;">Compare</a>
+          
+                    <a class="dropdown-item px-3" href="{{url_for('data_individual')}}" style="color: white;">View</a>
+                    <a class="dropdown-item px-3" href="{{url_for('data_frequency')}}" style="color: white;">Frequency</a>
+
+                  </div>
+
+
+                <li class="nav-item">
+                  <a class="nav-link px-3 " href="{{url_for('chat_page')}}" style="color: white;">Chats  <i class="far fa-comments"></i></i></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 " href="{{url_for('create_broadcast')}}" style="color: white;">Broadcast  <i class="fas fa-bullhorn"></i></a>
+                </li>
+              
+                <li class="nav-item dropdown float-right">
+                  <a class="nav-link px-3 dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                  Account <i class="far fa-user-circle fa-fw"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
+                    <a class="dropdown-item px-3 mx-auto"  href="{{url_for('settings')}}" style="color: white;">Settings</a>
+                    
+                    <a class="dropdown-item px-3 justify-content-center" id="logout" href="{{url_for('login_page')}}" style="color: white;">Log Out</a>
+                  </div>
+                </li>
+                {% else %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle px-3 white" href="{{url_for('main_page')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                    Audit  <i class="fas fa-book fa-fw"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
+                    <a class="dropdown-item px-3" href="{{url_for('audits.view_audits')}}" style="color: white;">View</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 " href="{{url_for('chat_page')}}" style="color: white;">Chats  <i class="far fa-comments"></i></i></a>
+                </li>
+                <li class="nav-item dropdown float-right">
+                  <a class="nav-link px-3 dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                  Account <i class="far fa-user-circle fa-fw"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
+                    <a class="dropdown-item px-3 mx-auto"  href="{{url_for('settings')}}" style="color: white;">Settings</a>
+                    
+                    <a class="dropdown-item px-3 justify-content-center" id="logout" href="{{url_for('login_page')}}" style="color: white;">Log Out</a>
+                  </div>
+                </li>
+
+                {% endif %}
+               
+              </ul>
+            </div>
+          </nav>
+       </header>
+        
+        <div id="container">
+          {% block content %}{% endblock %} 
+        </div>
+        <div id="footer">
+            {% block footer %}
+            {% endblock %}
+
+        </div>
+    </body>
+</html>

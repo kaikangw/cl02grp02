@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<h1>{{title}}</h1>
+
+<div id="directory-grid" class="card-columns">
+    {%for data in tenants_list%}
+        <div id="directory-grid-card" class="card" style="border-color:darkorange;">
+            <div class="card-header" style="background-color:darkorange;">{{data[0]}}</div>
+            <div class="card-body">
+                <p class="card-text" style="font-style: bold;">
+                    Located at: {{data[1]}}
+                </p>
+                <p class="card-text" style="font-style: bold;">
+                    Tenancy: {{data[3]}} Days
+                </p>
+                <a id="directory-button" tabindex="0" class="btn" role="button" data-toggle="popover" data-trigger="focus" title="{{name}}" data-content="{{data[2]}}">Description</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+    var popover = new bootstrap.Popover(document.querySelector('.popover-dismiss'), {
+        trigger: 'focus'
+    })
+</script>
+
+
+{% endblock %}

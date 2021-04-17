@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+
+<div id="data_header">
+    <h1> {{ title }} </h1>
+</div>
+<br>
+<br>
+
+<div class="data-wrapper">
+    <div id="data_options" class="btn-group-vertical left-side" role="toolbar">
+        <h2>Data    <i class="fas fa-chart-bar fa-fw"></i></h2>
+        <br>
+        <div id="button-holder" class="mr-2" aria-label="data_1">
+            <button id="data_1" type="button" class="btn data_choice" style="border-color: darkorange; background-color: whitesmoke;">Data 1</button>
+        </div>
+        <div id="button-holder" class="mr-2" aria-label="data_2">
+            <button id="data_2" type="button" class="btn data_choice" style="border-color: darkorange; background-color: whitesmoke;">Data 2</button>
+        </div>
+        <div id="button-holder" class="mr-2" aria-label="data_3">
+            <button id="data_3" type="button" class="btn data_choice" style="border-color: darkorange; background-color: whitesmoke;">Data 3</button>
+        </div>
+        <div id="button-holder" class="mr-2" aria-label="data_4">
+            <button id="data_4" type="button" class="btn data_choice" style="border-color: darkorange; background-color: rgba(245, 245, 245, 0.438);">Data 4</button>
+        </div>
+        <div id="button-holder" class="mr-2" aria-label="data_5">
+            <button id="data_5" type="button" class="btn data_choice" style="border-color: darkorange; background-color: whitesmoke;">Data 5</button>
+        </div>
+
+    </div>
+
+    <div id="data_image" class="right-side" >
+        <div id="graph-container" style="width: 100%; height: 50vh;">
+            <canvas id="graph"></canvas>
+        </div>
+    </div>
+</div>    
+
+
+
+
+{% block Javascript %}
+
+<!-- Script for graph -->
+<script>
+    // bar chart 1 data
+    var data_1 = {
+        labels: ['January', 'February', 'March'],
+
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [30, 120, 90]
+            },
+            {
+                fillColor: "rgba(100,220,220,0.7)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [10, 70, 110]
+            }
+        ]
+
+    };
+
+    // bar chart 2 data
+    var data_2 = {
+        labels: ['Apr', 'May', 'June'],
+
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [50, 100, 140]
+            },
+            {
+                fillColor: "rgba(100,220,220,0.7)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [40, 70, 200]
+            }
+        ]
+    };
+
+    var data_3 = {
+        labels: ['July', 'Aug', 'Sept'],
+
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [110, 20, 240]
+            },
+            {
+                fillColor: "rgba(100,220,220,0.7)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [60, 90, 100]
+            }
+        ]
+    };
+
+    var data_4 = {
+        labels: ['Oct', 'Nov', 'Dec'],
+
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [70, 50, 140]
+            },
+            {
+                fillColor: "rgba(100,220,220,0.7)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [60, 90, 100]
+            }
+        ]
+    };
+
+    var data_5 = {
+        labels: ['John', 'Alice', 'Brandon'],
+
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [200, 10, 160]
+            },
+            {
+                fillColor: "rgba(100,220,220,0.7)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [40, 30, 20]
+            }
+        ]
+    };
+
+    options = {
+        responsive:true,
+        maintainAspectRatio:false,
+        layout: {
+            padding: {
+                left: 50,
+                right: 50,
+                top: 50,
+                bottom: 50
+            }
+        }
+    };
+
+    //Setting the default graph
+    var context = document.querySelector('#graph').getContext('2d');
+    new Chart(context).Line(data_1,options);
+
+    //Button 
+    $("#data_1").on("click", function () {
+        var context1 = document.querySelector('#graph').getContext('2d');
+        new Chart(context1).Line(data_1,options);
+    });
+    $("#data_2").on("click", function () {
+        var context2 = document.querySelector('#graph').getContext('2d');
+        new Chart(context2).Line(data_2,options);
+    });
+    $("#data_3").on("click", function () {
+        var context3 = document.querySelector('#graph').getContext('2d');
+        new Chart(context3).Line(data_3,options);
+    });
+    $("#data_4").on("click", function () {
+        var context4 = document.querySelector('#graph').getContext('2d');
+        new Chart(context4).Line(data_4,options);
+    });
+    $("#data_5").on("click", function () {
+        var context5 = document.querySelector('#graph').getContext('2d');
+        new Chart(context5).Line(data_5,options);
+    });
+
+</script>
+
+
+{% endblock %}
+{% endblock %}

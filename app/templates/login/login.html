@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>EzCheck</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/login.css')}}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script>
+      if ("{{alert}}" !== "None"){
+        alert("{{alert}}");
+      }
+      
+    </script>
+    
+  </head>
+  <body>
+  
+      
+     
+      <form action="/" class="login-form" method="POST">
+        <h1 style="font-size: xxx-large;">Login</h1>
+        <img class="img-singhealth2" src="{{ url_for('static', filename='images/singhealth2.png')}}" alt="">
+
+        <div class="form-group txtb">
+          <input type="text" name="username">
+          <span data-placeholder="Username" class="form-control" id="username" ></span>
+        </div>
+
+        <div class="form-group txtb">
+          <input type="password" name="password">
+          <span data-placeholder="Password" class="form-control" id="password"></span>
+        </div>
+
+        <button type="submit" name="login_btn" class="logbtn" >Login</button>  
+
+        <div class="rm">
+          <label><input type="checkbox" checked="checked" id="rememberMe">Remember Me</label>
+        </div>
+      
+      </form>
+    
+      
+
+      <script type="text/javascript">
+      $(".txtb input").on("focus",function(){
+        $(this).addClass("focus");
+      });
+
+      $(".txtb input").on("blur",function(){
+        if($(this).val() == "")
+        $(this).removeClass("focus");
+      });
+
+      </script>
+
+
+  </body>
+</html>

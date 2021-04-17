@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+    <table class="table table-striped">
+        <thead>
+        <h1>{{title}}</h1>
+        <h2>{{part1}}</h2>
+        <tr>
+            <th>Tenant</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in tenant_list1 %}
+            <tr>
+                <td>{{ data.tenant }}</td>
+                <td>{{ data.score }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table table-striped">
+        <thead>
+        <h2>{{part2}}</h2>
+        <tr>
+            <th>Tenant</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in tenant_list2 %}
+            <tr>
+                <td>{{ data.tenant }}</td>
+                <td>{{ data.score }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>    
+    <table class="table table-striped">
+        <thead>
+        <h2>{{part3}}</h2>
+        <tr>
+            <th>Tenant</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in tenant_list3 %}
+            <tr>
+                <td>{{ data.tenant }}</td>
+                <td>{{ data.score }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>    
+    <table class="table table-striped">
+        <thead>
+        <h2>{{part4}}</h2>
+        <tr>
+            <th>Tenant</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in tenant_list4 %}
+            <tr>
+                <td>{{ data.tenant }}</td>
+                <td>{{ data.score }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>    
+    <table class="table table-striped">
+        <thead>
+        <h2>{{part5}}</h2>
+        <tr>
+            <th>Tenant</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in tenant_list5 %}
+            <tr>
+                <td>{{ data.tenant }}</td>
+                <td>{{ data.score }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>    
+
+{% endblock %}

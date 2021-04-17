@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div id="results_card" class="card" style="border-color: darkorange;">
+    <div class="card-header" style="background-color: rgba(128, 128, 128, 0.089); border-color: darkorange;">
+        <h1>{{ heading }}</h1>
+        <ul class="nav nav-tabs card-header-tabs" id="results-list" role="tablist" >    
+            <li class="nav-item" style="border-color: darkorange;"></li>
+        </ul>
+    </div>
+    <div class="card-body" >
+        <div class="tab-content mt-2">
+            <div>
+                <p class="card-text text-left"><strong>Images</strong></p>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="upload-file">
+                            <div class="upload-wrapper">
+                                <label>
+                                    <input type="file" name="files[]" id="files" multiple accept="image/jpeg, image/png, image/gif,">
+                                    <p>Drop your files here. <br>or <a>Browse</a></p>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12" style="margin: 0 0 10px 0;">
+                        <output id="image-gallery"></output>
+                    </div>
+                </div>
+            </div>
+            
+                        
+
+            <div>
+                <p class="card-text text-left"><strong>Additional Remarks: </strong></p>
+                <p class="card-text text-left"><input type="text" style="width: 100%; height: 200px;"><br><br></p>
+            </div>
+        </div>
+    </div>
+        <div class="btn-box">
+            <div class="checklist_left" style="margin: -30px 0 0 0;">
+                <a href="{{url_for('audits.create_audit')}}"><button class="back">Back</button></a>
+            </div>
+            <div class="checklist_right" style="margin: -30px 0 0 0;">
+                <button class="submit">Submit</button>
+            </div>
+        </div>
+    
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="audit_additional_info.js"></script>
+<script type="257be86a981729866f2fa61c-text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-83834093-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+{% endblock %}

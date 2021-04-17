@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+
+{% block content %}
+<div id="chat_main">
+  <h1 id="chatpage_headline">Chats <i class="far fa-comment-alt"></i></h1>
+</div>
+<br>
+<div id="availChats" class="card-columns">
+  {% for recipient in chatRecipients %}
+  <div id="chat_card" class="card" style="border-color: darkorange;">
+    <h5 id="broadcast-title" class="card-header" style="border-color: darkorange;"> {{recipient}}</h>
+      <br>
+      <br>
+      <a id="tochat" href="{{ url_for('chat', user=recipient) }}" class="btn btn-primary">To Chat</a>
+  </div>
+  <br>
+  {% endfor %}
+</div>
+
+<script>
+  function newChat() {
+    var x = document.getElementById("add_new_chat");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
+
+<div id="add_new_chat">
+  <div id="newChatform">
+    <form id="newChat" action="{{ url_for('create_chat') }}" method="POST">
+      <h3 id="chatpage_headline">Create New Chat</h3>
+      <br>
+      <div id="recipient">
+        <h6 id="sendto">Send to: </h6>
+        <select name="availRecipients" id="availRecipients">
+          {% for r in availRecipients %}
+          <option id="recipient" name="recipient" value="{{r}}">{{ r }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <br>
+      <br>
+      <textarea rows="10" cols="40" id="message" name="message" placeholder="  Write message here..."></textarea>
+      <button type="submit" class="startChat">Send</button>
+    </form>
+  </div>
+</div>
+<a type="button" id="showForm" onclick="newChat()"><i class="fas fa-plus-circle fa-3x"></i></a>
+{% endblock %}

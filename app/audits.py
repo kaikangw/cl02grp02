@@ -77,8 +77,11 @@ def create_audit():
         db.session.add(audit)
         db.session.commit()
         #send_audit_mail('audit/audit.html', form)
-        latest_audit =  Audit.query.order_by(Audit.id.desc()).first()
-        return render_template(url_for("audits.audit_result",audit_id = latest_audit.id)  )
+        result =  Audit.query.order_by(Audit.id.desc()).first()
+        remarks = pull_comments("1", "hygiene")
+        latest_audit = {result.tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":remarks, "Due":result.rectification}}
+        images = os.listdir('./app/static/images')
+        return render_template("audit/audit_result.html",results = latest_audit, images = images)
         
     return render_template('audit/audit.html', form=form)
 

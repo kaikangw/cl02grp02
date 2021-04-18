@@ -4,6 +4,7 @@
     text-transform: uppercase;
 }
 
+
 /*Copied*/
 
 div#userChat {
@@ -48,7 +49,7 @@ div#indivChat{
     overflow-y: auto;
     padding: 10px;
     flex-direction: column-reverse;
-    display: flex;
+    display: flex ;
   }
   .msger-chat::-webkit-scrollbar {
     width: 6px;

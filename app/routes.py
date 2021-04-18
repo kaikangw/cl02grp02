@@ -41,6 +41,7 @@ def login_page():
         
             else:
                 return redirect(url_for('main_page'))
+                
         else:
             return render_template("login/login.html", alert = "Incorrect Username or Password")
     
@@ -73,11 +74,8 @@ def directory_page():
 #chatpage
 @app.route('/chat')
 def chat_page():
-    print(session["userId"])
     chat_recipients = makeList(session["userId"])
     avail_recipients = get_user_list(session["userId"])
-    print(chat_recipients)
-    print(avail_recipients)
     return render_template("chat/chat_main.html", chatRecipients = chat_recipients, availRecipients = avail_recipients)
 
 @app.route('/chat/<user>', methods=["POST", "GET"])
@@ -279,7 +277,6 @@ def data_frequency():
 
 '''
 
-
     return render_template("data.html", form=form)
     
     else:
@@ -290,8 +287,34 @@ def data_frequency():
             "Auditor 4":{"title":"Tellonme", "timestamp":"19:00:00", "content":"hello world, I am here"},
             "Auditor 5":{"title":"Alert", "timestamp":"19:00:00", "content":"hello world, I am here"}}
             
-        return render_template("main/main.html",broadcast= broadcast_message, alert = alert)
-'''
+        return render_template("main/main.html",broadcast= broadcast_message, alert = alert)'''
+
+@app.route('/saved', methods=['GET', 'POST'])
+def saved_audit():
+    audit = Audit.query.all()
+    dates = []
+    for data in audit:
+        date = str(data.timestamp)
+        date = date.split(' ')
+        date = date[0]
+        d = {'date':date, 'auditor':data.auditor, 'tenant': data.tenant}
+        dates.append(d)
+    return render_template("saved_audit.html", dates=dates)
+
+#broadcast message
+@app.route('/create_broadcast', methods=["GET","POST"])
+def create_broadcast():
+
+    if request.method == "POST":
+        recipient = request.form["broadcastTo"]
+        print(recipient)
+        broadcast = request.form["broadcastMsg"]
+        print(broadcast)
+        render_template("broadcast/broadcast.html")
+    return render_template("broadcast/broadcast.html")
+
+
+
 
 #blueprints
 app.register_blueprint(adminstrator, url_prefix="/admin")

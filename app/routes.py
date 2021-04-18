@@ -138,11 +138,11 @@ def data_page():
 
         elif option == 'individual':
             title = "TOP 5 WORST PERFORMNG INDIVIDUAL SCORES"
-            part1 = "Professionalism & Staff Hygiene"
-            part2 = "Housekeeping & General Cleanliness"
-            part3 = "Food Hygiene"
-            part4 = "Healthier Choice in line with HPB’s Healthy Eating’s Initiative "
-            part5 = "Workplace Safety & Health  "
+            part1 = "Professionalism & Staff Hygiene 10"
+            part2 = "Housekeeping & General Cleanliness 20"
+            part3 = "Food Hygiene 35"
+            part4 = "Healthier Choice in line with HPB’s Healthy Eating’s Initiative 25"
+            part5 = "Workplace Safety & Health  20"
             month = datetime.now().month
             tenants_part1 = Audit.query.filter(extract('month',Audit.timestamp)==month).order_by(Audit.part1_score.asc(),Audit.tenant.asc()).all()
             tenants_part2 = Audit.query.filter(extract('month',Audit.timestamp)==month).order_by(Audit.part2_score.asc(),Audit.tenant.asc()).all()
@@ -231,7 +231,7 @@ def search_query():
     tenants = Audit.query.filter(Audit.tenant==tenant_name).order_by(Audit.timestamp.asc()).all()    
     score = []
     for tenant in tenants:
-        if len(score) == 12:
+        if len(score) == 4:
             break
         score.append(tenant.total_score)
     return {'tenant':score, 'tenant_name':tenant_name}
@@ -259,6 +259,8 @@ def data_frequency():
                     auditor_dict.append( audit_list)
                     break
             audit_list.append([a.tenant,a.timestamp])
+        auditor_dict[0] = auditor_dict[0][-5:]
+
         return render_template("auditor_data.html", auditor = auditor_dict, title = form.auditor.data ) 
 
     title1 = "CGH"
@@ -284,7 +286,7 @@ def data_frequency():
         if user.institution== title4:
             skh.append([a.timestamp,a.auditor, a.tenant])
 
-    return render_template("frequency.html", form = form, title1=title1, title2=title2, title3=title3, title4=title4, cgh = cgh, kkh = kkh, sgh = sgh, skh = skh)
+    return render_template("frequency.html", form = form, title1=title1, title2=title2, title3=title3, title4=title4, cgh = cgh[-5:], kkh = kkh, sgh = sgh, skh = skh)
 
 '''
 
@@ -333,9 +335,13 @@ def download():
     tenants = Audit.query.filter(Audit.tenant==tenant_name).order_by(Audit.timestamp.asc()).all()    
     result = []
     for tenant in tenants:
-        if len(result) == 12:
+        if len(result) >= 4 and len(result)<13:
+            print("hi")
+            result.append(0)
+        elif len(result) >11:
             break
-        result.append(tenant.total_score)
+        else:
+            result.append(tenant.total_score)
         
 
     data = []

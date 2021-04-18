@@ -13,9 +13,13 @@ This is the html for the audit
           </tr>
           <tr>
             <th colspan="2">Professionalism</th>
-            <th>0</th>
+            <!-- <th>0</th>
             <th>1</th>
             <th>NA</th>
+            <th><a href="{{url_for('audits.audit_comments', heading='Professionalism')}}">+</a></th> -->
+            <th>0<input type="radio" value="0" name="98" onclick="selectAll()"></th>
+            <th>1<input type="radio" value="1" name="98" onclick="selectAll()"></th>
+            <th>NA<input type="radio" value="NA" name="98" onclick="selectAll()"></th>
             <th><a href="{{url_for('audits.audit_comments', heading='Professionalism')}}">+</a></th>
           </tr>
         </thread>
@@ -24,31 +28,31 @@ This is the html for the audit
             <td><span class="number">1.</span></td>
             <td><span class="qns">Shop is open and ready to service patients/visitors according to operating hours.</span>
             </td>
-            <td><input type="radio" id="0" name="1" /></td>
-            <td><input type="radio" id="1" name="1" /></td>
-            <td><input type="radio" id="NA" name="1" /></td>
+            <td><input type="radio" value="0" name="1" /></td>
+            <td><input type="radio" value="1" name="1" /></td>
+            <td><input type="radio" value="NA" name="1" /></td>
             <td rowspan="4"></td>
           </tr>
           <tr>
             <td><span class="number">2.</span></td>
             <td><span class="qns">Staff Attendance: adequate staff for peak and non-peak hours.</span></td>
-            <td><input type="radio" id="0" name="2" /></td>
-            <td><input type="radio" id="1" name="2" /></td>
-            <td><input type="radio" id="NA" name="2" /></td>
+            <td><input type="radio" value="0" name="2" /></td>
+            <td><input type="radio" value="1" name="2" /></td>
+            <td><input type="radio" value="NA" name="2" /></td>
           </tr>
           <tr>
             <td><span class="number">3.</span></td>
             <td><span class="qns">Staff Attendance: adequate staff for peak and non-peak hours.</span></td>
-            <td><input type="radio" id="0" name="3" /></td>
-            <td><input type="radio" id="1" name="3" /></td>
-            <td><input type="radio" id="NA" name="3" /></td>
+            <td><input type="radio" value="0" name="3" /></td>
+            <td><input type="radio" value="1" name="3" /></td>
+            <td><input type="radio" value="NA" name="3" /></td>
           </tr>
           <tr>
             <td><span class="number">4.</span></td>
             <td><span class="qns">At least one (1) clearly assigned person in-charge on site.</span></td>
-            <td><input type="radio" id="0" name="4" /></td>
-            <td><input type="radio" id="1" name="4" /></td>
-            <td><input type="radio" id="NA" name="4" /></td>
+            <td><input type="radio" value="0" name="4" /></td>
+            <td><input type="radio" value="1" name="4" /></td>
+            <td><input type="radio" value="NA" name="4" /></td>
           </tr>
         </tbody>
         <thread>
@@ -64,81 +68,81 @@ This is the html for the audit
           <tr>
             <td><span class="number">1.</span></td>
             <td><span class="qns">Staff who are unfit for work due to illness should not report to work.</span></td>
-            <td><input type="radio" id="0" name="5" /></td>
-            <td><input type="radio" id="1" name="5" /></td>
-            <td><input type="radio" id="NA" name="5" /></td>
+            <td><input type="radio" value="0" name="5" /></td>
+            <td><input type="radio" value="1" name="5" /></td>
+            <td><input type="radio" value="NA" name="5" /></td>
             <td rowspan="10"></td>
           </tr>
           <tr>
             <td><span class="number">2.</span></td>
             <td><span class="qns">Staff who are fit for work but suffering from the lingering effects of a cough and/or
                 cold should cover their mouths with a surgical mask.</span></td>
-            <td><input type="radio" id="0" name="6" /></td>
-            <td><input type="radio" id="1" name="6" /></td>
-            <td><input type="radio" id="NA" name="6" /></td>
+            <td><input type="radio" value="0" name="6" /></td>
+            <td><input type="radio" value="1" name="6" /></td>
+            <td><input type="radio" value="NA" name="6" /></td>
           </tr>
           <tr>
             <td><span class="number">3.</span></td>
             <td><span class="qns">Clean clothes/uniform or aprons are worn during food preparation and food
                 service.</span></td>
-            <td><input type="radio" id="0" name="7" /></td>
-            <td><input type="radio" id="1" name="7" /></td>
-            <td><input type="radio" id="NA" name="7" /></td>
+            <td><input type="radio" value="0" name="7" /></td>
+            <td><input type="radio" value="1" name="7" /></td>
+            <td><input type="radio" value="NA" name="7" /></td>
           </tr>
           <tr>
             <td><span class="number">4.</span></td>
             <td><span class="qns">Hair is kept tidy (long hair must be tied up) and covered with clean caps or hair nets
                 where appropriate.</span></td>
-            <td><input type="radio" id="0" name="8" /></td>
-            <td><input type="radio" id="1" name="8" /></td>
-            <td><input type="radio" id="NA" name="8" /></td>
+            <td><input type="radio" value="0" name="8" /></td>
+            <td><input type="radio" value="1" name="8" /></td>
+            <td><input type="radio" value="NA" name="8" /></td>
           </tr>
           <tr>
             <td><span class="number">5.</span></td>
             <td><span class="qns">Sores, wounds or cuts on hands, if any, are covered with waterproof and
                 brightly-coloured plaster.</span></td>
-            <td><input type="radio" id="0" name="9" /></td>
-            <td><input type="radio" id="1" name="9" /></td>
-            <td><input type="radio" id="NA" name="9" /></td>
+            <td><input type="radio" value="0" name="9" /></td>
+            <td><input type="radio" value="1" name="9" /></td>
+            <td><input type="radio" value="NA" name="9" /></td>
           </tr>
           <tr>
             <td><span class="number">6.</span></td>
             <td><span class="qns">Hands are washed thoroughly with soap and water, frequently and at appropriate
                 times.</span></td>
-            <td><input type="radio" id="0" name="10" /></td>
-            <td><input type="radio" id="1" name="10" /></td>
-            <td><input type="radio" id="NA" name="10" /></td>
+            <td><input type="radio" value="0" name="10" /></td>
+            <td><input type="radio" value="1" name="10" /></td>
+            <td><input type="radio" value="NA" name="10" /></td>
           </tr>
           <tr>
             <td><span class="number">7.</span></td>
             <td><span class="qns">Fingernails are short, clean, unpolished and without nail accessories.</span></td>
-            <td><input type="radio" id="0" name="11" /></td>
-            <td><input type="radio" id="1" name="11" /></td>
-            <td><input type="radio" id="NA" name="11" /></td>
+            <td><input type="radio" value="0" name="11" /></td>
+            <td><input type="radio" value="1" name="11" /></td>
+            <td><input type="radio" value="NA" name="11" /></td>
           </tr>
           <tr>
             <td><span class="number">8.</span></td>
             <td><span class="qns">No wrist watches/ rings or other hand jewellery (with exception of wedding ring) is worn
                 by staff handling food.</span></td>
-            <td><input type="radio" id="0" name="12" /></td>
-            <td><input type="radio" id="1" name="12" /></td>
-            <td><input type="radio" id="NA" name="12" /></td>
+            <td><input type="radio" value="0" name="12" /></td>
+            <td><input type="radio" value="1" name="12" /></td>
+            <td><input type="radio" value="NA" name="12" /></td>
           </tr>
           <tr>
             <td><span class="number">9.</span></td>
             <td><span class="qns">Food is handled with clean utensils and gloves.</span></td>
-            <td><input type="radio" id="0" name="13" /></td>
-            <td><input type="radio" id="1" name="13" /></td>
-            <td><input type="radio" id="NA" name="13" /></td>
+            <td><input type="radio" value="0" name="13" /></td>
+            <td><input type="radio" value="1" name="13" /></td>
+            <td><input type="radio" value="NA" name="13" /></td>
           </tr>
           <tr>
             <td><span class="number">10.</span></td>
             <td><span class="qns">Disposable gloves are changed regularly and/ or in between tasks.
                 <li>Staff do not handle cash with gloved hands.</li>
               </span></td>
-            <td><input type="radio" id="0" name="14" /></td>
-            <td><input type="radio" id="1" name="14" /></td>
-            <td><input type="radio" id="NA" name="14" /></td>
+            <td><input type="radio" value="0" name="14" /></td>
+            <td><input type="radio" value="1" name="14" /></td>
+            <td><input type="radio" value="NA" name="14" /></td>
           </tr>
         </tbody>
       </table>
@@ -165,9 +169,9 @@ This is the html for the audit
             <td><span class="number">1.</span></td>
             <td><span class="qns">Cleaning and maintenance records for equipment, ventilation and exhaust system.</span>
             </td>
-            <td><input type="radio" id="0" name="15" /></td>
-            <td><input type="radio" id="1" name="15" /></td>
-            <td><input type="radio" id="NA" name="15" /></td>
+            <td><input type="radio" value="0" name="15" /></td>
+            <td><input type="radio" value="1" name="15" /></td>
+            <td><input type="radio" value="NA" name="15" /></td>
             <td rowspan="15"></td>
           </tr>
           <tr>
@@ -175,96 +179,96 @@ This is the html for the audit
             <td><span class="qns">Adequate and regular pest control.
                 <li>Pest control record.</li>
               </span></td>
-            <td><input type="radio" id="0" name="16" /></td>
-            <td><input type="radio" id="1" name="16" /></td>
-            <td><input type="radio" id="NA" name="16" /></td>
+            <td><input type="radio" value="0" name="16" /></td>
+            <td><input type="radio" value="1" name="16" /></td>
+            <td><input type="radio" value="NA" name="16" /></td>
           </tr>
           <tr>
             <td><span class="number">3.</span></td>
             <td><span class="qns">Goods and equipment are within shop boundary.</span></td>
-            <td><input type="radio" id="0" name="17" /></td>
-            <td><input type="radio" id="1" name="17" /></td>
-            <td><input type="radio" id="NA" name="17" /></td>
+            <td><input type="radio" value="0" name="17" /></td>
+            <td><input type="radio" value="1" name="17" /></td>
+            <td><input type="radio" value="NA" name="17" /></td>
           </tr>
           <tr>
             <td><span class="number">4.</span></td>
             <td><span class="qns">Store display/ Shop front is neat and tidy.</span></td>
-            <td><input type="radio" id="0" name="18" /></td>
-            <td><input type="radio" id="1" name="18" /></td>
-            <td><input type="radio" id="NA" name="18" /></td>
+            <td><input type="radio" value="0" name="18" /></td>
+            <td><input type="radio" value="1" name="18" /></td>
+            <td><input type="radio" value="NA" name="18" /></td>
           </tr>
           <tr>
             <td><span class="number">5.</span></td>
             <td><span class="qns">Work/ serving area is neat, clean and free of spillage.</span></td>
-            <td><input type="radio" id="0" name="19" /></td>
-            <td><input type="radio" id="1" name="19" /></td>
-            <td><input type="radio" id="NA" name="19" /></td>
+            <td><input type="radio" value="0" name="19" /></td>
+            <td><input type="radio" value="1" name="19" /></td>
+            <td><input type="radio" value="NA" name="19" /></td>
           </tr>
           <tr>
             <td><span class="number">6.</span></td>
             <td><span class="qns">Uncluttered circulation space free of refuse/ furniture.</span></td>
-            <td><input type="radio" id="0" name="20" /></td>
-            <td><input type="radio" id="1" name="20" /></td>
-            <td><input type="radio" id="NA" name="20" /></td>
+            <td><input type="radio" value="0" name="20" /></td>
+            <td><input type="radio" value="1" name="20" /></td>
+            <td><input type="radio" value="NA" name="20" /></td>
           </tr>
           <tr>
             <td><span class="number">7.</span></td>
             <td><span class="qns">Tables are cleared promptly within 10 minutes.</span></td>
-            <td><input type="radio" id="0" name="21" /></td>
-            <td><input type="radio" id="1" name="21" /></td>
-            <td><input type="radio" id="NA" name="21" /></td>
+            <td><input type="radio" value="0" name="21" /></td>
+            <td><input type="radio" value="1" name="21" /></td>
+            <td><input type="radio" value="NA" name="21" /></td>
           </tr>
           <tr>
             <td><span class="number">8.</span></td>
             <td><span class="qns">Fixtures and fittings including shelves, cupboards and drawers are clean and dry, free
                 from pests, and in a good state.</span></td>
-            <td><input type="radio" id="0" name="22" /></td>
-            <td><input type="radio" id="1" name="22" /></td>
-            <td><input type="radio" id="NA" name="22" /></td>
+            <td><input type="radio" value="0" name="22" /></td>
+            <td><input type="radio" value="1" name="22" /></td>
+            <td><input type="radio" value="NA" name="22" /></td>
           </tr>
           <tr>
             <td><span class="number">9.</span></td>
             <td><span class="qns">Ceiling/ ceiling boards are free from stains/ dust with no gaps.</span></td>
-            <td><input type="radio" id="0" name="23" /></td>
-            <td><input type="radio" id="1" name="23" /></td>
-            <td><input type="radio" id="NA" name="23" /></td>
+            <td><input type="radio" value="0" name="23" /></td>
+            <td><input type="radio" value="1" name="23" /></td>
+            <td><input type="radio" value="NA" name="23" /></td>
           </tr>
           <tr>
             <td><span class="number">10.</span></td>
             <td><span class="qns">Fans and air-con units are in proper working order and clean and free from dust. Proper
                 maintenance and routine cleaning are carried out regularly.</span></td>
-            <td><input type="radio" id="0" name="24" /></td>
-            <td><input type="radio" id="1" name="24" /></td>
-            <td><input type="radio" id="NA" name="24" /></td>
+            <td><input type="radio" value="0" name="24" /></td>
+            <td><input type="radio" value="1" name="24" /></td>
+            <td><input type="radio" value="NA" name="24" /></td>
           </tr>
           <tr>
             <td><span class="number">11.</span></td>
             <td><span class="qns">Equipment, exhaust hood, crockery and utensils are clean, in good condition and
                 serviced.</span></td>
-            <td><input type="radio" id="0" name="25" /></td>
-            <td><input type="radio" id="1" name="25" /></td>
-            <td><input type="radio" id="NA" name="25" /></td>
+            <td><input type="radio" value="0" name="25" /></td>
+            <td><input type="radio" value="1" name="25" /></td>
+            <td><input type="radio" value="NA" name="25" /></td>
           </tr>
           <tr>
             <td><span class="number">12.</span></td>
             <td><span class="qns">Surfaces, walls and ceilings within customer areas are dry and clean.</span></td>
-            <td><input type="radio" id="0" name="26" /></td>
-            <td><input type="radio" id="1" name="26" /></td>
-            <td><input type="radio" id="NA" name="26" /></td>
+            <td><input type="radio" value="0" name="26" /></td>
+            <td><input type="radio" value="1" name="26" /></td>
+            <td><input type="radio" value="NA" name="26" /></td>
           </tr>
           <tr>
             <td><span class="number">13.</span></td>
             <td><span class="qns">Floor within customer areas is clean, dry and non-greasy.</span></td>
-            <td><input type="radio" id="0" name="27" /></td>
-            <td><input type="radio" id="1" name="27" /></td>
-            <td><input type="radio" id="NA" name="27" /></td>
+            <td><input type="radio" value="0" name="27" /></td>
+            <td><input type="radio" value="1" name="27" /></td>
+            <td><input type="radio" value="NA" name="27" /></td>
           </tr>
           <tr>
             <td><span class="number">14.</span></td>
             <td><span class="qns">Waste bins are properly lined with plastic bags and covered at all times.</span></td>
-            <td><input type="radio" id="0" name="28" /></td>
-            <td><input type="radio" id="1" name="28" /></td>
-            <td><input type="radio" id="NA" name="28" /></td>
+            <td><input type="radio" value="0" name="28" /></td>
+            <td><input type="radio" value="1" name="28" /></td>
+            <td><input type="radio" value="NA" name="28" /></td>
           </tr>
           <tr>
             <td><span class="number">15.</span></td>
@@ -274,9 +278,9 @@ This is the html for the audit
                 <li>Waste Management: Proper disposal of food stuff and waste.</li>
                 <li>Waste is properly bagged before disposing it at the waste disposal area/ bin centre.</li>
               </span></td>
-            <td><input type="radio" id="0" name="29" /></td>
-            <td><input type="radio" id="1" name="29" /></td>
-            <td><input type="radio" id="NA" name="29" /></td>
+            <td><input type="radio" value="0" name="29" /></td>
+            <td><input type="radio" value="1" name="29" /></td>
+            <td><input type="radio" value="NA" name="29" /></td>
           </tr>
         </tbody>
         <thread>
@@ -293,18 +297,18 @@ This is the html for the audit
             <td><span class="number">1.</span></td>
             <td><span class="qns">Hand washing facilities are easily accessible, in good working condition and soap is
                 provided.</span></td>
-            <td><input type="radio" id="0" name="30" /></td>
-            <td><input type="radio" id="1" name="30" /></td>
-            <td><input type="radio" id="NA" name="30" /></td>
+            <td><input type="radio" value="0" name="30" /></td>
+            <td><input type="radio" value="1" name="30" /></td>
+            <td><input type="radio" value="NA" name="30" /></td>
             <td rowspan="2"></td>
           </tr>
           <tr>
             <td><span class="number">2.</span></td>
             <td><span class="qns">Adequate facilities for hand hygiene are available including liquid soap and disposable
                 hand towels.</span></td>
-            <td><input type="radio" id="0" name="31" /></td>
-            <td><input type="radio" id="1" name="31" /></td>
-            <td><input type="radio" id="NA" name="31" /></td>
+            <td><input type="radio" value="0" name="31" /></td>
+            <td><input type="radio" value="1" name="31" /></td>
+            <td><input type="radio" value="NA" name="31" /></td>
           </tr>
         </tbody>
       </table>
@@ -330,9 +334,9 @@ This is the html for the audit
           <tr>
             <td><span class="number">1.</span></td>
             <td><span class="qns">Food is stored in appropriate conditions and at an appropriate temperature.</span></td>
-            <td><input type="radio" id="0" name="32" /></td>
-            <td><input type="radio" id="1" name="32" /></td>
-            <td><input type="radio" id="NA" name="32" /></td>
+            <td><input type="radio" value="0" name="32" /></td>
+            <td><input type="radio" value="1" name="32" /></td>
+            <td><input type="radio" value="NA" name="32" /></td>
             <td rowspan="26"></td>
           </tr>
           <tr>
@@ -341,93 +345,93 @@ This is the html for the audit
                 <li>Non-food items (e.g. insecticides, detergents and other chemicals) are not stored together with the
                   food items.</li>
               </span></td>
-            <td><input type="radio" id="0" name="33" /></td>
-            <td><input type="radio" id="1" name="33" /></td>
-            <td><input type="radio" id="NA" name="33" /></td>
+            <td><input type="radio" value="0" name="33" /></td>
+            <td><input type="radio" value="1" name="33" /></td>
+            <td><input type="radio" value="NA" name="33" /></td>
           </tr>
           <tr>
             <td><span class="number">3.</span></td>
             <td><span class="qns">Food is not placed near sources of contamination.</span></td>
-            <td><input type="radio" id="0" name="34" /></td>
-            <td><input type="radio" id="1" name="34" /></td>
-            <td><input type="radio" id="NA" name="34" /></td>
+            <td><input type="radio" value="0" name="34" /></td>
+            <td><input type="radio" value="1" name="34" /></td>
+            <td><input type="radio" value="NA" name="34" /></td>
           </tr>
           <tr>
             <td><span class="number">4.</span></td>
             <td><span class="qns">Storage of food does not invite pest infestation.</span></td>
-            <td><input type="radio" id="0" name="35" /></td>
-            <td><input type="radio" id="1" name="35" /></td>
-            <td><input type="radio" id="NA" name="35" /></td>
+            <td><input type="radio" value="0" name="35" /></td>
+            <td><input type="radio" value="1" name="35" /></td>
+            <td><input type="radio" value="NA" name="35" /></td>
           </tr>
           <tr>
             <td><span class="number">5.</span></td>
             <td><span class="qns">Dry goods (e.g. canned food and drinks) and other food items are stored neatly on
                 shelves, off the floor and away from walls.</span></td>
-            <td><input type="radio" id="0" name="36" /></td>
-            <td><input type="radio" id="1" name="36" /></td>
-            <td><input type="radio" id="NA" name="36" /></td>
+            <td><input type="radio" value="0" name="36" /></td>
+            <td><input type="radio" value="1" name="36" /></td>
+            <td><input type="radio" value="NA" name="36" /></td>
           </tr>
           <tr>
             <td><span class="number">6.</span></td>
             <td><span class="qns">Proper stock rotation system such as the First-Expired-First-Out (FEFO) system is used
                 for inventory management.</span></td>
-            <td><input type="radio" id="0" name="37" /></td>
-            <td><input type="radio" id="1" name="37" /></td>
-            <td><input type="radio" id="NA" name="37" /></td>
+            <td><input type="radio" value="0" name="37" /></td>
+            <td><input type="radio" value="1" name="37" /></td>
+            <td><input type="radio" value="NA" name="37" /></td>
           </tr>
           <tr>
             <td><span class="number">7.</span></td>
             <td><span class="qns">Food is protected from contamination; packaging is intact and no products are found with
                 signs of spoilage.</span></td>
-            <td><input type="radio" id="0" name="38" /></td>
-            <td><input type="radio" id="1" name="38" /></td>
-            <td><input type="radio" id="NA" name="38" /></td>
+            <td><input type="radio" value="0" name="38" /></td>
+            <td><input type="radio" value="1" name="38" /></td>
+            <td><input type="radio" value="NA" name="38" /></td>
           </tr>
           <tr>
             <td><span class="number">8.</span></td>
             <td><span class="qns">Ice machine is clean and well maintained.
                 <li>Only ice is stored in the ice machine to prevent contamination of the ice.</li>
               </span></td>
-            <td><input type="radio" id="0" name="39" /></td>
-            <td><input type="radio" id="1" name="39" /></td>
-            <td><input type="radio" id="NA" name="39" /></td>
+            <td><input type="radio" value="0" name="39" /></td>
+            <td><input type="radio" value="1" name="39" /></td>
+            <td><input type="radio" value="NA" name="39" /></td>
           </tr>
           <tr>
             <td><span class="number">9.</span></td>
             <td><span class="qns">Scoop for ice is stored outside the ice machine in a dedicated container.</span></td>
-            <td><input type="radio" id="0" name="40" /></td>
-            <td><input type="radio" id="1" name="40" /></td>
-            <td><input type="radio" id="NA" name="40" /></td>
+            <td><input type="radio" value="0" name="40" /></td>
+            <td><input type="radio" value="1" name="40" /></td>
+            <td><input type="radio" value="NA" name="40" /></td>
           </tr>
           <tr>
             <td><span class="number">10.</span></td>
             <td><span class="qns">Food supplied is clean and not expired.</span></td>
-            <td><input type="radio" id="0" name="41" /></td>
-            <td><input type="radio" id="1" name="41" /></td>
-            <td><input type="radio" id="NA" name="41" /></td>
+            <td><input type="radio" value="0" name="41" /></td>
+            <td><input type="radio" value="1" name="41" /></td>
+            <td><input type="radio" value="NA" name="41" /></td>
           </tr>
           <tr>
             <td><span class="number">11.</span></td>
             <td><span class="qns">Clear labelling of date of date of preparation/ manufacture/ expiry on all food
                 containers/packaging.</span></td>
-            <td><input type="radio" id="0" name="42" /></td>
-            <td><input type="radio" id="1" name="42" /></td>
-            <td><input type="radio" id="NA" name="42" /></td>
+            <td><input type="radio" value="0" name="42" /></td>
+            <td><input type="radio" value="1" name="42" /></td>
+            <td><input type="radio" value="NA" name="42" /></td>
           </tr>
           <tr>
             <td><span class="number">12.</span></td>
             <td><span class="qns">Cooked food is properly covered to prevent cross-contamination.</span></td>
-            <td><input type="radio" id="0" name="43" /></td>
-            <td><input type="radio" id="1" name="43" /></td>
-            <td><input type="radio" id="NA" name="43" /></td>
+            <td><input type="radio" value="0" name="43" /></td>
+            <td><input type="radio" value="1" name="43" /></td>
+            <td><input type="radio" value="NA" name="43" /></td>
           </tr>
           <tr>
             <td><span class="number">13.</span></td>
             <td><span class="qns">Proper work flow and segregation of areas to prevent cross-contamination between raw and
                 cooked/ ready-to-eat food areas.</span></td>
-            <td><input type="radio" id="0" name="44" /></td>
-            <td><input type="radio" id="1" name="44" /></td>
-            <td><input type="radio" id="NA" name="44" /></td>
+            <td><input type="radio" value="0" name="44" /></td>
+            <td><input type="radio" value="1" name="44" /></td>
+            <td><input type="radio" value="NA" name="44" /></td>
           </tr>
           <tr>
             <td><span class="number">14.</span></td>
@@ -436,97 +440,97 @@ This is the html for the audit
                 <li>E.g. Different chopping boards, knives and other utensils are used for cooked/ ready-to-eat and raw
                   food.</li>
               </span></td>
-            <td><input type="radio" id="0" name="45" /></td>
-            <td><input type="radio" id="1" name="45" /></td>
-            <td><input type="radio" id="NA" name="45" /></td>
+            <td><input type="radio" value="0" name="45" /></td>
+            <td><input type="radio" value="1" name="45" /></td>
+            <td><input type="radio" value="NA" name="45" /></td>
           </tr>
           <tr>
             <td><span class="number">15.</span></td>
             <td><span class="qns">Frozen food is thawed in chiller, microwave or under running water.</span></td>
-            <td><input type="radio" id="0" name="46" /></td>
-            <td><input type="radio" id="1" name="46" /></td>
-            <td><input type="radio" id="NA" name="46" /></td>
+            <td><input type="radio" value="0" name="46" /></td>
+            <td><input type="radio" value="1" name="46" /></td>
+            <td><input type="radio" value="NA" name="46" /></td>
           </tr>
           <tr>
             <td><span class="number">16.</span></td>
             <td><span class="qns">Ingredients used are clean and washed thoroughly before cooking.</span></td>
-            <td><input type="radio" id="0" name="47" /></td>
-            <td><input type="radio" id="1" name="47" /></td>
-            <td><input type="radio" id="NA" name="47" /></td>
+            <td><input type="radio" value="0" name="47" /></td>
+            <td><input type="radio" value="1" name="47" /></td>
+            <td><input type="radio" value="NA" name="47" /></td>
           </tr>
           <tr>
             <td><span class="number">17.</span></td>
             <td><span class="qns">All cooking ingredient (e.g. cooking oil, sauces) are properly covered in proper
                 containers and properly labelled, indicating the content and date of expiry.</span></td>
-            <td><input type="radio" id="0" name="48" /></td>
-            <td><input type="radio" id="1" name="48" /></td>
-            <td><input type="radio" id="NA" name="48" /></td>
+            <td><input type="radio" value="0" name="48" /></td>
+            <td><input type="radio" value="1" name="48" /></td>
+            <td><input type="radio" value="NA" name="48" /></td>
           </tr>
           <tr>
             <td><span class="number">18.</span></td>
             <td><span class="qns">All sauces are stored at appropriate condition & temperature.</span></td>
-            <td><input type="radio" id="0" name="49" /></td>
-            <td><input type="radio" id="1" name="49" /></td>
-            <td><input type="radio" id="NA" name="49" /></td>
+            <td><input type="radio" value="0" name="49" /></td>
+            <td><input type="radio" value="1" name="49" /></td>
+            <td><input type="radio" value="NA" name="49" /></td>
           </tr>
           <tr>
             <td><span class="number">19.</span></td>
             <td><span class="qns">Cooking oil is not used for more than 1 day.</span></td>
-            <td><input type="radio" id="0" name="50" /></td>
-            <td><input type="radio" id="1" name="50" /></td>
-            <td><input type="radio" id="NA" name="50" /></td>
+            <td><input type="radio" value="0" name="50" /></td>
+            <td><input type="radio" value="1" name="50" /></td>
+            <td><input type="radio" value="NA" name="50" /></td>
           </tr>
           <tr>
             <td><span class="number">20.</span></td>
             <td><span class="qns">Cooking oil is properly stored with a cover.</span></td>
-            <td><input type="radio" id="0" name="51" /></td>
-            <td><input type="radio" id="1" name="51" /></td>
-            <td><input type="radio" id="NA" name="51" /></td>
+            <td><input type="radio" value="0" name="51" /></td>
+            <td><input type="radio" value="1" name="51" /></td>
+            <td><input type="radio" value="NA" name="51" /></td>
           </tr>
           <tr>
             <td><span class="number">21.</span></td>
             <td><span class="qns">Perishable food is stored in the fridge.</span></td>
-            <td><input type="radio" id="0" name="52" /></td>
-            <td><input type="radio" id="1" name="52" /></td>
-            <td><input type="radio" id="NA" name="52" /></td>
+            <td><input type="radio" value="0" name="52" /></td>
+            <td><input type="radio" value="1" name="52" /></td>
+            <td><input type="radio" value="NA" name="52" /></td>
           </tr>
           <tr>
             <td><span class="number">22.</span></td>
             <td><span class="qns">Raw food and cooked food/ ready to serve food are clearly segregated.
                 <li>Cold and/ or hot holding units are clean and well maintained.</li>
               </span></td>
-            <td><input type="radio" id="0" name="53" /></td>
-            <td><input type="radio" id="1" name="53" /></td>
-            <td><input type="radio" id="NA" name="53" /></td>
+            <td><input type="radio" value="0" name="53" /></td>
+            <td><input type="radio" value="1" name="53" /></td>
+            <td><input type="radio" value="NA" name="53" /></td>
           </tr>
           <tr>
             <td><span class="number">23.</span></td>
             <td><span class="qns">Food preparation area is free of bird and animal (e.g. dog or cat).</span></td>
-            <td><input type="radio" id="0" name="54" /></td>
-            <td><input type="radio" id="1" name="54" /></td>
-            <td><input type="radio" id="NA" name="54" /></td>
+            <td><input type="radio" value="0" name="54" /></td>
+            <td><input type="radio" value="1" name="54" /></td>
+            <td><input type="radio" value="NA" name="54" /></td>
           </tr>
           <tr>
             <td><span class="number">24.</span></td>
             <td><span class="qns">Food preparation area is clean, free of pests and in good state of repair.</span></td>
-            <td><input type="radio" id="0" name="55" /></td>
-            <td><input type="radio" id="1" name="55" /></td>
-            <td><input type="radio" id="NA" name="55" /></td>
+            <td><input type="radio" value="0" name="55" /></td>
+            <td><input type="radio" value="1" name="55" /></td>
+            <td><input type="radio" value="NA" name="55" /></td>
           </tr>
           <tr>
             <td><span class="number">25.</span></td>
             <td><span class="qns">Food is not prepared on the floor, near drain or near/ in toilet.</span></td>
-            <td><input type="radio" id="0" name="56" /></td>
-            <td><input type="radio" id="1" name="56" /></td>
-            <td><input type="radio" id="NA" name="56" /></td>
+            <td><input type="radio" value="0" name="56" /></td>
+            <td><input type="radio" value="1" name="56" /></td>
+            <td><input type="radio" value="NA" name="56" /></td>
           </tr>
           <tr>
             <td><span class="number">26.</span></td>
             <td><span class="qns">Personal belongings are kept separately in the staff locker area or cabinet, away from
                 the food storage and preparation area.</span></td>
-            <td><input type="radio" id="0" name="57" /></td>
-            <td><input type="radio" id="1" name="57" /></td>
-            <td><input type="radio" id="NA" name="57" /></td>
+            <td><input type="radio" value="0" name="57" /></td>
+            <td><input type="radio" value="1" name="57" /></td>
+            <td><input type="radio" value="NA" name="57" /></td>
           </tr>
         </tbody>
         <thread>
@@ -543,9 +547,9 @@ This is the html for the audit
             <td><span class="number">1.</span></td>
             <td><span class="qns">Daily Temperature Log for food storage units (freezers, chillers, warmers, steamers,
                 ovens) using independent thermometer, etc. is maintained for inspection from time to time.</span></td>
-            <td><input type="radio" id="0" name="58" /></td>
-            <td><input type="radio" id="1" name="58" /></td>
-            <td><input type="radio" id="NA" name="58" /></td>
+            <td><input type="radio" value="0" name="58" /></td>
+            <td><input type="radio" value="1" name="58" /></td>
+            <td><input type="radio" value="NA" name="58" /></td>
             <td rowspan="11"></td>
           </tr>
           <tr>
@@ -553,80 +557,80 @@ This is the html for the audit
             <td><span class="qns">Food storage units (freezers, chillers, warmers, steamers, ovens) are kept clean and
                 well maintained. All rubber gaskets of refrigerators / warmers are free from defect, dirt and
                 mould.</span></td>
-            <td><input type="radio" id="0" name="59" /></td>
-            <td><input type="radio" id="1" name="59" /></td>
-            <td><input type="radio" id="NA" name="59" /></td>
+            <td><input type="radio" value="0" name="59" /></td>
+            <td><input type="radio" value="1" name="59" /></td>
+            <td><input type="radio" value="NA" name="59" /></td>
           </tr>
           <tr>
             <td><span class="number">3.</span></td>
             <td><span class="qns">Food storage units are not overstocked to allow good air circulation.</span></td>
-            <td><input type="radio" id="0" name="60" /></td>
-            <td><input type="radio" id="1" name="60" /></td>
-            <td><input type="radio" id="NA" name="60" /></td>
+            <td><input type="radio" value="0" name="60" /></td>
+            <td><input type="radio" value="1" name="60" /></td>
+            <td><input type="radio" value="NA" name="60" /></td>
           </tr>
           <tr>
             <td><span class="number">4.</span></td>
             <td><span class="qns">For walk-in freezers and chillers, food items are stored neatly on shelves and off the
                 floor.</span></td>
-            <td><input type="radio" id="0" name="61" /></td>
-            <td><input type="radio" id="1" name="61" /></td>
-            <td><input type="radio" id="NA" name="61" /></td>
+            <td><input type="radio" value="0" name="61" /></td>
+            <td><input type="radio" value="1" name="61" /></td>
+            <td><input type="radio" value="NA" name="61" /></td>
           </tr>
           <tr>
             <td><span class="number">5.</span></td>
             <td><span class="qns">Frozen food is stored at a temperature of not more than -12°C.
                 <li>Freezer’s temperature: < -12°C</li>
               </span></td>
-            <td><input type="radio" id="0" name="62" /></td>
-            <td><input type="radio" id="1" name="62" /></td>
-            <td><input type="radio" id="NA" name="62" /></td>
+            <td><input type="radio" value="0" name="62" /></td>
+            <td><input type="radio" value="1" name="62" /></td>
+            <td><input type="radio" value="NA" name="62" /></td>
           </tr>
           <tr>
             <td><span class="number">6.</span></td>
             <td><span class="qns">Chilled food is stored at a temperature of not more than 4°C.
                 <li>Chiller’s temperature: 0°C ~ 4°C</li>
               </span></td>
-            <td><input type="radio" id="0" name="63" /></td>
-            <td><input type="radio" id="1" name="63" /></td>
-            <td><input type="radio" id="NA" name="63" /></td>
+            <td><input type="radio" value="0" name="63" /></td>
+            <td><input type="radio" value="1" name="63" /></td>
+            <td><input type="radio" value="NA" name="63" /></td>
           </tr>
           <tr>
             <td><span class="number">7.</span></td>
             <td><span class="qns">Hot food are held above 60°C.
                 <li>Food warmer’s temperature: > 60°C</li>
               </span></td>
-            <td><input type="radio" id="0" name="64" /></td>
-            <td><input type="radio" id="1" name="64" /></td>
-            <td><input type="radio" id="NA" name="64" /></td>
+            <td><input type="radio" value="0" name="64" /></td>
+            <td><input type="radio" value="1" name="64" /></td>
+            <td><input type="radio" value="NA" name="64" /></td>
           </tr>
           <tr>
             <td><span class="number">8.</span></td>
             <td><span class="qns">Perishable food is stored at a temperature of not more than 4°C.</span></td>
-            <td><input type="radio" id="0" name="65" /></td>
-            <td><input type="radio" id="1" name="65" /></td>
-            <td><input type="radio" id="NA" name="65" /></td>
+            <td><input type="radio" value="0" name="65" /></td>
+            <td><input type="radio" value="1" name="65" /></td>
+            <td><input type="radio" value="NA" name="65" /></td>
           </tr>
           <tr>
             <td><span class="number">9.</span></td>
             <td><span class="qns">Dairy products are stored at a temperature of not more than 7°C.</span></td>
-            <td><input type="radio" id="0" name="66" /></td>
-            <td><input type="radio" id="1" name="66" /></td>
-            <td><input type="radio" id="NA" name="66" /></td>
+            <td><input type="radio" value="0" name="66" /></td>
+            <td><input type="radio" value="1" name="66" /></td>
+            <td><input type="radio" value="NA" name="66" /></td>
           </tr>
           <tr>
             <td><span class="number">10.</span></td>
             <td><span class="qns">Cooked/ ready-to-eat food are stored above raw food.</span></td>
-            <td><input type="radio" id="0" name="67" /></td>
-            <td><input type="radio" id="1" name="67" /></td>
-            <td><input type="radio" id="NA" name="67" /></td>
+            <td><input type="radio" value="0" name="67" /></td>
+            <td><input type="radio" value="1" name="67" /></td>
+            <td><input type="radio" value="NA" name="67" /></td>
           </tr>
           <tr>
             <td><span class="number">11.</span></td>
             <td><span class="qns">Food items are properly wrapped/covered in proper containers and protected from
                 contamination.</span></td>
-            <td><input type="radio" id="0" name="68" /></td>
-            <td><input type="radio" id="1" name="68" /></td>
-            <td><input type="radio" id="NA" name="68" /></td>
+            <td><input type="radio" value="0" name="68" /></td>
+            <td><input type="radio" value="1" name="68" /></td>
+            <td><input type="radio" value="NA" name="68" /></td>
           </tr>
         </tbody>
       </table>
@@ -654,53 +658,53 @@ This is the html for the audit
             <td><span class="qns">Min. no. of healthier variety of food items per stall.
                 <br /><b><u>Lease Term:</u></b><br />
                 50% of food items.</td>
-            <td><input type="radio" id="0" name="69" /></td>
-            <td><input type="radio" id="1" name="69" /></td>
-            <td><input type="radio" id="NA" name="69" /></td>
+            <td><input type="radio" value="0" name="69" /></td>
+            <td><input type="radio" value="1" name="69" /></td>
+            <td><input type="radio" value="NA" name="69" /></td>
             <td rowspan="7"></td>
           </tr>
           <tr>
             <td><span class="number">2.</span></td>
             <td><span class="qns">Label caloric count of healthier options.</span></td>
-            <td><input type="radio" id="0" name="70" /></td>
-            <td><input type="radio" id="1" name="70" /></td>
-            <td><input type="radio" id="NA" name="70" /></td>
+            <td><input type="radio" value="0" name="70" /></td>
+            <td><input type="radio" value="1" name="70" /></td>
+            <td><input type="radio" value="NA" name="70" /></td>
           </tr>
           <tr>
             <td><span class="number">3.</span></td>
             <td><span class="qns">Include HPB’s Identifiers beside healthier options.</span></td>
-            <td><input type="radio" id="0" name="71" /></td>
-            <td><input type="radio" id="1" name="71" /></td>
-            <td><input type="radio" id="NA" name="71" /></td>
+            <td><input type="radio" value="0" name="71" /></td>
+            <td><input type="radio" value="1" name="71" /></td>
+            <td><input type="radio" value="NA" name="71" /></td>
           </tr>
           <tr>
             <td><span class="number">4.</span></td>
             <td><span class="qns">Use of healthier cooking oils.</span></td>
-            <td><input type="radio" id="0" name="72" /></td>
-            <td><input type="radio" id="1" name="72" /></td>
-            <td><input type="radio" id="NA" name="72" /></td>
+            <td><input type="radio" value="0" name="72" /></td>
+            <td><input type="radio" value="1" name="72" /></td>
+            <td><input type="radio" value="NA" name="72" /></td>
           </tr>
           <tr>
             <td><span class="number">5.</span></td>
             <td><span class="qns">Offer wholemeal/ whole-grain option.</span></td>
-            <td><input type="radio" id="0" name="73" /></td>
-            <td><input type="radio" id="1" name="73" /></td>
-            <td><input type="radio" id="NA" name="73" /></td>
+            <td><input type="radio" value="0" name="73" /></td>
+            <td><input type="radio" value="1" name="73" /></td>
+            <td><input type="radio" value="NA" name="73" /></td>
           </tr>
           <tr>
             <td><span class="number">6.</span></td>
             <td><span class="qns">Healthier option food sold at lower price than regular items.</span></td>
-            <td><input type="radio" id="0" name="74" /></td>
-            <td><input type="radio" id="1" name="74" /></td>
-            <td><input type="radio" id="NA" name="74" /></td>
+            <td><input type="radio" value="0" name="74" /></td>
+            <td><input type="radio" value="1" name="74" /></td>
+            <td><input type="radio" value="NA" name="74" /></td>
           </tr>
           <tr>
             <td><span class="number">7.</span></td>
             <td><span class="qns">Limit deep-fried and pre-deep fried food items sold (≤ 20% deep-fried items).</span>
             </td>
-            <td><input type="radio" id="0" name="75" /></td>
-            <td><input type="radio" id="1" name="75" /></td>
-            <td><input type="radio" id="NA" name="75" /></td>
+            <td><input type="radio" value="0" name="75" /></td>
+            <td><input type="radio" value="1" name="75" /></td>
+            <td><input type="radio" value="NA" name="75" /></td>
           </tr>
         </tbody>
         <thread>
@@ -716,32 +720,32 @@ This is the html for the audit
           <tr>
             <td><span class="number">1.</span></td>
             <td><span class="qns">No sugar / Lower-sugar brewed beverage offerings according to guidelines.</span></td>
-            <td><input type="radio" id="0" name="76" /></td>
-            <td><input type="radio" id="1" name="76" /></td>
-            <td><input type="radio" id="NA" name="76" /></td>
+            <td><input type="radio" value="0" name="76" /></td>
+            <td><input type="radio" value="1" name="76" /></td>
+            <td><input type="radio" value="NA" name="76" /></td>
             <td rowspan="11"></td>
           </tr>
           <tr>
             <td><span class="number">2.</span></td>
             <td><span class="qns">Healthier option beverages sold at lower price than regular items.</span></td>
-            <td><input type="radio" id="0" name="77" /></td>
-            <td><input type="radio" id="1" name="77" /></td>
-            <td><input type="radio" id="NA" name="77" /></td>
+            <td><input type="radio" value="0" name="77" /></td>
+            <td><input type="radio" value="1" name="77" /></td>
+            <td><input type="radio" value="NA" name="77" /></td>
           </tr>
           <tr>
             <td><span class="number">3.</span></td>
             <td><span class="qns">Label caloric count of healthier options.</span></td>
-            <td><input type="radio" id="0" name="78" /></td>
-            <td><input type="radio" id="1" name="78" /></td>
-            <td><input type="radio" id="NA" name="78" /></td>
+            <td><input type="radio" value="0" name="78" /></td>
+            <td><input type="radio" value="1" name="78" /></td>
+            <td><input type="radio" value="NA" name="78" /></td>
           </tr>
           <tr>
             <td><span class="number">4.</span></td>
             <td><span class="qns">Limit sugar content on commercially-prepared sweetened beverages. (≥ 70%
                 commercially-prepared sweetened beverages sold to have HCS)</span></td>
-            <td><input type="radio" id="0" name="79" /></td>
-            <td><input type="radio" id="1" name="79" /></td>
-            <td><input type="radio" id="NA" name="79" /></td>
+            <td><input type="radio" value="0" name="79" /></td>
+            <td><input type="radio" value="1" name="79" /></td>
+            <td><input type="radio" value="NA" name="79" /></td>
           </tr>
         </tbody>
       </table>
@@ -768,83 +772,83 @@ This is the html for the audit
             <td><span class="number">1.</span></td>
             <td><span class="qns">All food handlers have Basic Food Hygiene certificate and a valid Refresher Food Hygiene
                 certificate (if applicable).</span></td>
-            <td><input type="radio" id="0" name="80" /></td>
-            <td><input type="radio" id="1" name="80" /></td>
-            <td><input type="radio" id="NA" name="80" /></td>
+            <td><input type="radio" value="0" name="80" /></td>
+            <td><input type="radio" value="1" name="80" /></td>
+            <td><input type="radio" value="NA" name="80" /></td>
             <td rowspan="11"></td>
           </tr>
           <tr>
             <td><span class="number">2.</span></td>
             <td><span class="qns">MSDS for all industrial chemicals are available and up to date.</span></td>
-            <td><input type="radio" id="0" name="81" /></td>
-            <td><input type="radio" id="1" name="81" /></td>
-            <td><input type="radio" id="NA" name="81" /></td>
+            <td><input type="radio" value="0" name="81" /></td>
+            <td><input type="radio" value="1" name="81" /></td>
+            <td><input type="radio" value="NA" name="81" /></td>
           </tr>
           <tr>
             <td><span class="number">3.</span></td>
             <td><span class="qns">Proper chemicals storage.</span></td>
-            <td><input type="radio" id="0" name="82" /></td>
-            <td><input type="radio" id="1" name="82" /></td>
-            <td><input type="radio" id="NA" name="82" /></td>
+            <td><input type="radio" value="0" name="82" /></td>
+            <td><input type="radio" value="1" name="82" /></td>
+            <td><input type="radio" value="NA" name="82" /></td>
           </tr>
           <tr>
             <td><span class="number">4.</span></td>
             <td><span class="qns">All detergent and bottles containing liquids are labelled appropriately.</span></td>
-            <td><input type="radio" id="0" name="83" /></td>
-            <td><input type="radio" id="1" name="83" /></td>
-            <td><input type="radio" id="NA" name="83" /></td>
+            <td><input type="radio" value="0" name="83" /></td>
+            <td><input type="radio" value="1" name="83" /></td>
+            <td><input type="radio" value="NA" name="83" /></td>
           </tr>
           <tr>
             <td><span class="number">5.</span></td>
             <td><span class="qns">All personnel to wear safety shoes and safety attire where necessary.</span></td>
-            <td><input type="radio" id="0" name="84" /></td>
-            <td><input type="radio" id="1" name="84" /></td>
-            <td><input type="radio" id="NA" name="84" /></td>
+            <td><input type="radio" value="0" name="84" /></td>
+            <td><input type="radio" value="1" name="84" /></td>
+            <td><input type="radio" value="NA" name="84" /></td>
           </tr>
           <tr>
             <td><span class="number">6.</span></td>
             <td><span class="qns">Knives and sharp objects are kept at a safe place.</span></td>
-            <td><input type="radio" id="0" name="85" /></td>
-            <td><input type="radio" id="1" name="85" /></td>
-            <td><input type="radio" id="NA" name="85" /></td>
+            <td><input type="radio" value="0" name="85" /></td>
+            <td><input type="radio" value="1" name="85" /></td>
+            <td><input type="radio" value="NA" name="85" /></td>
           </tr>
           <tr>
             <td><span class="number">7.</span></td>
             <td><span class="qns">Area under the sink should not be cluttered with items other than washing agents.</span>
             </td>
-            <td><input type="radio" id="0" name="86" /></td>
-            <td><input type="radio" id="1" name="86" /></td>
-            <td><input type="radio" id="NA" name="86" /></td>
+            <td><input type="radio" value="0" name="86" /></td>
+            <td><input type="radio" value="1" name="86" /></td>
+            <td><input type="radio" value="NA" name="86" /></td>
           </tr>
           <tr>
             <td><span class="number">8.</span></td>
             <td><span class="qns">Delivery personnel do not stack goods above the shoulder level.</span></td>
-            <td><input type="radio" id="0" name="87" /></td>
-            <td><input type="radio" id="1" name="87" /></td>
-            <td><input type="radio" id="NA" name="87" /></td>
+            <td><input type="radio" value="0" name="87" /></td>
+            <td><input type="radio" value="1" name="87" /></td>
+            <td><input type="radio" value="NA" name="87" /></td>
           </tr>
           <tr>
             <td><span class="number">9.</span></td>
             <td><span class="qns">Stacking of goods does not exceed 600mm from the ceiling and heavy items at the bottom,
                 light items on top.</span></td>
-            <td><input type="radio" id="0" name="88" /></td>
-            <td><input type="radio" id="1" name="88" /></td>
-            <td><input type="radio" id="NA" name="88" /></td>
+            <td><input type="radio" value="0" name="88" /></td>
+            <td><input type="radio" value="1" name="88" /></td>
+            <td><input type="radio" value="NA" name="88" /></td>
           </tr>
           <tr>
             <td><span class="number">10.</span></td>
             <td><span class="qns">Proper signage/ label (fire, hazards, warnings, food stuff) and Exit signs in working
                 order.</span></td>
-            <td><input type="radio" id="0" name="89" /></td>
-            <td><input type="radio" id="1" name="89" /></td>
-            <td><input type="radio" id="NA" name="89" /></td>
+            <td><input type="radio" value="0" name="89" /></td>
+            <td><input type="radio" value="1" name="89" /></td>
+            <td><input type="radio" value="NA" name="89" /></td>
           </tr>
           <tr>
             <td><span class="number">11.</span></td>
             <td><span class="qns">Equipment, crockery and utensils are not chipped, broken or cracked.</span></td>
-            <td><input type="radio" id="0" name="90" /></td>
-            <td><input type="radio" id="1" name="90" /></td>
-            <td><input type="radio" id="NA" name="90" /></td>
+            <td><input type="radio" value="0" name="90" /></td>
+            <td><input type="radio" value="1" name="90" /></td>
+            <td><input type="radio" value="NA" name="90" /></td>
           </tr>
         </tbody>
         <thread>
@@ -861,24 +865,24 @@ This is the html for the audit
             <td><span class="number">1.</span></td>
             <td><span class="qns">Fire extinguishers access is unobstructed; Fire extinguishers are not expired and
                 employees know how to use them.</span></td>
-            <td><input type="radio" id="0" name="91" /></td>
-            <td><input type="radio" id="1" name="91" /></td>
-            <td><input type="radio" id="NA" name="91" /></td>
+            <td><input type="radio" value="0" name="91" /></td>
+            <td><input type="radio" value="1" name="91" /></td>
+            <td><input type="radio" value="NA" name="91" /></td>
             <td rowspan="3"></td>
           </tr>
           <tr>
             <td><span class="number">2.</span></td>
             <td><span class="qns">Escape route and exits are unobstructed.</span></td>
-            <td><input type="radio" id="0" name="92" /></td>
-            <td><input type="radio" id="1" name="92" /></td>
-            <td><input type="radio" id="NA" name="92" /></td>
+            <td><input type="radio" value="0" name="92" /></td>
+            <td><input type="radio" value="1" name="92" /></td>
+            <td><input type="radio" value="NA" name="92" /></td>
           </tr>
           <tr>
             <td><span class="number">3.</span></td>
             <td><span class="qns">First aid box is available and well-equipped.</span></td>
-            <td><input type="radio" id="0" name="93" /></td>
-            <td><input type="radio" id="1" name="93" /></td>
-            <td><input type="radio" id="NA" name="93" /></td>
+            <td><input type="radio" value="0" name="93" /></td>
+            <td><input type="radio" value="1" name="93" /></td>
+            <td><input type="radio" value="NA" name="93" /></td>
           </tr>
         </tbody>
         <thread>
@@ -894,33 +898,33 @@ This is the html for the audit
           <tr>
             <td><span class="number">1.</span></td>
             <td><span class="qns">Electrical sockets are not overloaded – one plug to one socket.</span></td>
-            <td><input type="radio" id="0" name="94" /></td>
-            <td><input type="radio" id="1" name="94" /></td>
-            <td><input type="radio" id="NA" name="94" /></td>
+            <td><input type="radio" value="0" name="94" /></td>
+            <td><input type="radio" value="1" name="94" /></td>
+            <td><input type="radio" value="NA" name="94" /></td>
             <td rowspan="4"></td>
           </tr>
           <tr>
             <td><span class="number">2.</span></td>
             <td><span class="qns"><span class="qns">Plugs and cords are intact and free from exposure/ tension with PSB
                   safety mark.</span></td>
-            <td><input type="radio" id="0" name="95" /></td>
-            <td><input type="radio" id="1" name="95" /></td>
-            <td><input type="radio" id="NA" name="95" /></td>
+            <td><input type="radio" value="0" name="95" /></td>
+            <td><input type="radio" value="1" name="95" /></td>
+            <td><input type="radio" value="NA" name="95" /></td>
           </tr>
           <tr>
             <td><span class="number">3.</span></td>
             <td><span class="qns"><span class="qns">Power points that are in close proximity to flammable and/or water
                   sources are installed with a plastic cover.</span></td>
-            <td><input type="radio" id="0" name="96" /></td>
-            <td><input type="radio" id="1" name="96" /></td>
-            <td><input type="radio" id="NA" name="96" /></td>
+            <td><input type="radio" value="0" name="96" /></td>
+            <td><input type="radio" value="1" name="96" /></td>
+            <td><input type="radio" value="NA" name="96" /></td>
           </tr>
           <tr>
             <td><span class="number">4.</span></td>
             <td><span class="qns"><span class="qns">Electrical panels / DBs are covered.</span></td>
-            <td><input type="radio" id="0" name="97" /></td>
-            <td><input type="radio" id="1" name="97" /></td>
-            <td><input type="radio" id="NA" name="97" /></td>
+            <td><input type="radio" value="0" name="97" /></td>
+            <td><input type="radio" value="1" name="97" /></td>
+            <td><input type="radio" value="NA" name="97" /></td>
           </tr>
         </tbody>
       </table>
@@ -932,4 +936,30 @@ This is the html for the audit
     </form>
   
   </div>
-{% endblock %}
+
+
+ <script type="text/javascript">
+    function selectAll(Form1) {
+        var btns = document.querySelectorAll('input[type="radio"]')
+        if(btns[0].checked){
+            for(var i=0;i<btns.length;i++){
+                if(btns[i].value=="0"){
+                    btns[i].checked=true;
+                }
+            }
+        }else if (btns[1].checked){
+            for(var i=0;i<btns.length;i++){
+                if(btns[i].value=="1"){
+                    btns[i].checked=true;
+                }
+            }
+        }else if (btns[2].checked){
+            for(var i=0;i<btns.length;i++){
+                if(btns[i].value=="NA"){
+                    btns[i].checked=true;
+                }
+            }
+        }
+    }
+</script>
+  {% endblock %}

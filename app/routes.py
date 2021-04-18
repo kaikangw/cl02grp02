@@ -1,6 +1,8 @@
 from re import I
-from flask import render_template, redirect, url_for, request,session, flash
+from flask import render_template, redirect, url_for, request,session, flash, Response, send_file
 import os
+import pandas as pd
+from io import BytesIO
 from app import app, db, mail
 from app.adminstrator import adminstrator
 from app.audits import audits
@@ -24,7 +26,7 @@ def check_admin():
 @app.route('/', methods=["GET", "POST"])
 def login_page():
 
-    if request.method == "POST":
+    if request.method == "POST": 
         username = request.form.get("username")
         password = request.form.get("password")
         token = login(username,password)
@@ -190,12 +192,20 @@ def data_page():
                 tenant = a.tenant
                 user = User.query.filter(User.username == tenant).first()
                 if user.institution == title1:
+                    if len(cgh)== 5:
+                        break
                     cgh.append([tenant,a.total_score])
                 if user.institution == title2:
+                    if len(kkh )== 5:
+                        break
                     kkh.append([tenant,a.total_score])
                 if user.institution == title3:
+                    if len(sgh) == 5:
+                        break
                     sgh.append([tenant,a.total_score])
                 if user.institution== title4:
+                    if len(skh) == 5:
+                        break
                     skh.append([tenant,a.total_score])
             return render_template("institution_compare.html", title1=title1, title2=title2, title3=title3, title4=title4, cgh = cgh, kkh = kkh, sgh = sgh, skh = skh)
 
@@ -217,13 +227,14 @@ def data_individual():
 
 @app.route('/search_query', methods=['GET', 'POST'])
 def search_query():
-    print("searching")
-    tenant = request.form['auditee']
-    tenants = Audit.query.filter(Audit.tenant==tenant).order_by(Audit.timestamp.asc()).all()    
+    tenant_name = request.form['auditee']
+    tenants = Audit.query.filter(Audit.tenant==tenant_name).order_by(Audit.timestamp.asc()).all()    
     score = []
     for tenant in tenants:
+        if len(score) == 12:
+            break
         score.append(tenant.total_score)
-    return {'tenant':score,'tenant_name':tenant}
+    return {'tenant':score, 'tenant_name':tenant_name}
 
 @app.route('/data/frequency', methods=['GET', 'POST'])
 def data_frequency():
@@ -313,6 +324,42 @@ def create_broadcast():
         render_template("broadcast/broadcast.html")
     return render_template("broadcast/broadcast.html")
 
+
+
+@app.route('/download', methods=["GET","POST"])
+def download():
+    month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    tenant_name = request.form['auditee']
+    tenants = Audit.query.filter(Audit.tenant==tenant_name).order_by(Audit.timestamp.asc()).all()    
+    result = []
+    for tenant in tenants:
+        if len(result) == 12:
+            break
+        result.append(tenant.total_score)
+        
+
+    data = []
+    for i in range(len(month)):
+        data.append([month[i], result[i]])
+    df_1 = pd.DataFrame(data, columns=["Month", "Result"])
+
+    #create an output stream
+    output = BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+
+    #taken from the original question
+    df_1.to_excel(writer, startrow = 0,merge_cells = False, sheet_name = "Sheet_1", index=False)
+    workbook = writer.book
+    worksheet = writer.sheets["Sheet_1"]
+
+    #the writer has done its job
+    writer.close()
+
+    #go back to the beginning of the stream
+    output.seek(0)
+
+    #finally return the file
+    return send_file(output, attachment_filename="data.xlsx", as_attachment=True)
 
 
 

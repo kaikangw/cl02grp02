@@ -7,7 +7,6 @@ body {
   height: 100vh;
 }
 
-
 .upload-file {
   float: left;
   width: 100%;
@@ -34,7 +33,7 @@ body {
 .upload-file .upload-wrapper label p {
   font-size: 15px;
   font-weight: 400;
-  margin-top: 50px;
+  margin-top: 75px;
 }
 .upload-file .upload-wrapper label p a {
   font-weight: 650;

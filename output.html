@@ -1,0 +1,1220 @@
+<!--This is the html for the audit-->
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="HandheldFriendly" content="true">
+        <title>EzCheck</title>
+        
+        <!-- Required meta tags -->
+       
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+        <!-- Extensions -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+        <script src="https://kit.fontawesome.com/c6bc12f920.js" crossorigin="anonymous"></script>
+
+        <!-- CSS for different pages -->
+        <link rel="stylesheet" type="text/css" href="/static/styles/styles.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/styles/audit_checklist.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/styles/mainpage.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/styles/view_data.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/styles/directory.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/styles/chat.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/styles/broadcast.css"/>
+        
+        
+
+    </head>
+
+    <body>
+       <header>
+        <!--- Navbar -->
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #f06d1a; font-size:  x-large;" >
+            <a class="navbar-brand px-3" style="font-size: xx-large;" href="/main">
+              <!--<img src="/static/images/singhealth.png" width="50" height="10%" class="d-inline-block align-top" alt="">-->
+              EzCheck
+            </a>
+
+            <!--- Navbar will become a dropdown when the screen size is too small-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon" ></span>
+            </button>
+            
+            <!--- Navbar categories-->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link px-3 " href="/directory" style="color: white;">Directory  <i class="fas fa-address-book fa-fw"></i></a>
+                </li>
+                
+                
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle px-3 white" href="/main" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                    Audit  <i class="fas fa-book fa-fw"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
+                    <a class="dropdown-item px-3" href="/audits/create" style="color: white;">Create</a>
+          
+                    <a class="dropdown-item px-3" href="/audits/view-all" style="color: white;">View</a>
+
+                  </div>
+                </li>
+
+
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle px-3 white" href="/main" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                    Data  <i class="fas fa-chart-line fa-fw"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
+                    <a class="dropdown-item px-3" href="/data" style="color: white;">Compare</a>
+          
+                    <a class="dropdown-item px-3" href="/data/individual" style="color: white;">View</a>
+                    <a class="dropdown-item px-3" href="/data/frequency" style="color: white;">Frequency</a>
+
+                  </div>
+
+
+                <li class="nav-item">
+                  <a class="nav-link px-3 " href="/chat" style="color: white;">Chats  <i class="far fa-comments"></i></i></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 " href="/create_broadcast" style="color: white;">Broadcast  <i class="fas fa-bullhorn"></i></a>
+                </li>
+              
+                <li class="nav-item dropdown float-right">
+                  <a class="nav-link px-3 dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                  Account <i class="far fa-user-circle fa-fw"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
+                    <a class="dropdown-item px-3 mx-auto"  href="/settings" style="color: white;">Settings</a>
+                    
+                    <a class="dropdown-item px-3 justify-content-center" id="logout" href="/" style="color: white;">Log Out</a>
+                  </div>
+                </li>
+                
+               
+              </ul>
+            </div>
+          </nav>
+       </header>
+        
+        <div id="container">
+          
+    <form action="" method="post" novalidate>
+        <input id="csrf_token" name="csrf_token" type="hidden" value="IjQzYzFiYmMwNmJmYTAxY2JiM2Y3NDZkYjg4ZWNjNDRlZDAwMDBhOTgi.E122eg.862ljMRWOr_CRfosweiH4NseLy4">
+        <p>
+            <label for="auditee">Auditee:</label>
+            <select id="auditee" name="auditee"><option selected value="kopitiam">Kopitiam</option></select>
+        </p>        
+        <p>
+            <label for="auditor">Auditor:</label>
+            <select id="auditor" name="auditor"><option selected value="auditorA">Auditor A</option></select>
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>1. Professionalism & Staff Hygiene (10%)</th>
+                    <th colspan="3">Point(s) Awarded</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="4">Professionalism</th>    
+                </tr>
+                <tr>
+                    <td>Shop is open and ready to service patients/visitors according to operating hours.</td>
+                    
+                        <td><input id="professionalism1-0" name="professionalism1" type="radio" value="1"></td>
+                        <td><label for="professionalism1-0">1</label></td>
+                    
+                        <td><input checked id="professionalism1-1" name="professionalism1" type="radio" value="0"></td>
+                        <td><label for="professionalism1-1">0</label></td>
+                    
+                        <td><input id="professionalism1-2" name="professionalism1" type="radio" value="N/A"></td>
+                        <td><label for="professionalism1-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Staff Attendance: adequate staff for peak and non-peak hours.</td>
+                    
+                        <td><input checked id="professionalism2-0" name="professionalism2" type="radio" value="1"><label for="professionalism2-0">1</label></td>
+                    
+                        <td><input id="professionalism2-1" name="professionalism2" type="radio" value="0"><label for="professionalism2-1">0</label></td>
+                    
+                        <td><input id="professionalism2-2" name="professionalism2" type="radio" value="N/A"><label for="professionalism2-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>At least one (1) clearly assigned person in-charge on site.</td>
+                    
+                        <td><input checked id="professionalism3-0" name="professionalism3" type="radio" value="1"><label for="professionalism3-0">1</label></td>
+                    
+                        <td><input id="professionalism3-1" name="professionalism3" type="radio" value="0"><label for="professionalism3-1">0</label></td>
+                    
+                        <td><input id="professionalism3-2" name="professionalism3" type="radio" value="N/A"><label for="professionalism3-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <th colspan="4">Staff Hygiene</th>    
+                </tr>
+                <tr>
+                    <td>Staff who are unfit for work due to illness should not report to work.</td>
+                    
+                        <td><input checked id="staffhygiene1-0" name="staffhygiene1" type="radio" value="1"><label for="staffhygiene1-0">1</label></td>
+                    
+                        <td><input id="staffhygiene1-1" name="staffhygiene1" type="radio" value="0"><label for="staffhygiene1-1">0</label></td>
+                    
+                        <td><input id="staffhygiene1-2" name="staffhygiene1" type="radio" value="N/A"><label for="staffhygiene1-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Staff who are fit for work but suffering from the lingering effects of a cough and/or cold should cover their mouths with a surgical mask.</td>
+                    
+                        <td><input checked id="staffhygiene2-0" name="staffhygiene2" type="radio" value="1"><label for="staffhygiene2-0">1</label></td>
+                    
+                        <td><input id="staffhygiene2-1" name="staffhygiene2" type="radio" value="0"><label for="staffhygiene2-1">0</label></td>
+                    
+                        <td><input id="staffhygiene2-2" name="staffhygiene2" type="radio" value="N/A"><label for="staffhygiene2-2">N/A</label></td>
+                    
+                </tr>                     
+                <tr>
+                    <td>Clean clothes/uniform or aprons are worn during food preparation and food service.</td>
+                    
+                        <td><input checked id="staffhygiene3-0" name="staffhygiene3" type="radio" value="1"><label for="staffhygiene3-0">1</label></td>
+                    
+                        <td><input id="staffhygiene3-1" name="staffhygiene3" type="radio" value="0"><label for="staffhygiene3-1">0</label></td>
+                    
+                        <td><input id="staffhygiene3-2" name="staffhygiene3" type="radio" value="N/A"><label for="staffhygiene3-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Hair is kept tidy (long hair must be tied up) and covered with clean caps or hair nets where appropriate.</td>
+                    
+                        <td><input checked id="staffhygiene4-0" name="staffhygiene4" type="radio" value="1"><label for="staffhygiene4-0">1</label></td>
+                    
+                        <td><input id="staffhygiene4-1" name="staffhygiene4" type="radio" value="0"><label for="staffhygiene4-1">0</label></td>
+                    
+                        <td><input id="staffhygiene4-2" name="staffhygiene4" type="radio" value="N/A"><label for="staffhygiene4-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Sores, wounds or cuts on hands, if any, are covered with waterproof and brightly-coloured plaster.</td>
+                    
+                        <td><input checked id="staffhygiene5-0" name="staffhygiene5" type="radio" value="1"><label for="staffhygiene5-0">1</label></td>
+                    
+                        <td><input id="staffhygiene5-1" name="staffhygiene5" type="radio" value="0"><label for="staffhygiene5-1">0</label></td>
+                    
+                        <td><input id="staffhygiene5-2" name="staffhygiene5" type="radio" value="N/A"><label for="staffhygiene5-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Hands are washed thoroughly with soap and water, frequently and at appropriate times.</td>
+                    
+                        <td><input checked id="staffhygiene6-0" name="staffhygiene6" type="radio" value="1"><label for="staffhygiene6-0">1</label></td>
+                    
+                        <td><input id="staffhygiene6-1" name="staffhygiene6" type="radio" value="0"><label for="staffhygiene6-1">0</label></td>
+                    
+                        <td><input id="staffhygiene6-2" name="staffhygiene6" type="radio" value="N/A"><label for="staffhygiene6-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Fingernails are short, clean, unpolished and without nail accessories.</td>
+                    
+                        <td><input checked id="staffhygiene7-0" name="staffhygiene7" type="radio" value="1"><label for="staffhygiene7-0">1</label></td>
+                    
+                        <td><input id="staffhygiene7-1" name="staffhygiene7" type="radio" value="0"><label for="staffhygiene7-1">0</label></td>
+                    
+                        <td><input id="staffhygiene7-2" name="staffhygiene7" type="radio" value="N/A"><label for="staffhygiene7-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>No wrist watches/ rings or other hand jewellery (with exception of wedding ring) is worn by staff handling food.</td>
+                    
+                        <td><input checked id="staffhygiene8-0" name="staffhygiene8" type="radio" value="1"><label for="staffhygiene8-0">1</label></td>
+                    
+                        <td><input id="staffhygiene8-1" name="staffhygiene8" type="radio" value="0"><label for="staffhygiene8-1">0</label></td>
+                    
+                        <td><input id="staffhygiene8-2" name="staffhygiene8" type="radio" value="N/A"><label for="staffhygiene8-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Food is handled with clean utensils and gloves. </td>
+                    
+                        <td><input checked id="staffhygiene9-0" name="staffhygiene9" type="radio" value="1"><label for="staffhygiene9-0">1</label></td>
+                    
+                        <td><input id="staffhygiene9-1" name="staffhygiene9" type="radio" value="0"><label for="staffhygiene9-1">0</label></td>
+                    
+                        <td><input id="staffhygiene9-2" name="staffhygiene9" type="radio" value="N/A"><label for="staffhygiene9-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        Disposable gloves are changed regularly and/ or in between tasks.
+                        <li>Staff do not handle cash with gloved hands.</li>
+                    </td>
+                    
+                        <td><input checked id="staffhygiene10-0" name="staffhygiene10" type="radio" value="1"><label for="staffhygiene10-0">1</label></td>
+                    
+                        <td><input id="staffhygiene10-1" name="staffhygiene10" type="radio" value="0"><label for="staffhygiene10-1">0</label></td>
+                    
+                        <td><input id="staffhygiene10-2" name="staffhygiene10" type="radio" value="N/A"><label for="staffhygiene10-2">N/A</label></td>
+                    
+                </tr> 
+            </tbody>
+            <thead>
+                <tr>
+                    <th>2. Housekeeping & General Cleanliness (20%)</th>
+                    <th colspan="3">Point(s) Awarded</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="4">General Environment Cleanliness</th> 
+                </tr>
+                <tr>
+                    <td>Cleaning and maintenance records for equipment, ventilation and exhaust system.</td>
+                    
+                        <td><input checked id="generalenv1-0" name="generalenv1" type="radio" value="1"><label for="generalenv1-0">1</label></td>
+                    
+                        <td><input id="generalenv1-1" name="generalenv1" type="radio" value="0"><label for="generalenv1-1">0</label></td>
+                    
+                        <td><input id="generalenv1-2" name="generalenv1" type="radio" value="N/A"><label for="generalenv1-2">N/A</label></td>
+                    
+                </tr> 
+                <tr>
+                    <td>Adequate and regular pest control.
+                        <li>Pest control record.</li>
+                    </td>
+                    
+                        <td><input checked id="generalenv2-0" name="generalenv2" type="radio" value="1"><label for="generalenv2-0">1</label></td>
+                    
+                        <td><input id="generalenv2-1" name="generalenv2" type="radio" value="0"><label for="generalenv2-1">0</label></td>
+                    
+                        <td><input id="generalenv2-2" name="generalenv2" type="radio" value="N/A"><label for="generalenv2-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Goods and equipment are within shop boundary.</td>
+                    
+                        <td><input checked id="generalenv3-0" name="generalenv3" type="radio" value="1"><label for="generalenv3-0">1</label></td>
+                    
+                        <td><input id="generalenv3-1" name="generalenv3" type="radio" value="0"><label for="generalenv3-1">0</label></td>
+                    
+                        <td><input id="generalenv3-2" name="generalenv3" type="radio" value="N/A"><label for="generalenv3-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Store display/ Shop front is neat and tidy.</td>
+                    
+                        <td><input checked id="generalenv4-0" name="generalenv4" type="radio" value="1"><label for="generalenv4-0">1</label></td>
+                    
+                        <td><input id="generalenv4-1" name="generalenv4" type="radio" value="0"><label for="generalenv4-1">0</label></td>
+                    
+                        <td><input id="generalenv4-2" name="generalenv4" type="radio" value="N/A"><label for="generalenv4-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Work/ serving area is neat, clean and free of spillage.</td>
+                    
+                        <td><input checked id="generalenv5-0" name="generalenv5" type="radio" value="1"><label for="generalenv5-0">1</label></td>
+                    
+                        <td><input id="generalenv5-1" name="generalenv5" type="radio" value="0"><label for="generalenv5-1">0</label></td>
+                    
+                        <td><input id="generalenv5-2" name="generalenv5" type="radio" value="N/A"><label for="generalenv5-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Uncluttered circulation space free of refuse/ furniture.</td>
+                    
+                        <td><input checked id="generalenv6-0" name="generalenv6" type="radio" value="1"><label for="generalenv6-0">1</label></td>
+                    
+                        <td><input id="generalenv6-1" name="generalenv6" type="radio" value="0"><label for="generalenv6-1">0</label></td>
+                    
+                        <td><input id="generalenv6-2" name="generalenv6" type="radio" value="N/A"><label for="generalenv6-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Tables are cleared promptly within 10 minutes.</td>
+                    
+                        <td><input checked id="generalenv7-0" name="generalenv7" type="radio" value="1"><label for="generalenv7-0">1</label></td>
+                    
+                        <td><input id="generalenv7-1" name="generalenv7" type="radio" value="0"><label for="generalenv7-1">0</label></td>
+                    
+                        <td><input id="generalenv7-2" name="generalenv7" type="radio" value="N/A"><label for="generalenv7-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Fixtures and fittings including shelves, cupboards and drawers are clean and dry, free from pests, and in a good state.</td>
+                    
+                        <td><input checked id="generalenv8-0" name="generalenv8" type="radio" value="1"><label for="generalenv8-0">1</label></td>
+                    
+                        <td><input id="generalenv8-1" name="generalenv8" type="radio" value="0"><label for="generalenv8-1">0</label></td>
+                    
+                        <td><input id="generalenv8-2" name="generalenv8" type="radio" value="N/A"><label for="generalenv8-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Ceiling/ ceiling boards are free from stains/ dust with no gaps.</td>
+                    
+                        <td><input checked id="generalenv9-0" name="generalenv9" type="radio" value="1"><label for="generalenv9-0">1</label></td>
+                    
+                        <td><input id="generalenv9-1" name="generalenv9" type="radio" value="0"><label for="generalenv9-1">0</label></td>
+                    
+                        <td><input id="generalenv9-2" name="generalenv9" type="radio" value="N/A"><label for="generalenv9-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Fans and air-con units are in proper working order and clean and free from dust. Proper maintenance and routine cleaning are carried out regularly.</td>
+                    
+                        <td><input checked id="generalenv10-0" name="generalenv10" type="radio" value="1"><label for="generalenv10-0">1</label></td>
+                    
+                        <td><input id="generalenv10-1" name="generalenv10" type="radio" value="0"><label for="generalenv10-1">0</label></td>
+                    
+                        <td><input id="generalenv10-2" name="generalenv10" type="radio" value="N/A"><label for="generalenv10-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Equipment, exhaust hood, crockery and utensils are clean, in good condition and serviced.</td>
+                    
+                        <td><input checked id="generalenv11-0" name="generalenv11" type="radio" value="1"><label for="generalenv11-0">1</label></td>
+                    
+                        <td><input id="generalenv11-1" name="generalenv11" type="radio" value="0"><label for="generalenv11-1">0</label></td>
+                    
+                        <td><input id="generalenv11-2" name="generalenv11" type="radio" value="N/A"><label for="generalenv11-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Surfaces, walls and ceilings within customer areas are dry and clean.</td>
+                    
+                        <td><input checked id="generalenv12-0" name="generalenv12" type="radio" value="1"><label for="generalenv12-0">1</label></td>
+                    
+                        <td><input id="generalenv12-1" name="generalenv12" type="radio" value="0"><label for="generalenv12-1">0</label></td>
+                    
+                        <td><input id="generalenv12-2" name="generalenv12" type="radio" value="N/A"><label for="generalenv12-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Floor within customer areas is clean, dry and non-greasy.</td>
+                    
+                        <td><input checked id="generalenv13-0" name="generalenv13" type="radio" value="1"><label for="generalenv13-0">1</label></td>
+                    
+                        <td><input id="generalenv13-1" name="generalenv13" type="radio" value="0"><label for="generalenv13-1">0</label></td>
+                    
+                        <td><input id="generalenv13-2" name="generalenv13" type="radio" value="N/A"><label for="generalenv13-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Waste bins are properly lined with plastic bags and covered at all times.</td>
+                    
+                        <td><input checked id="generalenv14-0" name="generalenv14" type="radio" value="1"><label for="generalenv14-0">1</label></td>
+                    
+                        <td><input id="generalenv14-1" name="generalenv14" type="radio" value="0"><label for="generalenv14-1">0</label></td>
+                    
+                        <td><input id="generalenv14-2" name="generalenv14" type="radio" value="N/A"><label for="generalenv14-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Adequate number of covered waste pedal bins are available and waste is properly managed and disposed.
+                        <li>Waste bins are not over-filled.</li>
+                        <li>Waste Management: Proper disposal of food stuff and waste.</li>
+                        <li>Waste is properly bagged before disposing it at the waste disposal area/ bin centre.</li>
+                    </td>
+                    
+                        <td><input checked id="generalenv15-0" name="generalenv15" type="radio" value="1"><label for="generalenv15-0">1</label></td>
+                    
+                        <td><input id="generalenv15-1" name="generalenv15" type="radio" value="0"><label for="generalenv15-1">0</label></td>
+                    
+                        <td><input id="generalenv15-2" name="generalenv15" type="radio" value="N/A"><label for="generalenv15-2">N/A</label></td>
+                    
+                </tr> 
+                <tr>
+                    <th colspan="4">Hand Hygiene Facilities</th>
+                </tr>
+                <tr>
+                    <td>Hand washing facilities are easily accessible, in good working condition and soap is provided.</td>
+                    
+                        <td><input checked id="handhygiene1-0" name="handhygiene1" type="radio" value="1"><label for="handhygiene1-0">1</label></td>
+                    
+                        <td><input id="handhygiene1-1" name="handhygiene1" type="radio" value="0"><label for="handhygiene1-1">0</label></td>
+                    
+                        <td><input id="handhygiene1-2" name="handhygiene1" type="radio" value="N/A"><label for="handhygiene1-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Adequate facilities for hand hygiene are available including liquid soap and disposable hand towels.</td>
+                    
+                        <td><input checked id="handhygiene2-0" name="handhygiene2" type="radio" value="1"><label for="handhygiene2-0">1</label></td>
+                    
+                        <td><input id="handhygiene2-1" name="handhygiene2" type="radio" value="0"><label for="handhygiene2-1">0</label></td>
+                    
+                        <td><input id="handhygiene2-2" name="handhygiene2" type="radio" value="N/A"><label for="handhygiene2-2">N/A</label></td>
+                    
+                </tr>     
+            </tbody>
+            <thead>
+                <tr>
+                    <th>3. Food Hygiene (35%)</th>
+                    <th colspan="3">Point(s) Awarded</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="4">Storage & Preparation of Food</th>
+                </tr>
+                <tr>
+                    <td>Food is stored in appropriate conditions and at an appropriate temperature.</td>
+                    
+                        <td><input checked id="storageprep1-0" name="storageprep1" type="radio" value="1"><label for="storageprep1-0">1</label></td>
+                    
+                        <td><input id="storageprep1-1" name="storageprep1" type="radio" value="0"><label for="storageprep1-1">0</label></td>
+                    
+                        <td><input id="storageprep1-2" name="storageprep1" type="radio" value="N/A"><label for="storageprep1-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Food and non-food are clearly segregated.
+                        <li>Non-food items (e.g. insecticides, detergents and other chemicals) are not stored together with the food items.</li>
+                    </td>
+                    
+                        <td><input checked id="storageprep2-0" name="storageprep2" type="radio" value="1"><label for="storageprep2-0">1</label></td>
+                    
+                        <td><input id="storageprep2-1" name="storageprep2" type="radio" value="0"><label for="storageprep2-1">0</label></td>
+                    
+                        <td><input id="storageprep2-2" name="storageprep2" type="radio" value="N/A"><label for="storageprep2-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Food is not placed near sources of contamination.</td>
+                    
+                        <td><input checked id="storageprep3-0" name="storageprep3" type="radio" value="1"><label for="storageprep3-0">1</label></td>
+                    
+                        <td><input id="storageprep3-1" name="storageprep3" type="radio" value="0"><label for="storageprep3-1">0</label></td>
+                    
+                        <td><input id="storageprep3-2" name="storageprep3" type="radio" value="N/A"><label for="storageprep3-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Storage of food does not invite pest infestation.</td>
+                    
+                        <td><input checked id="storageprep4-0" name="storageprep4" type="radio" value="1"><label for="storageprep4-0">1</label></td>
+                    
+                        <td><input id="storageprep4-1" name="storageprep4" type="radio" value="0"><label for="storageprep4-1">0</label></td>
+                    
+                        <td><input id="storageprep4-2" name="storageprep4" type="radio" value="N/A"><label for="storageprep4-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Dry goods (e.g. canned food and drinks) and other food items are stored neatly on shelves, off the floor and away from walls.</td>
+                    
+                        <td><input checked id="storageprep5-0" name="storageprep5" type="radio" value="1"><label for="storageprep5-0">1</label></td>
+                    
+                        <td><input id="storageprep5-1" name="storageprep5" type="radio" value="0"><label for="storageprep5-1">0</label></td>
+                    
+                        <td><input id="storageprep5-2" name="storageprep5" type="radio" value="N/A"><label for="storageprep5-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Proper stock rotation system such as the First-Expired-First-Out (FEFO) system is used for inventory management.</td>
+                    
+                        <td><input checked id="storageprep6-0" name="storageprep6" type="radio" value="1"><label for="storageprep6-0">1</label></td>
+                    
+                        <td><input id="storageprep6-1" name="storageprep6" type="radio" value="0"><label for="storageprep6-1">0</label></td>
+                    
+                        <td><input id="storageprep6-2" name="storageprep6" type="radio" value="N/A"><label for="storageprep6-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Food is protected from contamination; packaging is intact and no products are found with signs of spoilage.</td>
+                    
+                        <td><input checked id="storageprep7-0" name="storageprep7" type="radio" value="1"><label for="storageprep7-0">1</label></td>
+                    
+                        <td><input id="storageprep7-1" name="storageprep7" type="radio" value="0"><label for="storageprep7-1">0</label></td>
+                    
+                        <td><input id="storageprep7-2" name="storageprep7" type="radio" value="N/A"><label for="storageprep7-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Ice machine is clean and well maintained.
+                        <li>Only ice is stored in the ice machine to prevent contamination of the ice.</li>
+                    </td>
+                    
+                        <td><input checked id="storageprep8-0" name="storageprep8" type="radio" value="1"><label for="storageprep8-0">1</label></td>
+                    
+                        <td><input id="storageprep8-1" name="storageprep8" type="radio" value="0"><label for="storageprep8-1">0</label></td>
+                    
+                        <td><input id="storageprep8-2" name="storageprep8" type="radio" value="N/A"><label for="storageprep8-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Scoop for ice is stored outside the ice machine in a dedicated container.</td>
+                    
+                        <td><input checked id="storageprep9-0" name="storageprep9" type="radio" value="1"><label for="storageprep9-0">1</label></td>
+                    
+                        <td><input id="storageprep9-1" name="storageprep9" type="radio" value="0"><label for="storageprep9-1">0</label></td>
+                    
+                        <td><input id="storageprep9-2" name="storageprep9" type="radio" value="N/A"><label for="storageprep9-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Food supplied is clean and not expired.</td>
+                    
+                        <td><input checked id="storageprep10-0" name="storageprep10" type="radio" value="1"><label for="storageprep10-0">1</label></td>
+                    
+                        <td><input id="storageprep10-1" name="storageprep10" type="radio" value="0"><label for="storageprep10-1">0</label></td>
+                    
+                        <td><input id="storageprep10-2" name="storageprep10" type="radio" value="N/A"><label for="storageprep10-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Clear labelling of date of date of preparation/ manufacture/ expiry on all food containers/packaging..</td>
+                    
+                        <td><input checked id="storageprep11-0" name="storageprep11" type="radio" value="1"><label for="storageprep11-0">1</label></td>
+                    
+                        <td><input id="storageprep11-1" name="storageprep11" type="radio" value="0"><label for="storageprep11-1">0</label></td>
+                    
+                        <td><input id="storageprep11-2" name="storageprep11" type="radio" value="N/A"><label for="storageprep11-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Cooked food is properly covered to prevent cross-contamination.</td>
+                    
+                        <td><input checked id="storageprep12-0" name="storageprep12" type="radio" value="1"><label for="storageprep12-0">1</label></td>
+                    
+                        <td><input id="storageprep12-1" name="storageprep12" type="radio" value="0"><label for="storageprep12-1">0</label></td>
+                    
+                        <td><input id="storageprep12-2" name="storageprep12" type="radio" value="N/A"><label for="storageprep12-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Proper work flow and segregation of areas to prevent cross-contamination between raw and cooked/ ready-to-eat food areas.</td>
+                    
+                        <td><input checked id="storageprep13-0" name="storageprep13" type="radio" value="1"><label for="storageprep13-0">1</label></td>
+                    
+                        <td><input id="storageprep13-1" name="storageprep13" type="radio" value="0"><label for="storageprep13-1">0</label></td>
+                    
+                        <td><input id="storageprep13-2" name="storageprep13" type="radio" value="N/A"><label for="storageprep13-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Proper separation of cooked food/ ready-to-eat food, raw meat, seafood and vegetable to prevent cross-contamination.
+                        <li>E.g. Different chopping boards, knives and other utensils are used for cooked/ ready-to-eat and raw food.</li>
+                    </td>
+                    
+                        <td><input checked id="storageprep14-0" name="storageprep14" type="radio" value="1"><label for="storageprep14-0">1</label></td>
+                    
+                        <td><input id="storageprep14-1" name="storageprep14" type="radio" value="0"><label for="storageprep14-1">0</label></td>
+                    
+                        <td><input id="storageprep14-2" name="storageprep14" type="radio" value="N/A"><label for="storageprep14-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Frozen food is thawed in chiller, microwave or under running water.</td>
+                    
+                        <td><input checked id="storageprep15-0" name="storageprep15" type="radio" value="1"><label for="storageprep15-0">1</label></td>
+                    
+                        <td><input id="storageprep15-1" name="storageprep15" type="radio" value="0"><label for="storageprep15-1">0</label></td>
+                    
+                        <td><input id="storageprep15-2" name="storageprep15" type="radio" value="N/A"><label for="storageprep15-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Ingredients used are clean and washed thoroughly before cooking.</td>
+                    
+                        <td><input checked id="storageprep16-0" name="storageprep16" type="radio" value="1"><label for="storageprep16-0">1</label></td>
+                    
+                        <td><input id="storageprep16-1" name="storageprep16" type="radio" value="0"><label for="storageprep16-1">0</label></td>
+                    
+                        <td><input id="storageprep16-2" name="storageprep16" type="radio" value="N/A"><label for="storageprep16-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>All cooking ingredient (e.g. cooking oil, sauces) are properly covered in proper containers and properly labelled, indicating the content and date of expiry.</td>
+                    
+                        <td><input checked id="storageprep17-0" name="storageprep17" type="radio" value="1"><label for="storageprep17-0">1</label></td>
+                    
+                        <td><input id="storageprep17-1" name="storageprep17" type="radio" value="0"><label for="storageprep17-1">0</label></td>
+                    
+                        <td><input id="storageprep17-2" name="storageprep17" type="radio" value="N/A"><label for="storageprep17-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>All sauces are stored at appropriate condition & temperature.</td>
+                    
+                        <td><input checked id="storageprep18-0" name="storageprep18" type="radio" value="1"><label for="storageprep18-0">1</label></td>
+                    
+                        <td><input id="storageprep18-1" name="storageprep18" type="radio" value="0"><label for="storageprep18-1">0</label></td>
+                    
+                        <td><input id="storageprep18-2" name="storageprep18" type="radio" value="N/A"><label for="storageprep18-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Cooking oil is not used for more than 1 day.</td>
+                    
+                        <td><input checked id="storageprep19-0" name="storageprep19" type="radio" value="1"><label for="storageprep19-0">1</label></td>
+                    
+                        <td><input id="storageprep19-1" name="storageprep19" type="radio" value="0"><label for="storageprep19-1">0</label></td>
+                    
+                        <td><input id="storageprep19-2" name="storageprep19" type="radio" value="N/A"><label for="storageprep19-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Cooking oil is properly stored with a cover.</td>
+                    
+                        <td><input checked id="storageprep20-0" name="storageprep20" type="radio" value="1"><label for="storageprep20-0">1</label></td>
+                    
+                        <td><input id="storageprep20-1" name="storageprep20" type="radio" value="0"><label for="storageprep20-1">0</label></td>
+                    
+                        <td><input id="storageprep20-2" name="storageprep20" type="radio" value="N/A"><label for="storageprep20-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Perishable food is stored in the fridge.</td>
+                    
+                        <td><input checked id="storageprep21-0" name="storageprep21" type="radio" value="1"><label for="storageprep21-0">1</label></td>
+                    
+                        <td><input id="storageprep21-1" name="storageprep21" type="radio" value="0"><label for="storageprep21-1">0</label></td>
+                    
+                        <td><input id="storageprep21-2" name="storageprep21" type="radio" value="N/A"><label for="storageprep21-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Raw food and cooked food/ ready to serve food are clearly segregated.
+                        <li>Cold and/ or hot holding units are clean and well maintained.</li>
+                    </td>
+                    
+                        <td><input checked id="storageprep22-0" name="storageprep22" type="radio" value="1"><label for="storageprep22-0">1</label></td>
+                    
+                        <td><input id="storageprep22-1" name="storageprep22" type="radio" value="0"><label for="storageprep22-1">0</label></td>
+                    
+                        <td><input id="storageprep22-2" name="storageprep22" type="radio" value="N/A"><label for="storageprep22-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Food preparation area is free of bird and animal (e.g. dog or cat).</td>
+                    
+                        <td><input checked id="storageprep23-0" name="storageprep23" type="radio" value="1"><label for="storageprep23-0">1</label></td>
+                    
+                        <td><input id="storageprep23-1" name="storageprep23" type="radio" value="0"><label for="storageprep23-1">0</label></td>
+                    
+                        <td><input id="storageprep23-2" name="storageprep23" type="radio" value="N/A"><label for="storageprep23-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Food preparation area is clean, free of pests and in good state of repair.</td>
+                    
+                        <td><input checked id="storageprep24-0" name="storageprep24" type="radio" value="1"><label for="storageprep24-0">1</label></td>
+                    
+                        <td><input id="storageprep24-1" name="storageprep24" type="radio" value="0"><label for="storageprep24-1">0</label></td>
+                    
+                        <td><input id="storageprep24-2" name="storageprep24" type="radio" value="N/A"><label for="storageprep24-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Food is not prepared on the floor, near drain or near/ in toilet.</td>
+                    
+                        <td><input checked id="storageprep25-0" name="storageprep25" type="radio" value="1"><label for="storageprep25-0">1</label></td>
+                    
+                        <td><input id="storageprep25-1" name="storageprep25" type="radio" value="0"><label for="storageprep25-1">0</label></td>
+                    
+                        <td><input id="storageprep25-2" name="storageprep25" type="radio" value="N/A"><label for="storageprep25-2">N/A</label></td>
+                    
+                </tr>             
+                <tr>
+                    <td>Personal belongings are kept separately in the staff locker area or cabinet, away from the food storage and preparation area.</td>
+                    
+                        <td><input checked id="storageprep26-0" name="storageprep26" type="radio" value="1"><label for="storageprep26-0">1</label></td>
+                    
+                        <td><input id="storageprep26-1" name="storageprep26" type="radio" value="0"><label for="storageprep26-1">0</label></td>
+                    
+                        <td><input id="storageprep26-2" name="storageprep26" type="radio" value="N/A"><label for="storageprep26-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <th colspan="4">Storage of Food in Refrigerator/ Warmer</th>
+                </tr>
+                <tr>
+                    <td>Daily Temperature Log for food storage units (freezers, chillers, warmers, steamers, ovens) using independent thermometer, etc. is maintained for inspection from time to time.</td>
+                    
+                        <td><input checked id="storagefood1-0" name="storagefood1" type="radio" value="1"><label for="storagefood1-0">1</label></td>
+                    
+                        <td><input id="storagefood1-1" name="storagefood1" type="radio" value="0"><label for="storagefood1-1">0</label></td>
+                    
+                        <td><input id="storagefood1-2" name="storagefood1" type="radio" value="N/A"><label for="storagefood1-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Food storage units (freezers, chillers, warmers, steamers, ovens) are kept clean and well maintained. All rubber gaskets of refrigerators / warmers are free from defect, dirt and mould.</td>
+                    
+                        <td><input checked id="storagefood2-0" name="storagefood2" type="radio" value="1"><label for="storagefood2-0">1</label></td>
+                    
+                        <td><input id="storagefood2-1" name="storagefood2" type="radio" value="0"><label for="storagefood2-1">0</label></td>
+                    
+                        <td><input id="storagefood2-2" name="storagefood2" type="radio" value="N/A"><label for="storagefood2-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Food storage units are not overstocked to allow good air circulation.</td>
+                    
+                        <td><input checked id="storagefood3-0" name="storagefood3" type="radio" value="1"><label for="storagefood3-0">1</label></td>
+                    
+                        <td><input id="storagefood3-1" name="storagefood3" type="radio" value="0"><label for="storagefood3-1">0</label></td>
+                    
+                        <td><input id="storagefood3-2" name="storagefood3" type="radio" value="N/A"><label for="storagefood3-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>For walk-in freezers and chillers, food items are stored neatly on shelves and off the floor.</td>
+                    
+                        <td><input checked id="storagefood4-0" name="storagefood4" type="radio" value="1"><label for="storagefood4-0">1</label></td>
+                    
+                        <td><input id="storagefood4-1" name="storagefood4" type="radio" value="0"><label for="storagefood4-1">0</label></td>
+                    
+                        <td><input id="storagefood4-2" name="storagefood4" type="radio" value="N/A"><label for="storagefood4-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Frozen food is stored at a temperature of not more than -12°„C.
+                        <li>Freezer°Øs temperature: < -12°„C</li>
+                    </td>
+                    
+                        <td><input checked id="storagefood5-0" name="storagefood5" type="radio" value="1"><label for="storagefood5-0">1</label></td>
+                    
+                        <td><input id="storagefood5-1" name="storagefood5" type="radio" value="0"><label for="storagefood5-1">0</label></td>
+                    
+                        <td><input id="storagefood5-2" name="storagefood5" type="radio" value="N/A"><label for="storagefood5-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Chilled food is stored at a temperature of not more than 4°„C.
+                        <li>Chiller°Øs temperature: 0°„C ~ 4°„C</li>
+                    </td>
+                    
+                        <td><input checked id="storagefood6-0" name="storagefood6" type="radio" value="1"><label for="storagefood6-0">1</label></td>
+                    
+                        <td><input id="storagefood6-1" name="storagefood6" type="radio" value="0"><label for="storagefood6-1">0</label></td>
+                    
+                        <td><input id="storagefood6-2" name="storagefood6" type="radio" value="N/A"><label for="storagefood6-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Hot food are held above 60°„C.
+                        <li>Food warmer°Øs temperature: > 60°„C</li>
+                    </td>
+                    
+                        <td><input checked id="storagefood7-0" name="storagefood7" type="radio" value="1"><label for="storagefood7-0">1</label></td>
+                    
+                        <td><input id="storagefood7-1" name="storagefood7" type="radio" value="0"><label for="storagefood7-1">0</label></td>
+                    
+                        <td><input id="storagefood7-2" name="storagefood7" type="radio" value="N/A"><label for="storagefood7-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Perishable food is stored at a temperature of not more than 4°„C.</td>
+                    
+                        <td><input checked id="storagefood8-0" name="storagefood8" type="radio" value="1"><label for="storagefood8-0">1</label></td>
+                    
+                        <td><input id="storagefood8-1" name="storagefood8" type="radio" value="0"><label for="storagefood8-1">0</label></td>
+                    
+                        <td><input id="storagefood8-2" name="storagefood8" type="radio" value="N/A"><label for="storagefood8-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Dairy products are stored at a temperature of not more than 7°„C.</td>
+                    
+                        <td><input checked id="storagefood9-0" name="storagefood9" type="radio" value="1"><label for="storagefood9-0">1</label></td>
+                    
+                        <td><input id="storagefood9-1" name="storagefood9" type="radio" value="0"><label for="storagefood9-1">0</label></td>
+                    
+                        <td><input id="storagefood9-2" name="storagefood9" type="radio" value="N/A"><label for="storagefood9-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Cooked/ ready-to-eat food are stored above raw food.</td>
+                    
+                        <td><input checked id="storagefood10-0" name="storagefood10" type="radio" value="1"><label for="storagefood10-0">1</label></td>
+                    
+                        <td><input id="storagefood10-1" name="storagefood10" type="radio" value="0"><label for="storagefood10-1">0</label></td>
+                    
+                        <td><input id="storagefood10-2" name="storagefood10" type="radio" value="N/A"><label for="storagefood10-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Food items are properly wrapped/covered in proper containers and protected from contamination.</td>
+                    
+                        <td><input checked id="storagefood11-0" name="storagefood11" type="radio" value="1"><label for="storagefood11-0">1</label></td>
+                    
+                        <td><input id="storagefood11-1" name="storagefood11" type="radio" value="0"><label for="storagefood11-1">0</label></td>
+                    
+                        <td><input id="storagefood11-2" name="storagefood11" type="radio" value="N/A"><label for="storagefood11-2">N/A</label></td>
+                    
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                    <th>4. Healthier Choice in line with HPB°Øs Healthy Eating°Øs Initiative (15%)</th>
+                    <th colspan="3">Point(s) Awarded</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="4">Food</th>
+                </tr>
+                <tr>
+                    <td>Min. no. of healthier variety of food items per stall.
+                        <br />
+                        <b><u>Lease Term:</u></b>
+                        <br />
+                        50% of food items.	
+                    </td>
+                    
+                        <td><input checked id="food1-0" name="food1" type="radio" value="1"><label for="food1-0">1</label></td>
+                    
+                        <td><input id="food1-1" name="food1" type="radio" value="0"><label for="food1-1">0</label></td>
+                    
+                        <td><input id="food1-2" name="food1" type="radio" value="N/A"><label for="food1-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Label caloric count of healthier options.</td>
+                    
+                        <td><input checked id="food2-0" name="food2" type="radio" value="1"><label for="food2-0">1</label></td>
+                    
+                        <td><input id="food2-1" name="food2" type="radio" value="0"><label for="food2-1">0</label></td>
+                    
+                        <td><input id="food2-2" name="food2" type="radio" value="N/A"><label for="food2-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Include HPB°Øs Identifiers beside healthier options.</td>
+                    
+                        <td><input checked id="food3-0" name="food3" type="radio" value="1"><label for="food3-0">1</label></td>
+                    
+                        <td><input id="food3-1" name="food3" type="radio" value="0"><label for="food3-1">0</label></td>
+                    
+                        <td><input id="food3-2" name="food3" type="radio" value="N/A"><label for="food3-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Use of healthier cooking oils.</td>
+                    
+                        <td><input checked id="food4-0" name="food4" type="radio" value="1"><label for="food4-0">1</label></td>
+                    
+                        <td><input id="food4-1" name="food4" type="radio" value="0"><label for="food4-1">0</label></td>
+                    
+                        <td><input id="food4-2" name="food4" type="radio" value="N/A"><label for="food4-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Offer wholemeal/ whole-grain option.</td>
+                    
+                        <td><input checked id="food5-0" name="food5" type="radio" value="1"><label for="food5-0">1</label></td>
+                    
+                        <td><input id="food5-1" name="food5" type="radio" value="0"><label for="food5-1">0</label></td>
+                    
+                        <td><input id="food5-2" name="food5" type="radio" value="N/A"><label for="food5-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Healthier option food sold at lower price than regular items.</td>
+                    
+                        <td><input checked id="food6-0" name="food6" type="radio" value="1"><label for="food6-0">1</label></td>
+                    
+                        <td><input id="food6-1" name="food6" type="radio" value="0"><label for="food6-1">0</label></td>
+                    
+                        <td><input id="food6-2" name="food6" type="radio" value="N/A"><label for="food6-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Limit deep-fried and pre-deep fried food items sold (°‹ 20% deep-fried items). </td>
+                    
+                        <td><input checked id="food7-0" name="food7" type="radio" value="1"><label for="food7-0">1</label></td>
+                    
+                        <td><input id="food7-1" name="food7" type="radio" value="0"><label for="food7-1">0</label></td>
+                    
+                        <td><input id="food7-2" name="food7" type="radio" value="N/A"><label for="food7-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <th colspan="4">Beverage</th>
+                </tr>
+                <tr>
+                    <td>No sugar / Lower-sugar brewed beverage offerings according to guidelines.</td>
+                    
+                        <td><input checked id="beverage1-0" name="beverage1" type="radio" value="1"><label for="beverage1-0">1</label></td>
+                    
+                        <td><input id="beverage1-1" name="beverage1" type="radio" value="0"><label for="beverage1-1">0</label></td>
+                    
+                        <td><input id="beverage1-2" name="beverage1" type="radio" value="N/A"><label for="beverage1-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Healthier option beverages sold at lower price than regular items.</td>
+                    
+                        <td><input checked id="beverage2-0" name="beverage2" type="radio" value="1"><label for="beverage2-0">1</label></td>
+                    
+                        <td><input id="beverage2-1" name="beverage2" type="radio" value="0"><label for="beverage2-1">0</label></td>
+                    
+                        <td><input id="beverage2-2" name="beverage2" type="radio" value="N/A"><label for="beverage2-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Label caloric count of healthier options.</td>
+                    
+                        <td><input checked id="beverage3-0" name="beverage3" type="radio" value="1"><label for="beverage3-0">1</label></td>
+                    
+                        <td><input id="beverage3-1" name="beverage3" type="radio" value="0"><label for="beverage3-1">0</label></td>
+                    
+                        <td><input id="beverage3-2" name="beverage3" type="radio" value="N/A"><label for="beverage3-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Limit sugar content on commercially-prepared sweetened beverages. 
+                        (°› 70% commercially-prepared sweetened beverages sold to have HCS)</td>
+                    
+                        <td><input checked id="beverage4-0" name="beverage4" type="radio" value="1"><label for="beverage4-0">1</label></td>
+                    
+                        <td><input id="beverage4-1" name="beverage4" type="radio" value="0"><label for="beverage4-1">0</label></td>
+                    
+                        <td><input id="beverage4-2" name="beverage4" type="radio" value="N/A"><label for="beverage4-2">N/A</label></td>
+                    
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                    <th>5. Workplace Safety & Health (20%)</th>
+                    <th colspan="3">Point(s) Awarded</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="4">General Safety</th>
+                </tr>
+                <tr>
+                    <td>All food handlers have Basic Food Hygiene certificate and a valid Refresher Food Hygiene certificate (if applicable).</td>
+                    
+                        <td><input checked id="generalsafety1-0" name="generalsafety1" type="radio" value="1"><label for="generalsafety1-0">1</label></td>
+                    
+                        <td><input id="generalsafety1-1" name="generalsafety1" type="radio" value="0"><label for="generalsafety1-1">0</label></td>
+                    
+                        <td><input id="generalsafety1-2" name="generalsafety1" type="radio" value="N/A"><label for="generalsafety1-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>MSDS for all industrial chemicals are available and up to date.</td>
+                    
+                        <td><input checked id="generalsafety2-0" name="generalsafety2" type="radio" value="1"><label for="generalsafety2-0">1</label></td>
+                    
+                        <td><input id="generalsafety2-1" name="generalsafety2" type="radio" value="0"><label for="generalsafety2-1">0</label></td>
+                    
+                        <td><input id="generalsafety2-2" name="generalsafety2" type="radio" value="N/A"><label for="generalsafety2-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Proper chemicals storage.</td>
+                    
+                        <td><input checked id="generalsafety3-0" name="generalsafety3" type="radio" value="1"><label for="generalsafety3-0">1</label></td>
+                    
+                        <td><input id="generalsafety3-1" name="generalsafety3" type="radio" value="0"><label for="generalsafety3-1">0</label></td>
+                    
+                        <td><input id="generalsafety3-2" name="generalsafety3" type="radio" value="N/A"><label for="generalsafety3-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>All detergent and bottles containing liquids are labelled appropriately.</td>
+                    
+                        <td><input checked id="generalsafety4-0" name="generalsafety4" type="radio" value="1"><label for="generalsafety4-0">1</label></td>
+                    
+                        <td><input id="generalsafety4-1" name="generalsafety4" type="radio" value="0"><label for="generalsafety4-1">0</label></td>
+                    
+                        <td><input id="generalsafety4-2" name="generalsafety4" type="radio" value="N/A"><label for="generalsafety4-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>All personnel to wear safety shoes and safety attire where necessary.</td>
+                    
+                        <td><input checked id="generalsafety5-0" name="generalsafety5" type="radio" value="1"><label for="generalsafety5-0">1</label></td>
+                    
+                        <td><input id="generalsafety5-1" name="generalsafety5" type="radio" value="0"><label for="generalsafety5-1">0</label></td>
+                    
+                        <td><input id="generalsafety5-2" name="generalsafety5" type="radio" value="N/A"><label for="generalsafety5-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Knives and sharp objects are kept at a safe place.</td>
+                    
+                        <td><input checked id="generalsafety6-0" name="generalsafety6" type="radio" value="1"><label for="generalsafety6-0">1</label></td>
+                    
+                        <td><input id="generalsafety6-1" name="generalsafety6" type="radio" value="0"><label for="generalsafety6-1">0</label></td>
+                    
+                        <td><input id="generalsafety6-2" name="generalsafety6" type="radio" value="N/A"><label for="generalsafety6-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Area under the sink should not be cluttered with items other than washing agents.</td>
+                    
+                        <td><input checked id="generalsafety7-0" name="generalsafety7" type="radio" value="1"><label for="generalsafety7-0">1</label></td>
+                    
+                        <td><input id="generalsafety7-1" name="generalsafety7" type="radio" value="0"><label for="generalsafety7-1">0</label></td>
+                    
+                        <td><input id="generalsafety7-2" name="generalsafety7" type="radio" value="N/A"><label for="generalsafety7-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Delivery personnel do not stack goods above the shoulder level.</td>
+                    
+                        <td><input checked id="generalsafety8-0" name="generalsafety8" type="radio" value="1"><label for="generalsafety8-0">1</label></td>
+                    
+                        <td><input id="generalsafety8-1" name="generalsafety8" type="radio" value="0"><label for="generalsafety8-1">0</label></td>
+                    
+                        <td><input id="generalsafety8-2" name="generalsafety8" type="radio" value="N/A"><label for="generalsafety8-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Stacking of goods does not exceed 600mm from the ceiling and heavy items at the bottom, light items on top.</td>
+                    
+                        <td><input checked id="generalsafety9-0" name="generalsafety9" type="radio" value="1"><label for="generalsafety9-0">1</label></td>
+                    
+                        <td><input id="generalsafety9-1" name="generalsafety9" type="radio" value="0"><label for="generalsafety9-1">0</label></td>
+                    
+                        <td><input id="generalsafety9-2" name="generalsafety9" type="radio" value="N/A"><label for="generalsafety9-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Proper signage/ label (fire, hazards, warnings, food stuff) and Exit signs in working order.</td>
+                    
+                        <td><input checked id="generalsafety10-0" name="generalsafety10" type="radio" value="1"><label for="generalsafety10-0">1</label></td>
+                    
+                        <td><input id="generalsafety10-1" name="generalsafety10" type="radio" value="0"><label for="generalsafety10-1">0</label></td>
+                    
+                        <td><input id="generalsafety10-2" name="generalsafety10" type="radio" value="N/A"><label for="generalsafety10-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <td>Equipment, crockery and utensils are not chipped, broken or cracked.</td>
+                    
+                        <td><input checked id="generalsafety11-0" name="generalsafety11" type="radio" value="1"><label for="generalsafety11-0">1</label></td>
+                    
+                        <td><input id="generalsafety11-1" name="generalsafety11" type="radio" value="0"><label for="generalsafety11-1">0</label></td>
+                    
+                        <td><input id="generalsafety11-2" name="generalsafety11" type="radio" value="N/A"><label for="generalsafety11-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <th colspan="4">Fire & Emergency Safety</th>
+                </tr>
+                <tr>
+                    <td>Fire extinguishers access is unobstructed; Fire extinguishers are not expired and employees know how to use them.</td>
+                    
+                        <td><input checked id="fire1-0" name="fire1" type="radio" value="1"><label for="fire1-0">1</label></td>
+                    
+                        <td><input id="fire1-1" name="fire1" type="radio" value="0"><label for="fire1-1">0</label></td>
+                    
+                        <td><input id="fire1-2" name="fire1" type="radio" value="N/A"><label for="fire1-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Escape route and exits are unobstructed.</td>
+                    
+                        <td><input checked id="fire2-0" name="fire2" type="radio" value="1"><label for="fire2-0">1</label></td>
+                    
+                        <td><input id="fire2-1" name="fire2" type="radio" value="0"><label for="fire2-1">0</label></td>
+                    
+                        <td><input id="fire2-2" name="fire2" type="radio" value="N/A"><label for="fire2-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>First aid box is available and well-equipped.</td>
+                    
+                        <td><input checked id="fire3-0" name="fire3" type="radio" value="1"><label for="fire3-0">1</label></td>
+                    
+                        <td><input id="fire3-1" name="fire3" type="radio" value="0"><label for="fire3-1">0</label></td>
+                    
+                        <td><input id="fire3-2" name="fire3" type="radio" value="N/A"><label for="fire3-2">N/A</label></td>
+                    
+                </tr>
+                <tr>
+                    <th colspan="4">Electrical Safety</th>
+                </tr>
+                <tr>
+                    <td>Electrical sockets are not overloaded ®C one plug to one socket.</td>
+                    
+                        <td><input checked id="elect1-0" name="elect1" type="radio" value="1"><label for="elect1-0">1</label></td>
+                    
+                        <td><input id="elect1-1" name="elect1" type="radio" value="0"><label for="elect1-1">0</label></td>
+                    
+                        <td><input id="elect1-2" name="elect1" type="radio" value="N/A"><label for="elect1-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Plugs and cords are intact and free from exposure/ tension with PSB safety mark.</td>
+                    
+                        <td><input checked id="elect2-0" name="elect2" type="radio" value="1"><label for="elect2-0">1</label></td>
+                    
+                        <td><input id="elect2-1" name="elect2" type="radio" value="0"><label for="elect2-1">0</label></td>
+                    
+                        <td><input id="elect2-2" name="elect2" type="radio" value="N/A"><label for="elect2-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Power points that are in close proximity to flammable and/or water sources are installed with a plastic cover.</td>
+                    
+                        <td><input checked id="elect3-0" name="elect3" type="radio" value="1"><label for="elect3-0">1</label></td>
+                    
+                        <td><input id="elect3-1" name="elect3" type="radio" value="0"><label for="elect3-1">0</label></td>
+                    
+                        <td><input id="elect3-2" name="elect3" type="radio" value="N/A"><label for="elect3-2">N/A</label></td>
+                    
+                </tr>            
+                <tr>
+                    <td>Electrical panels / DBs are covered.</td>
+                    
+                        <td><input checked id="elect4-0" name="elect4" type="radio" value="1"><label for="elect4-0">1</label></td>
+                    
+                        <td><input id="elect4-1" name="elect4" type="radio" value="0"><label for="elect4-1">0</label></td>
+                    
+                        <td><input id="elect4-2" name="elect4" type="radio" value="N/A"><label for="elect4-2">N/A</label></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            Finding/ Remarks:
+        </p>
+        <textarea cols="40" id="remarks" name="remarks" rows="5">
+</textarea>
+        <p>
+            <label for="rectification">Rectification time:</label>
+            <select id="rectification" name="rectification"><option selected value="3">3 Days</option><option value="7">7 Days</option></select>
+        </p>
+
+        </p>
+        <p>
+            <input id="submit" name="submit" type="submit" value="submit">
+        </p>
+    </form>
+ 
+        </div>
+        <div id="footer">
+            
+            
+
+        </div>
+    </body>
+</html>

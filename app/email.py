@@ -15,6 +15,8 @@ def send_email(subject, sender, recipients, html_body):
 
 def send_audit_mail(html,form):
     output_from_parsed_template = render_template(html,form=form)
+    
+                
     os.remove('output.html') if os.path.exists('output.html') else None
     os.remove('audit.pdf') if os.path.exists('audit.pdf') else None
     with open("output.html", "w") as fh:
@@ -28,4 +30,3 @@ def send_audit_mail(html,form):
                sender=app.config['ADMINS'][0],
                recipients=['ezchecksg@gmail.com'],
                html_body=render_template(html,form=form))
-                

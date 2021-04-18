@@ -76,7 +76,7 @@ def create_audit():
         audit = Audit(part1_score = int(part1_score), part2_score = int(part2_score), part3_score= int(part3_score), part4_score = int(part4_score), part5_score = int(part5_score), total_score = int(total), auditor = form.auditor.data, tenant = form.auditee.data, rectification = form.rectification.data, timestamp = datetime.now(), remarks = form.remarks.data)
         db.session.add(audit)
         db.session.commit()
-        #send_audit_mail('audit/audit.html', form)
+        send_audit_mail('audit/audit.html', form)
         result =  Audit.query.order_by(Audit.id.desc()).first()
         remarks = pull_comments("1", "hygiene")
         latest_audit = {result.tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":remarks, "Due":result.rectification}}

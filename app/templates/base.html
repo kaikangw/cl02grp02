@@ -36,7 +36,8 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/directory.css')}}"/>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/chat.css')}}"/>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/broadcast.css')}}"/>
-        
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/audit_additional_info.css')}}"/>
+
         {% endblock %}
 
     </head>
@@ -69,7 +70,6 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
                     <a class="dropdown-item px-3" href="{{url_for('audits.create_audit')}}" style="color: white;">Create</a>
-          
                     <a class="dropdown-item px-3" href="{{url_for('audits.view_audits')}}" style="color: white;">View</a>
 
                   </div>
@@ -114,6 +114,7 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
                     <a class="dropdown-item px-3" href="{{url_for('audits.view_audits')}}" style="color: white;">View</a>
+                    <a class="dropdown-item px-3" href="{{url_for('audits.create_audit')}}" style="color: white;">Create</a>
                   </div>
                 </li>
                 <li class="nav-item">

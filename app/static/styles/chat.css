@@ -4,7 +4,6 @@
     text-transform: uppercase;
 }
 
-
 /*Copied*/
 
 div#userChat {
@@ -173,6 +172,45 @@ div#newChatform{
   margin: 0 auto;
 }
 
+@media(max-width: 1080px){
+  h3#chatpage_headline{
+    color: white;
+  }
+
+  h6#sendto{
+    color: white;
+  }
+
+  div#add_new_chat{
+    display: none;
+    position: fixed;
+    height: 70%;
+    width: 90%;
+    bottom: 25px;
+    right: 25px;
+    border: 3px solid #f1f1f1;
+    border-radius: 20px 20px 20px 20px;
+    z-index: 9;
+    padding-top: 2%;
+    background-color: rgba(150, 137, 137, 0.919);
+  }
+
+  div#newChatform{
+    height: 95%;
+    width: 90%;
+    position:relative;
+    margin: 0 auto;
+    overflow-y: auto;
+  }
+
+  textarea#message{
+    border: 1px solid #9b9696;
+    width: 80%;
+    height: 80%;
+  }
+  
+}
+
 a#showForm{
   position: fixed;
   bottom: 0;
@@ -190,7 +228,7 @@ h3#sendto{
 }
 
 textarea#message{
-  border: 1px solid #9b9696
+  border: 1px solid #9b9696;
 }
 
 button.startChat{

@@ -17,7 +17,7 @@ div#sendBroadcast{
 form#send_broadcast{
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 90%;
     height: 100%;
     display: relative;
 }
@@ -52,4 +52,24 @@ select#broadcastTo{
   margin: 0 auto;
   border: 1px solid #ccc;
   border-radius: 6px;
+}
+
+@media (max-width:1080px){
+    div#sendBroadcast{
+        border: 1px solid black;
+        width: 90%;
+        height:70%;
+        margin: auto;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    
+    form#send_broadcast{
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        height: 100%;
+        display: relative;
+    }
+    
 }

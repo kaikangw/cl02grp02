@@ -38,5 +38,5 @@ webencodings==0.5.1
 Werkzeug==1.0.1
 WTForms==2.3.3
 requests
-firebase_admin
+firebase-admin==4.5.3
 gunicorn

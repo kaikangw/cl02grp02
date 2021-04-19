@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 div#data_options{
     float:left;
     margin-top: 10px;
@@ -49,4 +50,57 @@ div#data_options{
     width:200px;
     margin-bottom: 10%;
     border-radius: 10px;
+=======
+div#data_options{
+    float:left;
+    margin-top: 10px;
+    padding: 10px;
+    height:90%;
+    /*width: 30%;*/
+    align-items: center;
+}
+
+#data_image{
+    float: right;
+    border: 1px solid black;
+    width: auto;
+    height: 90%;
+    width: 70%;
+    margin-top: 10px;
+    
+}
+
+#left-side {
+    display: flex;
+    width: 20%;
+    height: 1000px;
+    margin:5px;
+}
+
+#right-side {
+    display: flex;
+    width: 80%;
+    height: 100%;
+    margin:5px;
+}
+
+.data-wrapper {
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    padding:5px;
+    vertical-align: top;
+}
+
+#data-header {
+    display: flex;
+    height: 10%;
+    align-content: center;
+}
+
+.data_choice{
+    width:200px;
+    margin-bottom: 10%;
+    border-radius: 10px;
+>>>>>>> 906d0c6aee48dac79b7d52f09dbca9041364bc40
 }

@@ -1,5 +1,5 @@
 import firebase_admin, json, os, requests, pprint
-from firebase_admin import credentials, firestore, storage, db
+from firebase_admin import credentials, firestore, storage, db, auth
 from firebase_admin.auth import UserRecord
 from typing import Optional
 from sqlalchemy import exc, or_, and_

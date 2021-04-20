@@ -24,6 +24,20 @@ def initialize():
 ## as well as a function to get id from username (getuserid)
 ## I'm assuming we can input the user id for all the functions cos the admin will have access to these anyway
 
+def get_user_details(username: str):
+    user = User.query.filter(User.username == username).first()
+    dic = {
+        "User ID" : user.id,
+        "Username" : username,
+        "Email" : user.email,
+        "Type" : user.type,
+        "Institution" : user.institution,
+        "Tenancy" : user.tenancy,
+        "Description" : user.description,
+        "Location" : user.location
+    }
+    return dic
+
 def change_email(userid: int, email: str):
     initialize()
     return auth.update_user(userid, email = email)

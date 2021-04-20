@@ -7,6 +7,46 @@
 
 {% block content %}
 <a type="button" id="back" href="{{url_for('admin.admin_page')}}"><i class="fas fa-chevron-left"></i></a>
-<input type="text" placeholder="Search..." id="search">
-<button type="submit"><i class="fa fa-search"></i></button>
+<input type="text" onkeyup="search()" placeholder="Search..." id="search"><i class="fa fa-search"></i>
+
+<br>
+<br>
+<table id="users">
+    <tr class="header">
+        <th>Username</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td> <a type="button" href="{{ url_for('admin.deleteUser', user = user) }}" id="chooseUser"
+                class="btn">{{user}}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<script>
+    function search() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("search");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("users");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+</script>
+
+
 {% endblock %}

@@ -11,7 +11,7 @@ from app.forms import AuditForm, ResultForm, NewForm, ShopForm, GraphForm
 from datetime import datetime
 from sqlalchemy import func, extract
 from app.email import send_audit_mail
-from app.generalFunctions import create_account, accountType, getusername, getuserid, login, send_msg, pull_msg, makeList, get_user_list
+from app.generalFunctions import create_account, accountType, getusername, getuserid, login, send_msg, pull_msg, makeList, get_user_list, new_broadcast, get_broadcast_list
 
 #Images Folder
 UPLOAD_FOLDER = os.path.join('static','images')
@@ -52,7 +52,8 @@ def login_page():
 
 @app.route('/main')
 def main_page():
-    broadcast_message = {"Auditor 1":{"title":"Reminder", "timestamp":"19:00:00", "content":"jgsdjiojfs"},"Auditor 2":{"title":"Warning", "timestamp":"20:00:00", "content":"Please comply!!"}, "Auditor 3": {"title":"Time to Eat", "timestamp":"22:00:00", "content":"Food's ready!"},"Auditor 4":{"title":"Tellonme", "timestamp":"19:00:00", "content":"hello world, I am here"},"Auditor 5":{"title":"Alert", "timestamp":"19:00:00", "content":"hello world, I am here"}}
+    #broadcast_message = {"Auditor 1":{"title":"Reminder", "timestamp":"19:00:00", "content":"jgsdjiojfs"},"Auditor 2":{"title":"Warning", "timestamp":"20:00:00", "content":"Please comply!!"}, "Auditor 3": {"title":"Time to Eat", "timestamp":"22:00:00", "content":"Food's ready!"},"Auditor 4":{"title":"Tellonme", "timestamp":"19:00:00", "content":"hello world, I am here"},"Auditor 5":{"title":"Alert", "timestamp":"19:00:00", "content":"hello world, I am here"}}
+    broadcast_message = get_broadcast_list(session["clearance"])
     return render_template("main/main.html", broadcast= broadcast_message, alert=[])
 
 
@@ -115,8 +116,6 @@ def settings():
     session.pop('username')
     session.pop('clearance')
     return render_template("login/login.html")
-
-
 
 @app.route('/data', methods=['GET', 'POST'])
 def data_page():
@@ -323,6 +322,8 @@ def create_broadcast():
         print(recipient)
         broadcast = request.form["broadcastMsg"]
         print(broadcast)
+        new_broadcast(session["userId"], recipient, broadcast)
+
         render_template("broadcast/broadcast.html")
     return render_template("broadcast/broadcast.html")
 

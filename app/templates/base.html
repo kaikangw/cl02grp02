@@ -27,6 +27,7 @@
         <!-- Extensions -->
         <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
         <script src="https://kit.fontawesome.com/c6bc12f920.js" crossorigin="anonymous"></script>
+       
 
         <!-- CSS for different pages -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css')}}"/>
@@ -114,7 +115,6 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border:none; background-color:#f06d1a;">
                     <a class="dropdown-item px-3" href="{{url_for('audits.view_audits')}}" style="color: white;">View</a>
-                    <a class="dropdown-item px-3" href="{{url_for('audits.create_audit')}}" style="color: white;">Create</a>
                   </div>
                 </li>
                 <li class="nav-item">

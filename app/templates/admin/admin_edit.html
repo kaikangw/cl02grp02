@@ -6,7 +6,116 @@
 {% endblock %}
 
 {% block content %}
+{% if chose == "False" %}
 <a type="button" id="back" href="{{url_for('admin.admin_page')}}"><i class="fas fa-chevron-left"></i></a>
-<input type="text" placeholder="Search..." id="search">
-<button type="submit"><i class="fa fa-search"></i></button>
+<input type="text" onkeyup="search()" placeholder="Search..." id="search"><i class="fa fa-search"></i>
+
+<br>
+<br>
+<table id="users">
+    <tr class="header">
+        <th>Username</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td> <a type="button" href="{{ url_for('admin.editFor', user = user) }}" id="chooseUser"
+                class="btn">{{user}}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% elif chose == "True" %}
+
+<div class="modal-dialog" role="document">
+    
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="chosenUserLabel">Edit Account</h5>
+            <a type="button" class="close" href="{{ url_for('admin.editAccount') }}" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </a>
+        </div>
+        <div class="modal-body">
+            <form id="changedUserDetails" method="POST">
+                <div class="form-group">
+                    <label for="username" class="col-form-label">Username:</label>
+                    <input type="text" class="form-control" id="username" name="username" value= "{{user['Username']}}">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-form-label">Email:</label>
+                    <input type="text" class="form-control" id="email" name="email" value= "{{user['Email']}}">
+                </div>
+                <div class="form-group">
+                    <h5>Current type: {{user['Type']}}</h5><br>
+                    <label for="type" class="col-form-label">Type:</label>
+                    
+                    <select id="type" name="type">
+                        <option id="default" value="{{user['Type']}}"></option>
+                        <option id="auditor" value="auditor">Auditor</option>
+                        <option id="admin" value="admin">Admin</option>
+                        <option id="auditor" value="tenant">Tenant</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="instituition" class="col-form-label">Instituition:</label>
+                    <input type="text" class="form-control" id="instituition" name="instituition"  value= "{{user['Instituition']}}">
+                </div>
+                <div class="form-group">
+                    <label for="tenancy" class="col-form-label">Tenancy:</label>
+                    <input type="text" class="form-control" id="tenancy" name="tenancy"  value= "{{user['Tenancy']}}">
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-form-label">Description:</label>
+                    <input type="text" class="form-control" id="description" name="description" value= "{{user['Description']}}">                </div>
+                <div class="form-group">
+                    <label for="location" class="col-form-label">Location:</label>
+                    <input type="text" class="form-control" id="location" name="location" value= "{{user['Location']}}">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-form-label">Password:</label>
+                    <input type="text" class="form-control" id="password" name="password">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-secondary" href="{{ url_for('admin.editAccount') }}">Close</a>
+            <button type="submit" onClick="makeChange()" class="btn btn-primary">Ok</button>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+
+<script>
+    function search() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("search");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("users");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function makeChange(){
+        document.getElementById("changedUserDetails").submit();
+    }
+
+</script>
+
+
 {% endblock %}

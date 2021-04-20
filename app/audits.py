@@ -88,6 +88,7 @@ def create_audit():
 @audits.route("/comments-for-<heading>", methods=["GET"])
 def audit_comments(heading):
     return render_template("audit/audit_additional_info.html", heading = heading)
+    
 
 @audits.route("/result/<audit_id>", methods=["GET"])
 def audit_result(audit_id):

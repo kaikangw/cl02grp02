@@ -17,6 +17,7 @@ ul.id = "imgList";
 
 function init() {
 	//add javascript handlers for the file upload event
+	alert("hell")
 	document
 		.querySelector("#files")
 		.addEventListener("change", handleFileSelect, false);
@@ -29,6 +30,7 @@ function handleFileSelect(e) {
 
 	//To obtaine a File reference
 	var files = e.target.files;
+	alert("hello")
 
 	// Loop through the FileList and then to render image files as thumbnails.
 	for (var i = 0, f; (f = files[i]); i++) {

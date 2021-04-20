@@ -22,7 +22,7 @@ def get_broadcast_list(receivertype: str):
         details = {"timestamp" : date_time,
                     "senderName" : senderName,
                     "content" : broadcast.body}
-        list.append(details)
+        broadcast_list.append(details)
     
     return broadcast_list
 

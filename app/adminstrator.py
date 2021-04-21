@@ -48,7 +48,7 @@ def editFor(user):
         description = request.form["description"]
         password = request.form["password"]
         print("This is the password: "+password)
-        change_details(current_uid,username,email,accountType,instituition,tenancy, location, description, password)
+        change_details(current_uid,username,email,accountType,instituition,tenancy, description, location, password)
 
         return redirect(url_for("admin.editAccount"))
 

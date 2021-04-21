@@ -39,26 +39,25 @@ def pull_comments(auditid: int, section: str):
     return comments
 
 def get_images(auditid: int, section:str):
-    image_paths = []
     for comment in Comments.query.filter(db.and_(Comments.audit_id == auditid, Comments.section == section)).order_by(Comments.path):
         image_path = comment.image_path
+        comment_id = comment.id
+        download_image(auditid, section, comment_id, image_path)
+    path = "downloads/" + str(audit_id) + "/" + section
+    return path
 
-        for path in image_path:
-            #download_image(auditid, section, path)
-            print(path)
 
-
-def download_image(audit_id: int, section: str, image_path: str):
+def download_image(audit_id: int, section: str, comment_id: int, image_path: str):
     list_of_paths = image_path.split(",")
     current_path = 0
-    folder_name = "downloads/" + str(audit_id) + "/" + section
+    folder_name = "downloads/" + str(audit_id) + "/" + section + "/" + str(comment_id)
     if not os.path.exists(folder_name):
             os.makedirs(folder_name)
     for x in list_of_paths:
-        storage_path = str(audit_id) + "/" + section + str(current_path) #should just be x but i'll double check once yansiew gets back to me
+        storage_path = str(audit_id) + "/" + section + "/" + str(comment_id) + str(current_path) #should just be x but i'll double check once yansiew gets back to me
         image_name = folder_name + str(current_path) + ".jpg"
         bucket = storage.bucket()
         blob = bucket.blob(storage_path)
         blob.download_to_filename(image_name)
         current_path += 1
-    return storage_path
+    return folder_name

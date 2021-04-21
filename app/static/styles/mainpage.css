@@ -56,3 +56,38 @@ i#icon::before{
         font-size: 3.375rem;
     }
 }
+
+/*Settings Page*/
+ div#settings-idcard{
+     width: 70%;
+     height: 60%;
+     vertical-align: top;
+     display: inline-block;
+     
+ }
+
+ div#settings-profile{
+    float:left;
+    width: 33.3%;
+    height: 100%;
+ }
+
+i#settingsicon{
+    top: 50%;
+}
+
+ div#settings-desc{
+     float:right;
+     width: 66.6%;
+     height: 100%;
+
+ }
+
+ #thisUser{
+     text-transform: uppercase;
+     
+ }
+
+ @media screen (max-width: 1080px){
+     
+ }

@@ -122,6 +122,14 @@ def getuserid(username):
     thisid = User.query.filter(User.username == username).first()
     return thisid.id
 
+#def getinstituition(username):
+#    user = User.query.filter(User.username == username).first()
+#    return user.instituition
+
+#def gettenancy(username):
+#    user = User.query.filter(User.username == username).first()
+#    return user.tenancy
+
 ##Login
 def login(email: str, password: str, return_secure_token: bool = True):
     payload = json.dumps({

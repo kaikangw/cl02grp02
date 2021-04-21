@@ -11,7 +11,7 @@ from app.forms import AuditForm, ResultForm, NewForm, ShopForm, GraphForm
 from datetime import datetime
 from sqlalchemy import func, extract
 from app.email import send_audit_mail
-from app.generalFunctions import create_account, accountType, getusername, getuserid, login, send_msg, pull_msg, makeList, get_user_list, new_broadcast, get_broadcast_list
+from app.generalFunctions import create_account, accountType, getusername, getuserid, login, send_msg, pull_msg, makeList, get_user_list, new_broadcast, get_broadcast_list 
 
 #Images Folder
 UPLOAD_FOLDER = os.path.join('static','images')
@@ -113,9 +113,18 @@ def create_chat():
 #settings
 @app.route('/settings')
 def settings():
-    session.pop('username')
-    session.pop('clearance')
-    return render_template("login/login.html")
+    user = session["username"]
+    uid = session["userId"]
+    clearance = session["clearance"]
+    '''instituition = getinstituition(user)
+    
+    if clearance == "tenant":
+        tenancy = gettenancy(user)
+    else:
+        tenancy = ""'''
+
+    #return render_template("main/settings.html", user = user, uid = uid, clearance = clearance, instituition = instituition, tenancy = tenancy)
+    return render_template("main/settings.html", user = user, uid = uid, clearance = clearance)
 
 @app.route('/data', methods=['GET', 'POST'])
 def data_page():

@@ -159,10 +159,11 @@ div#add_new_chat{
   width: 33.3%;
   bottom: 25px;
   right: 25px;
-  border: 3px solid #f1f1f1;
+  border: 1.5px solid black;
   border-radius: 20px 20px 20px 20px;
   z-index: 9;
   padding-top: 2%;
+  background-color: rgb(243, 243, 242);
 }
 
 div#newChatform{
@@ -174,25 +175,25 @@ div#newChatform{
 
 @media(max-width: 1080px){
   h3#chatpage_headline{
-    color: white;
+    color: black;
   }
 
   h6#sendto{
-    color: white;
+    color: black;
   }
 
   div#add_new_chat{
     display: none;
     position: fixed;
     height: 70%;
-    width: 90%;
+    width: 75%;
     bottom: 25px;
     right: 25px;
-    border: 3px solid #f1f1f1;
+    border: 1.5px solid black;
     border-radius: 20px 20px 20px 20px;
     z-index: 9;
     padding-top: 2%;
-    background-color: rgba(150, 137, 137, 0.919);
+    background-color: rgb(243, 243, 242);
   }
 
   div#newChatform{
@@ -205,8 +206,8 @@ div#newChatform{
 
   textarea#message{
     border: 1px solid #9b9696;
-    width: 80%;
-    height: 80%;
+    width: 90%;
+   
   }
   
 }
@@ -229,6 +230,8 @@ h3#sendto{
 
 textarea#message{
   border: 1px solid #9b9696;
+  width:80%;
+
 }
 
 button.startChat{
@@ -250,4 +253,9 @@ option#recipient, select#availRecipients{
   
   font-family:Arial, Helvetica, sans-serif;
   text-transform: uppercase;
+}
+
+h5#broadcast-title{
+  text-transform: uppercase;
+  
 }

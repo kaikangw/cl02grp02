@@ -1,0 +1,726 @@
+<!--This is the html for the audit-->
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+
+    <form action="{{ url_for('create_audit') }}" method="post" novalidate>
+        {{ form.hidden_tag() }}
+
+        <p>Doing audit for: {{tenant}}</p>
+
+        <table id="audit-checklist">
+            <thead id="checklist-head">
+                <tr>
+                    <th>1. Professionalism & Staff Hygiene (10%)</th>
+                    <th colspan="3">Point(s) Awarded</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="4">Professionalism</th>    
+                </tr>
+                <tr>
+                    <td>Shop is open and ready to service patients/visitors according to operating hours.</td>
+                    {% for subfield in form.professionalism1 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                        
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Staff Attendance: adequate staff for peak and non-peak hours.</td>
+                    {% for subfield in form.professionalism2 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>At least one (1) clearly assigned person in-charge on site.</td>
+                    {% for subfield in form.professionalism3 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                
+                <tr>
+                    <th colspan="4">Staff Hygiene</th>    
+                </tr>
+                <tr>
+                    <td>Staff who are unfit for work due to illness should not report to work.</td>
+                    {% for subfield in form.staffhygiene1 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Staff who are fit for work but suffering from the lingering effects of a cough and/or cold should cover their mouths with a surgical mask.</td>
+                    {% for subfield in form.staffhygiene2 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>                     
+                <tr>
+                    <td>Clean clothes/uniform or aprons are worn during food preparation and food service.</td>
+                    {% for subfield in form.staffhygiene3 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Hair is kept tidy (long hair must be tied up) and covered with clean caps or hair nets where appropriate.</td>
+                    {% for subfield in form.staffhygiene4 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Sores, wounds or cuts on hands, if any, are covered with waterproof and brightly-coloured plaster.</td>
+                    {% for subfield in form.staffhygiene5 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Hands are washed thoroughly with soap and water, frequently and at appropriate times.</td>
+                    {% for subfield in form.staffhygiene6 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Fingernails are short, clean, unpolished and without nail accessories.</td>
+                    {% for subfield in form.staffhygiene7 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>No wrist watches/ rings or other hand jewellery (with exception of wedding ring) is worn by staff handling food.</td>
+                    {% for subfield in form.staffhygiene8 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Food is handled with clean utensils and gloves. </td>
+                    {% for subfield in form.staffhygiene9 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>
+                        Disposable gloves are changed regularly and/ or in between tasks.
+                        <li>Staff do not handle cash with gloved hands.</li>
+                    </td>
+                    {% for subfield in form.staffhygiene10 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr> 
+                <tr>
+                    <td><a href="{{url_for('audit_comments', heading='Professionalism & Staff Hygiene')}}"><b>Click here to add additional comments: </b></a></td>
+                </tr>
+            </tbody>
+            <thead id="checklist-head">
+                <tr>
+                    <th>2. Housekeeping & General Cleanliness (20%)</th>
+                    <th colspan="3">Point(s) Awarded</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="4">General Environment Cleanliness</th> 
+                </tr>
+                <tr>
+                    <td>Cleaning and maintenance records for equipment, ventilation and exhaust system.</td>
+                    {% for subfield in form.generalenv1 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr> 
+                <tr>
+                    <td>Adequate and regular pest control.
+                        <li>Pest control record.</li>
+                    </td>
+                    {% for subfield in form.generalenv2 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Goods and equipment are within shop boundary.</td>
+                    {% for subfield in form.generalenv3 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Store display/ Shop front is neat and tidy.</td>
+                    {% for subfield in form.generalenv4 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Work/ serving area is neat, clean and free of spillage.</td>
+                    {% for subfield in form.generalenv5 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Uncluttered circulation space free of refuse/ furniture.</td>
+                    {% for subfield in form.generalenv6 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Tables are cleared promptly within 10 minutes.</td>
+                    {% for subfield in form.generalenv7 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Fixtures and fittings including shelves, cupboards and drawers are clean and dry, free from pests, and in a good state.</td>
+                    {% for subfield in form.generalenv8 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Ceiling/ ceiling boards are free from stains/ dust with no gaps.</td>
+                    {% for subfield in form.generalenv9 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Fans and air-con units are in proper working order and clean and free from dust. Proper maintenance and routine cleaning are carried out regularly.</td>
+                    {% for subfield in form.generalenv10 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Equipment, exhaust hood, crockery and utensils are clean, in good condition and serviced.</td>
+                    {% for subfield in form.generalenv11 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Surfaces, walls and ceilings within customer areas are dry and clean.</td>
+                    {% for subfield in form.generalenv12 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Floor within customer areas is clean, dry and non-greasy.</td>
+                    {% for subfield in form.generalenv13 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Waste bins are properly lined with plastic bags and covered at all times.</td>
+                    {% for subfield in form.generalenv14 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Adequate number of covered waste pedal bins are available and waste is properly managed and disposed.
+                        <li>Waste bins are not over-filled.</li>
+                        <li>Waste Management: Proper disposal of food stuff and waste.</li>
+                        <li>Waste is properly bagged before disposing it at the waste disposal area/ bin centre.</li>
+                    </td>
+                    {% for subfield in form.generalenv15 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr> 
+                <tr>
+                    <th colspan="4">Hand Hygiene Facilities</th>
+                </tr>
+                <tr>
+                    <td>Hand washing facilities are easily accessible, in good working condition and soap is provided.</td>
+                    {% for subfield in form.handhygiene1 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Adequate facilities for hand hygiene are available including liquid soap and disposable hand towels.</td>
+                    {% for subfield in form.handhygiene2 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td><a href="{{url_for('audit_comments', heading='Housekeeping & General Cleanliness')}}"><b>Click here to add additional comments: </b></a></td>
+                </tr>     
+            </tbody>
+            <thead id="checklist-head">
+                <tr>
+                    <th>3. Food Hygiene (35%)</th>
+                    <th colspan="3">Point(s) Awarded</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="4">Storage & Preparation of Food</th>
+                </tr>
+                <tr>
+                    <td>Food is stored in appropriate conditions and at an appropriate temperature.</td>
+                    {% for subfield in form.storageprep1 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Food and non-food are clearly segregated.
+                        <li>Non-food items (e.g. insecticides, detergents and other chemicals) are not stored together with the food items.</li>
+                    </td>
+                    {% for subfield in form.storageprep2 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Food is not placed near sources of contamination.</td>
+                    {% for subfield in form.storageprep3 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Storage of food does not invite pest infestation.</td>
+                    {% for subfield in form.storageprep4 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Dry goods (e.g. canned food and drinks) and other food items are stored neatly on shelves, off the floor and away from walls.</td>
+                    {% for subfield in form.storageprep5 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Proper stock rotation system such as the First-Expired-First-Out (FEFO) system is used for inventory management.</td>
+                    {% for subfield in form.storageprep6 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Food is protected from contamination; packaging is intact and no products are found with signs of spoilage.</td>
+                    {% for subfield in form.storageprep7 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Ice machine is clean and well maintained.
+                        <li>Only ice is stored in the ice machine to prevent contamination of the ice.</li>
+                    </td>
+                    {% for subfield in form.storageprep8 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Scoop for ice is stored outside the ice machine in a dedicated container.</td>
+                    {% for subfield in form.storageprep9 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Food supplied is clean and not expired.</td>
+                    {% for subfield in form.storageprep10 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Clear labelling of date of date of preparation/ manufacture/ expiry on all food containers/packaging..</td>
+                    {% for subfield in form.storageprep11 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Cooked food is properly covered to prevent cross-contamination.</td>
+                    {% for subfield in form.storageprep12 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Proper work flow and segregation of areas to prevent cross-contamination between raw and cooked/ ready-to-eat food areas.</td>
+                    {% for subfield in form.storageprep13 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Proper separation of cooked food/ ready-to-eat food, raw meat, seafood and vegetable to prevent cross-contamination.
+                        <li>E.g. Different chopping boards, knives and other utensils are used for cooked/ ready-to-eat and raw food.</li>
+                    </td>
+                    {% for subfield in form.storageprep14 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Frozen food is thawed in chiller, microwave or under running water.</td>
+                    {% for subfield in form.storageprep15 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Ingredients used are clean and washed thoroughly before cooking.</td>
+                    {% for subfield in form.storageprep16 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>All cooking ingredient (e.g. cooking oil, sauces) are properly covered in proper containers and properly labelled, indicating the content and date of expiry.</td>
+                    {% for subfield in form.storageprep17 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>All sauces are stored at appropriate condition & temperature.</td>
+                    {% for subfield in form.storageprep18 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Cooking oil is not used for more than 1 day.</td>
+                    {% for subfield in form.storageprep19 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Cooking oil is properly stored with a cover.</td>
+                    {% for subfield in form.storageprep20 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Perishable food is stored in the fridge.</td>
+                    {% for subfield in form.storageprep21 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Raw food and cooked food/ ready to serve food are clearly segregated.
+                        <li>Cold and/ or hot holding units are clean and well maintained.</li>
+                    </td>
+                    {% for subfield in form.storageprep22 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Food preparation area is free of bird and animal (e.g. dog or cat).</td>
+                    {% for subfield in form.storageprep23 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Food preparation area is clean, free of pests and in good state of repair.</td>
+                    {% for subfield in form.storageprep24 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Food is not prepared on the floor, near drain or near/ in toilet.</td>
+                    {% for subfield in form.storageprep25 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>             
+                <tr>
+                    <td>Personal belongings are kept separately in the staff locker area or cabinet, away from the food storage and preparation area.</td>
+                    {% for subfield in form.storageprep26 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th colspan="4">Storage of Food in Refrigerator/ Warmer</th>
+                </tr>
+                <tr>
+                    <td>Daily Temperature Log for food storage units (freezers, chillers, warmers, steamers, ovens) using independent thermometer, etc. is maintained for inspection from time to time.</td>
+                    {% for subfield in form.storagefood1 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Food storage units (freezers, chillers, warmers, steamers, ovens) are kept clean and well maintained. All rubber gaskets of refrigerators / warmers are free from defect, dirt and mould.</td>
+                    {% for subfield in form.storagefood2 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Food storage units are not overstocked to allow good air circulation.</td>
+                    {% for subfield in form.storagefood3 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>For walk-in freezers and chillers, food items are stored neatly on shelves and off the floor.</td>
+                    {% for subfield in form.storagefood4 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Frozen food is stored at a temperature of not more than -12°C.
+                        <li>Freezer’s temperature: < -12°C</li>
+                    </td>
+                    {% for subfield in form.storagefood5 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Chilled food is stored at a temperature of not more than 4°C.
+                        <li>Chiller’s temperature: 0°C ~ 4°C</li>
+                    </td>
+                    {% for subfield in form.storagefood6 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Hot food are held above 60°C.
+                        <li>Food warmer’s temperature: > 60°C</li>
+                    </td>
+                    {% for subfield in form.storagefood7 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Perishable food is stored at a temperature of not more than 4°C.</td>
+                    {% for subfield in form.storagefood8 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Dairy products are stored at a temperature of not more than 7°C.</td>
+                    {% for subfield in form.storagefood9 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Cooked/ ready-to-eat food are stored above raw food.</td>
+                    {% for subfield in form.storagefood10 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Food items are properly wrapped/covered in proper containers and protected from contamination.</td>
+                    {% for subfield in form.storagefood11 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td><a href="{{url_for('audit_comments', heading='Food Hygiene')}}"><b>Click here to add additional comments: </b></a></td>
+                </tr>
+            </tbody>
+            <thead id="checklist-head">
+                <tr>
+                    <th>4. Healthier Choice in line with HPB’s Healthy Eating’s Initiative (15%)</th>
+                    <th colspan="3">Point(s) Awarded</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="4">Food</th>
+                </tr>
+                <tr>
+                    <td>Min. no. of healthier variety of food items per stall.
+                        <br />
+                        <b><u>Lease Term:</u></b>
+                        <br />
+                        50% of food items.	
+                    </td>
+                    {% for subfield in form.food1 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Label caloric count of healthier options.</td>
+                    {% for subfield in form.food2 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Include HPB’s Identifiers beside healthier options.</td>
+                    {% for subfield in form.food3 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Use of healthier cooking oils.</td>
+                    {% for subfield in form.food4 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Offer wholemeal/ whole-grain option.</td>
+                    {% for subfield in form.food5 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Healthier option food sold at lower price than regular items.</td>
+                    {% for subfield in form.food6 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Limit deep-fried and pre-deep fried food items sold (≤ 20% deep-fried items). </td>
+                    {% for subfield in form.food7 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th colspan="4">Beverage</th>
+                </tr>
+                <tr>
+                    <td>No sugar / Lower-sugar brewed beverage offerings according to guidelines.</td>
+                    {% for subfield in form.beverage1 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Healthier option beverages sold at lower price than regular items.</td>
+                    {% for subfield in form.beverage2 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Label caloric count of healthier options.</td>
+                    {% for subfield in form.beverage3 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Limit sugar content on commercially-prepared sweetened beverages. 
+                        (≥ 70% commercially-prepared sweetened beverages sold to have HCS)</td>
+                    {% for subfield in form.beverage4 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td><a href="{{url_for('audit_comments', heading='Healthier Choice')}}"><b>Click here to add additional comments: </b></a></td>
+                </tr>
+            </tbody>
+            <thead id="checklist-head">
+                <tr>
+                    <th>5. Workplace Safety & Health (20%)</th>
+                    <th colspan="3">Point(s) Awarded</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="4">General Safety</th>
+                </tr>
+                <tr>
+                    <td>All food handlers have Basic Food Hygiene certificate and a valid Refresher Food Hygiene certificate (if applicable).</td>
+                    {% for subfield in form.generalsafety1 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>MSDS for all industrial chemicals are available and up to date.</td>
+                    {% for subfield in form.generalsafety2 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Proper chemicals storage.</td>
+                    {% for subfield in form.generalsafety3 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>All detergent and bottles containing liquids are labelled appropriately.</td>
+                    {% for subfield in form.generalsafety4 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>All personnel to wear safety shoes and safety attire where necessary.</td>
+                    {% for subfield in form.generalsafety5 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Knives and sharp objects are kept at a safe place.</td>
+                    {% for subfield in form.generalsafety6 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Area under the sink should not be cluttered with items other than washing agents.</td>
+                    {% for subfield in form.generalsafety7 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Delivery personnel do not stack goods above the shoulder level.</td>
+                    {% for subfield in form.generalsafety8 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Stacking of goods does not exceed 600mm from the ceiling and heavy items at the bottom, light items on top.</td>
+                    {% for subfield in form.generalsafety9 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Proper signage/ label (fire, hazards, warnings, food stuff) and Exit signs in working order.</td>
+                    {% for subfield in form.generalsafety10 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Equipment, crockery and utensils are not chipped, broken or cracked.</td>
+                    {% for subfield in form.generalsafety11 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th colspan="4">Fire & Emergency Safety</th>
+                </tr>
+                <tr>
+                    <td>Fire extinguishers access is unobstructed; Fire extinguishers are not expired and employees know how to use them.</td>
+                    {% for subfield in form.fire1 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Escape route and exits are unobstructed.</td>
+                    {% for subfield in form.fire2 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>First aid box is available and well-equipped.</td>
+                    {% for subfield in form.fire3 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th colspan="4">Electrical Safety</th>
+                </tr>
+                <tr>
+                    <td>Electrical sockets are not overloaded – one plug to one socket.</td>
+                    {% for subfield in form.elect1 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Plugs and cords are intact and free from exposure/ tension with PSB safety mark.</td>
+                    {% for subfield in form.elect2 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Power points that are in close proximity to flammable and/or water sources are installed with a plastic cover.</td>
+                    {% for subfield in form.elect3 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>            
+                <tr>
+                    <td>Electrical panels / DBs are covered.</td>
+                    {% for subfield in form.elect4 %}
+                        <td>{{ subfield }}{{ subfield.label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td><a href="{{url_for('audit_comments', heading='Workplace Safety & Health')}}"><b>Click here to add additional comments: </b></a></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-size: x-large; font-weight: bold;">
+            Final Overall Remards:
+        </p>
+        {{ form.remarks(cols=40, rows=5) }}
+        <p>
+           <b>{{ form.rectification.label }}</b>
+            {{ form.rectification }}
+        </p>
+
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+{% endblock %}

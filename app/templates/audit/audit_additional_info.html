@@ -11,294 +11,286 @@
 
 
 <div id="results_card" class="card" style="border-color: darkorange;">
-    <div class="card-header" style="background-color: rgba(128, 128, 128, 0.089); border-color: darkorange;">
-        <h1>{{ heading }}</h1>
-        <ul class="nav nav-tabs card-header-tabs" id="results-list" role="tablist" >    
-            <li class="nav-item" style="border-color: darkorange;"></li>
-        </ul>
-    </div>
-    <div class="card-body" >
-        <div class="tab-content mt-2">
-            <div>
-                <p class="card-text text-left"><strong>Images</strong></p>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="upload-file">
-                            <div class="upload-wrapper">
-                                <label>
-                                    <input type="file" name="files[]" id="files" multiple accept="image/jpeg, image/png, image/gif,">
-                                    <p>Drop your files here. <br>or <a>Browse</a></p>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12" style="margin: 0 0 10px 0;">
-                        <output id="image-gallery"></output>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <p class="card-text text-left"><strong>Additional Remarks: </strong></p>
-                <p class="card-text text-left"><input type="text" style="width: 100%; height: 200px;"><br><br></p>
-            </div>
-        </div>
-    </div>
-        <div class="btn-box">
-            <div class="checklist_left" style="margin: -30px 0 0 0;">
-                <a href="{{url_for('audits.create_audit')}}"><button class="back">Back</button></a>
-            </div>
-            <div class="checklist_right" style="margin: -30px 0 0 0;">
-                <a href="{{url_for('audits.create_audit')}}"><button class="submit">Submit</button>
-            </div>
-        </div>
-    
+	<div class="card-header" style="background-color: rgba(128, 128, 128, 0.089); border-color: darkorange;">
+		<h1>{{ heading }}</h1>
+		<ul class="nav nav-tabs card-header-tabs" id="results-list" role="tablist">
+			<li class="nav-item" style="border-color: darkorange;"></li>
+		</ul>
+	</div>
+	<form id="audit-{{heading}}" enctype="multipart/form-data"  method="POST">
+	<div class="card-body">
+		
+			<div>
+				<p class="card-text text-left"><strong>Images</strong></p>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="upload-file">
+							<div class="upload-wrapper">
+								<label>
+									<input type="file" name="files[]" id="files" multiple
+										accept="image/jpeg, image/png, image/gif,">
+									<p>Drop your files here. <br>or <a>Browse</a></p>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-12" style="margin: 0 0 10px 0;">
+						<output id="image-gallery"></output>
+					</div>
+				</div>
+			</div>
+			<div>
+				<p class="card-text text-left"><strong>Additional Remarks: </strong></p>
+				<p class="card-text text-left"><input type="text" style="width: 100%; height: 200px;" id="audit-comments" name="audit-comments"><br><br></p>
+			</div>
+
+	</div>
+	<div class="btn-box">
+		<div class="checklist_left" style="margin: -30px 0 0 0;">
+			<a href="{{url_for('create_audit')}}"><button class="back">Back</button></a>
+		</div>
+		<div class="checklist_right" style="margin: -30px 0 0 0;">
+			<button class="submit">Submit</button></a>
+		</div>
+	</div>
+	</form>
+
 </div>
 
 
 <script>
-//I added event handler for the file upload control to access the files properties.
-document.addEventListener("DOMContentLoaded", init, false);
+	//I added event handler for the file upload control to access the files properties.
+	document.addEventListener("DOMContentLoaded", init, false);
 
-//To save an array of attachments
-var AttachmentArray = [];
+	//To save an array of attachments
+	var AttachmentArray = [];
 
-//counter for attachment array
-var arrCounter = 0;
+	//counter for attachment array
+	var arrCounter = 0;
 
-//to make sure the error message for number of files will be shown only one time.
-var filesCounterAlertStatus = false;
+	//to make sure the error message for number of files will be shown only one time.
+	var filesCounterAlertStatus = false;
 
-var path = location.pathname;
+	var path = location.pathname;
 
 
-//un ordered list to keep attachments thumbnails
-var ul = document.createElement("ul");
-ul.className = "thumb-Images";
-ul.id = "imgList";
+	//un ordered list to keep attachments thumbnails
+	var ul = document.createElement("ul");
+	ul.className = "thumb-Images";
+	ul.id = "imgList";
 
-function init() {
-	//add javascript handlers for the file upload event
-	document
-		.querySelector("#files")
-		.addEventListener("change", handleFileSelect, false);
-}
-
-//the handler for file upload event
-function handleFileSelect(e) {
-	//to make sure the user select file/files
-	if (!e.target.files) return;
-
-	//To obtaine a File reference
-	var files = e.target.files;
-
-	// Loop through the FileList and then to render image files as thumbnails.
-	for (var i = 0, f; (f = files[i]); i++) {
-		//instantiate a FileReader object to read its contents into memory
-		var fileReader = new FileReader();
-
-		// Closure to capture the file information and apply validation.
-		fileReader.onload = (function(readerEvt) {
-			return function(e) {
-				//Apply the validation rules for attachments upload
-				ApplyFileValidationRules(readerEvt);
-
-				//Render attachments thumbnails.
-				RenderThumbnail(e, readerEvt);
-
-				//Fill the array of attachment
-				FillAttachmentArray(e, readerEvt);
-			};
-		})(f);
-
-		// Read in the image file as a data URL.
-		// readAsDataURL: The result property will contain the file/blob's data encoded as a data URL.
-		// More info about Data URI scheme https://en.wikipedia.org/wiki/Data_URI_scheme
-		fileReader.readAsDataURL(f);
+	function init() {
+		//add javascript handlers for the file upload event
+		document
+			.querySelector("#files")
+			.addEventListener("change", handleFileSelect, false);
 	}
-	document
-		.getElementById("files")
-		.addEventListener("change", handleFileSelect, false);
-}
 
-//To remove attachment once user click on x button
-jQuery(function($) {
-	$("div").on("click", ".img-wrap .close", function() {
-		var id = $(this)
-			.closest(".img-wrap")
-			.find("img")
-			.data("id");
+	//the handler for file upload event
+	function handleFileSelect(e) {
+		//to make sure the user select file/files
+		if (!e.target.files) return;
 
-		//to remove the deleted item from array
-		var elementPos = AttachmentArray.map(function(x) {
-			return x.FileName;
-		}).indexOf(id);
-		if (elementPos !== -1) {
-			AttachmentArray.splice(elementPos, 1);
+		//To obtaine a File reference
+		var files = e.target.files;
+
+		// Loop through the FileList and then to render image files as thumbnails.
+		for (var i = 0, f; (f = files[i]); i++) {
+			//instantiate a FileReader object to read its contents into memory
+			var fileReader = new FileReader();
+
+			// Closure to capture the file information and apply validation.
+			fileReader.onload = (function (readerEvt) {
+				return function (e) {
+					//Apply the validation rules for attachments upload
+					ApplyFileValidationRules(readerEvt);
+
+					//Render attachments thumbnails.
+					RenderThumbnail(e, readerEvt);
+
+					//Fill the array of attachment
+					FillAttachmentArray(e, readerEvt);
+				};
+			})(f);
+
+			// Read in the image file as a data URL.
+			// readAsDataURL: The result property will contain the file/blob's data encoded as a data URL.
+			// More info about Data URI scheme https://en.wikipedia.org/wiki/Data_URI_scheme
+			fileReader.readAsDataURL(f);
 		}
+		document
+			.getElementById("files")
+			.addEventListener("change", handleFileSelect, false);
+	}
 
-		//to remove image tag
-		$(this)
-			.parent()
-			.find("img")
-			.not()
-			.remove();
+	//To remove attachment once user click on x button
+	jQuery(function ($) {
+		$("div").on("click", ".img-wrap .close", function () {
+			var id = $(this)
+				.closest(".img-wrap")
+				.find("img")
+				.data("id");
 
-		//to remove div tag that contain the image
-		$(this)
-			.parent()
-			.find("div")
-			.not()
-			.remove();
-
-		//to remove div tag that contain caption name
-		$(this)
-			.parent()
-			.parent()
-			.find("div")
-			.not()
-			.remove();
-
-		//to remove li tag
-		var lis = document.querySelectorAll("#imgList li");
-		for (var i = 0; (li = lis[i]); i++) {
-			if (li.innerHTML == "") {
-				li.parentNode.removeChild(li);
+			//to remove the deleted item from array
+			var elementPos = AttachmentArray.map(function (x) {
+				return x.FileName;
+			}).indexOf(id);
+			if (elementPos !== -1) {
+				AttachmentArray.splice(elementPos, 1);
 			}
-		}
-	});
-});
 
-//Apply the validation rules for attachments upload
-function ApplyFileValidationRules(readerEvt) {
+			//to remove image tag
+			$(this)
+				.parent()
+				.find("img")
+				.not()
+				.remove();
+
+			//to remove div tag that contain the image
+			$(this)
+				.parent()
+				.find("div")
+				.not()
+				.remove();
+
+			//to remove div tag that contain caption name
+			$(this)
+				.parent()
+				.parent()
+				.find("div")
+				.not()
+				.remove();
+
+			//to remove li tag
+			var lis = document.querySelectorAll("#imgList li");
+			for (var i = 0; (li = lis[i]); i++) {
+				if (li.innerHTML == "") {
+					li.parentNode.removeChild(li);
+				}
+			}
+		});
+	});
+
+	//Apply the validation rules for attachments upload
+	function ApplyFileValidationRules(readerEvt) {
+		//To check file type according to upload conditions
+		if (CheckFileType(readerEvt.type) == false) {
+			alert(
+				"The file (" +
+				readerEvt.name +
+				") does not match the upload conditions, You can only upload jpg/png/gif files"
+			);
+			e.preventDefault();
+			return;
+		}
+
+		//To check file Size according to upload conditions
+		if (CheckFileSize(readerEvt.size) == false) {
+			alert(
+				"The file (" +
+				readerEvt.name +
+				") does not match the upload conditions, The maximum file size for uploads should not exceed 300 KB"
+			);
+			e.preventDefault();
+			return;
+		}
+
+		//To check files count according to upload conditions
+		if (CheckFilesCount(AttachmentArray) == false) {
+			if (!filesCounterAlertStatus) {
+				filesCounterAlertStatus = true;
+				alert(
+					"You have added more than 10 files. According to upload conditions you can upload 10 files maximum"
+				);
+			}
+			e.preventDefault();
+			return;
+		}
+	}
+
 	//To check file type according to upload conditions
-	if (CheckFileType(readerEvt.type) == false) {
-		alert(
-			"The file (" +
-			readerEvt.name +
-			") does not match the upload conditions, You can only upload jpg/png/gif files"
-		);
-		e.preventDefault();
-		return;
+	function CheckFileType(fileType) {
+		if (fileType == "image/jpeg") {
+			return true;
+		} else if (fileType == "image/png") {
+			return true;
+		} else if (fileType == "image/gif") {
+			return true;
+		} else {
+			return false;
+		}
+		return true;
 	}
 
 	//To check file Size according to upload conditions
-	if (CheckFileSize(readerEvt.size) == false) {
-		alert(
-			"The file (" +
-			readerEvt.name +
-			") does not match the upload conditions, The maximum file size for uploads should not exceed 300 KB"
-		);
-		e.preventDefault();
-		return;
+	function CheckFileSize(fileSize) {
+		if (fileSize < 300000) {
+			return true;
+		} else {
+			return false;
+		}
+		return true;
 	}
 
 	//To check files count according to upload conditions
-	if (CheckFilesCount(AttachmentArray) == false) {
-		if (!filesCounterAlertStatus) {
-			filesCounterAlertStatus = true;
-			alert(
-				"You have added more than 10 files. According to upload conditions you can upload 10 files maximum"
-			);
+	function CheckFilesCount(AttachmentArray) {
+		//Since AttachmentArray.length return the next available index in the array,
+		//I have used the loop to get the real length
+		var len = 0;
+		for (var i = 0; i < AttachmentArray.length; i++) {
+			if (AttachmentArray[i] !== undefined) {
+				len++;
+			}
 		}
-		e.preventDefault();
-		return;
-	}
-}
-
-//To check file type according to upload conditions
-function CheckFileType(fileType) {
-	if (fileType == "image/jpeg") {
-		return true;
-	} else if (fileType == "image/png") {
-		return true;
-	} else if (fileType == "image/gif") {
-		return true;
-	} else {
-		return false;
-	}
-	return true;
-}
-
-//To check file Size according to upload conditions
-function CheckFileSize(fileSize) {
-	if (fileSize < 300000) {
-		return true;
-	} else {
-		return false;
-	}
-	return true;
-}
-
-//To check files count according to upload conditions
-function CheckFilesCount(AttachmentArray) {
-	//Since AttachmentArray.length return the next available index in the array,
-	//I have used the loop to get the real length
-	var len = 0;
-	for (var i = 0; i < AttachmentArray.length; i++) {
-		if (AttachmentArray[i] !== undefined) {
-			len++;
+		//To check the length does not exceed 10 files maximum
+		if (len > 9) {
+			return false;
+		} else {
+			return true;
 		}
 	}
-	//To check the length does not exceed 10 files maximum
-	if (len > 9) {
-		return false;
-	} else {
-		return true;
+
+	//Render attachments thumbnails.
+	function RenderThumbnail(e, readerEvt) {
+		var li = document.createElement("li");
+		ul.appendChild(li);
+		li.innerHTML = [
+			'<div class="img-wrap img-wrapper">' +
+			'<a href="', e.target.result, '"><img class="thumb" src="',
+			e.target.result,
+			'" title="',
+			escape(readerEvt.name),
+			'" data-id="',
+			readerEvt.name,
+			'"/></a>' + "<span class=\"close\"><i class=\"fa fa-trash-o\"></i></span></div>"
+		].join("");
+
+		var div = document.createElement("div");
+		div.className = "file-info";
+		li.appendChild(div);
+		div.innerHTML = [readerEvt.name].join("");
+		document.getElementById("image-gallery").insertBefore(ul, null);
 	}
-}
 
-//Render attachments thumbnails.
-function RenderThumbnail(e, readerEvt) {
-	var li = document.createElement("li");
-	ul.appendChild(li);
-	li.innerHTML = [
-		'<div class="img-wrap img-wrapper">' +
-		'<a href="',e.target.result,'"><img class="thumb" src="',
-		e.target.result,
-		'" title="',
-		escape(readerEvt.name),
-		'" data-id="',
-		readerEvt.name,
-		'"/></a>' + "<span class=\"close\"><i class=\"fa fa-trash-o\"></i></span></div>"
-	].join("");
+	//Fill the array of attachment
+	function FillAttachmentArray(e, readerEvt) {
+		AttachmentArray[arrCounter] = {
+			AttachmentType: 1,
+			ObjectType: 1,
+			FileName: readerEvt.name,
+			FileDescription: "Attachment",
+			NoteText: "",
+			MimeType: readerEvt.type,
+			Content: e.target.result.split("base64,")[1],
+			FileSizeInBytes: readerEvt.size,
+			Pathname: path,
+			Section: y,
+		};
+		arrCounter = arrCounter + 1;
+	}
 
-	var div = document.createElement("div");
-	div.className = "file-info";
-	li.appendChild(div);
-	div.innerHTML = [readerEvt.name].join("");
-	document.getElementById("image-gallery").insertBefore(ul, null);
-}
-
-//Fill the array of attachment
-function FillAttachmentArray(e, readerEvt) {
-	AttachmentArray[arrCounter] = {
-		AttachmentType: 1,
-		ObjectType: 1,
-		FileName: readerEvt.name,
-		FileDescription: "Attachment",
-		NoteText: "",
-		MimeType: readerEvt.type,
-		Content: e.target.result.split("base64,")[1],
-		FileSizeInBytes: readerEvt.size,
-    Pathname: path,
-    Section: y,
-	};
-	arrCounter = arrCounter + 1;
-}
-
-console.log(AttachmentArray);
-// console.log(arrCounter);
-console.log(files);
-// console.log(id);
-console.log(CheckFilesCount);
-
-console.log(FillAttachmentArray);
-console.log(FileReader);
-console.log(ApplyFileValidationRules);
-console.log(x);
-console.log(y);
 </script>
 
 {% endblock %}

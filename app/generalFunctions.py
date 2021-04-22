@@ -4,7 +4,7 @@ from firebase_admin.auth import UserRecord
 from typing import Optional
 from sqlalchemy import exc, or_, and_
 from app import app, db 
-from app.models import Comments, User, Messages, Broadcasts
+from app.models import Comments, User, Messages, Broadcasts, Audit
 
 FIREBASE_WEB_API_KEY = "AIzaSyBXCtNbzv8EOVmvl4TVnsWmKLU5RYNF__8"
 rest_api_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
@@ -13,14 +13,14 @@ rest_api_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPa
 def initialize():
     try:
         app = firebase_admin.get_app()
-        print("app exists")
+        
     except ValueError as e:
         cred=credentials.Certificate("app\Firebase_Service_Account_Key.json")
         firebase_admin.initialize_app(cred, {
             'storageBucket': 'ezcheck-aa2cc.appspot.com',
             'databaseURL': 'https://ezcheck-aa2cc-default-rtdb.firebaseio.com/'
         })
-        print("app initialized")
+      
 
 #Adminstrator
 ##Account Creation
@@ -207,3 +207,77 @@ def pull_comments(auditid: int, section: str):
         remarks.append(m)
 
     return remarks
+
+###Audit Creation 
+##Get Images
+def upload_image(audit_id: int, section: str,comment_id: int, image_path: list):
+    initialize()
+    current_path = 0
+    #image_path should be a list
+    for x in image_path:
+        storage_path = str(audit_id) + "/" + section + "/" + str(comment_id) + "/" + str(current_path)
+        bucket = storage.bucket()
+        file_name = x
+        blob = bucket.blob(storage_path)
+        blob.upload_from_filename(file_name)
+        current_path += 1
+
+##add comments
+def add_to_database(audit_id: int, body: str, section: str, image_path: list, sender_id: int, receiver_id: int, parent_id: int = None):
+    initialize()
+    image_path_string = str(image_path)
+    comment = Comments(audit_id = audit_id, body = body, section = section, image_path = image_path_string, sender_id = sender_id, receiver_id = receiver_id, parent_id = parent_id)
+    comment.save()
+    return comment.id
+
+##download images
+def get_images(auditid: int, section:str):
+    initialize()
+    for comment in Comments.query.filter(db.and_(Comments.audit_id == auditid, Comments.section == section)).order_by(Comments.path):
+        image_path = comment.image_path
+        comment_id = comment.id
+        download_image(auditid, section, comment_id, image_path)
+    path = "downloads/" + str(auditid) + "/" + section
+    return path
+
+def download_image(audit_id: int, section: str, comment_id: int, image_path: str):
+    initialize()
+    list_of_paths = image_path.split(",")
+    current_path = 0
+    folder_name = "downloads/" + str(audit_id) + "/" + section + "/" + str(comment_id)
+    if not os.path.exists(folder_name):
+            os.makedirs(folder_name)
+    for x in list_of_paths:
+        print(x)
+        print("gotcha")
+        storage_path = str(audit_id) + "/" + section + "/" + str(comment_id) + str(current_path) #should just be x but i'll double check once yansiew gets back to me
+        image_name = folder_name + str(current_path) + ".jpg"
+        bucket = storage.bucket()
+        blob = bucket.blob(storage_path)
+        blob.download_to_filename(image_name)
+        current_path += 1
+    return folder_name
+
+##get tenant list
+def getTenants():
+    out = []
+    query = User.query.filter(User.type=="tenant")
+    for x in query:
+        out.append(x.username)
+    return out
+
+###Get Audits
+def getaudits():
+    out = {}
+    query = Audit.query.all()
+    for audit in query:
+        uid = audit.id
+        date = audit.timestamp.strftime("%m/%d/%Y")
+        dic = {
+            "date" : date,
+            "auditor" : audit.auditor,
+            "non-compliance" : audit.rectification,
+            "tenant" : audit.tenant
+        }
+        out.update({uid:dic})
+    return out

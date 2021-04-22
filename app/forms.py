@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, RadioField, SelectField, TextAreaField
+from wtforms import SubmitField, RadioField, SelectField, TextAreaField, StringField
 from wtforms.validators import DataRequired
+from app.generalFunctions import getTenants
 
 
 #form for the audit
@@ -117,15 +118,10 @@ class AuditForm(FlaskForm):
 
     remarks = TextAreaField('remarks')
 
-    auditor = SelectField('Auditor:', 
-                            choices=[('auditorA', 'Auditor A')])
-
     rectification = SelectField('Rectification time:', 
                             choices=[(3, '3 Days'),
                                     (7,'7 Days')])
 
-    auditee = SelectField('Auditee:', 
-                            choices=[('kopitiam', 'Kopitiam')])
     
 class ResultForm(FlaskForm):
     option = SelectField('option:',
@@ -133,7 +129,7 @@ class ResultForm(FlaskForm):
     submit = SubmitField('submit')
 
 class NewForm(FlaskForm):
-    auditor = SelectField('Auditor:', 
+    auditor = StringField('Auditor:', 
                         choices=[('auditorA', 'Auditor A')])
     submit = SubmitField('submit')
 

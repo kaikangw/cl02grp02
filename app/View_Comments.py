@@ -37,7 +37,7 @@ def pull_comments(auditid: int, section: str):
         each = {"senderId":senderName, "comment":comment.body, "level":comment.level()}
         comments.append(each)
     return comments
-
+ 
 def get_images(auditid: int, section:str):
     for comment in Comments.query.filter(db.and_(Comments.audit_id == auditid, Comments.section == section)).order_by(Comments.path):
         image_path = comment.image_path

@@ -34,7 +34,7 @@
         
         {% for message in broadcast %}
         <div id="main_broadcast_card" class="card " style="border-color: darkorange;">
-            <h5 id="broadcast-title" class="card-header" style="border-color: darkorange;">Message from: {{message["senderName"]}}</h5>
+            <h5 id="broadcast-title" class="card-header" style="border-color: darkorange;">Broadcast from: {{message["senderName"]}}</h5>
             <div class="card-body">
                 <p class="card-text text-left">{{ message["content"]}}</p>
             </div>

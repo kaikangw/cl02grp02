@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<h2 id="headline">Which tenant are you auditing for?</h2>
+<form action="{{ url_for('choose_tenant') }}" id="tenantChosen" method="POST">
+    <select id="availTenants" name="availTenants">
+        {% for t in tenants %}
+        <option value="{{ t }}">{{t}}</option>
+        {% endfor %}
+    </select>
+    <!--<a href="{{ url_for('create_audit') }}" type="submit">Submit</a>-->
+    <input type="submit" value="submit">
+</form>
+
+{% endblock %}

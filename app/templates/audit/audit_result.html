@@ -42,7 +42,7 @@
                 <p class="card-text text-left"><strong>Additional Remarks: </strong></p>
 
                 {% for each in results["Remarks"] %}
-                <p class="card-text text-left">Auditor: {{ each }}</p>
+                <p class="card-text text-left">{{ each }}</p>
                 {% endfor %}
                 
             </div>
@@ -50,7 +50,7 @@
                 <p class="card-text text-left"><strong>Images</strong></p>
                 <div class="audit-gallery">
                     {% for name in images %}
-                    <image src="{{ url_for('static', filename='images/'+name) }}" alt="audits"></image>
+                        <image src={{name}}></image>
                     {% endfor %}
                 </div>
             </div>

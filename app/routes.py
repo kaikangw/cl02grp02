@@ -477,11 +477,11 @@ def create_audit():
         auditorId = session["userId"]
         tenantId = getuserid(tenant)
 
-        PSH_additional = add_to_database(audit.id, PSH.get("comments"), "Professionalism & Staff Hygiene", PSH.get("images"), auditorId, tenantId)
-        HGC_additional = add_to_database(audit.id, HGC.get("comments"), "Housekeeping & General Cleanliness", HGC.get("images"), auditorId, tenantId)
-        FH_additional = add_to_database(audit.id, FH.get("comments"), "Food Hygiene", FH.get("images"), auditorId, tenantId)
-        HC_additional = add_to_database(audit.id, HC.get("comments"), "Healthier Choice", HC.get("images"), auditorId, tenantId)
-        WSH_additional = add_to_database(audit.id, WSH.get("comments"), "Workplace Safety & Health", WSH.get("images"), auditorId, tenantId)
+        PSH_additional = add_to_database(audit.id, PSH.get("comments"), "PSH", PSH.get("images"), auditorId, tenantId)
+        HGC_additional = add_to_database(audit.id, HGC.get("comments"), "HGC", HGC.get("images"), auditorId, tenantId)
+        FH_additional = add_to_database(audit.id, FH.get("comments"), "FH", FH.get("images"), auditorId, tenantId)
+        HC_additional = add_to_database(audit.id, HC.get("comments"), "HC", HC.get("images"), auditorId, tenantId)
+        WSH_additional = add_to_database(audit.id, WSH.get("comments"), "WSH", WSH.get("images"), auditorId, tenantId)
 
         upload_image(audit.id, PSH.get("section"), PSH_additional, PSH.get("images"))
         upload_image(audit.id, HGC.get("section"), HGC_additional, HGC.get("images"))
@@ -489,11 +489,19 @@ def create_audit():
         upload_image(audit.id, HC.get("section"), HC_additional, HC.get("images"))
         upload_image(audit.id, WSH.get("section"), WSH_additional, WSH.get("images"))
 
-        remarks = pull_comments("1", "hygiene")
-        latest_audit = {tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":remarks, "Due":result.rectification}}
-        images = get_images(audit.id, "PSH")
+        section_list = ["PSH","HGC","FH","HC","WSH"]
+        remarks_list = []
+        for section in section_list:
+            remarks = pull_comments(result.id, section)
+            remarks_list.append(remarks)
+        latest_audit = {tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":remarks_list, "Due":result.rectification}}
+        image_list =[]
+        for section in section_list:
+            images = get_images(result.id, section)
+            image_list = image_list + images
         
-        return render_template("audit/audit_result.html",results = latest_audit, images = images)
+        print(image_list)
+        return render_template("audit/audit_result.html",results = latest_audit, images = image_list)
         
     return render_template('audit/audit_w.html', form=form, auditor = auditor, tenant = tenant)
 
@@ -528,11 +536,20 @@ def audit_comments(heading):
 @app.route("/result/<audit_id>", methods=["GET"])
 def audit_result(audit_id):
     result = Audit.query.get(audit_id)
-    remarks = pull_comments("1", "hygene")
-    audit_details = {result.tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":remarks, "Due":result.rectification}}
+    section_list = ["PSH","HGC","FH","HC","WSH"]
+    remarks_list = []
+    for section in section_list:
+        remarks = pull_comments(audit_id, section)
+        remarks_list.append(remarks)
+    audit_details = {result.tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":remarks_list, "Due":result.rectification}}
    # images = os.listdir('./app/static/images')
-    images = get_images(result.id, "PSH")
-    return render_template('audit/audit_result.html', results = audit_details, images = images )
+    image_list =[]
+    for section in section_list:
+        images = get_images(result.id, section)
+        image_list = image_list + images
+    
+    print(image_list)
+    return render_template('audit/audit_result.html', results = audit_details, images = image_list )
 
 
 

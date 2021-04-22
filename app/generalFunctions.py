@@ -199,12 +199,13 @@ def pull_comments(auditid: int, section: str):
     remarks = []
     for comment in Comments.query.filter(db.and_(Comments.audit_id == auditid, Comments.section == section)).order_by(Comments.path):
         print("{}{}: {}".format('    '*comment.level(), comment.sender_id, comment.body))
-
+        string1 = "{}{}: {}".format('    '*comment.level(), getusername(comment.sender_id), comment.body)
         m = {}
         m["senderId"] = getusername(comment.sender_id)
         m["comment"] = comment.body
         m["level"] = comment.level()
-        remarks.append(m)
+        #remarks.append(m)
+        remarks.append(string1)
 
     return remarks
 
@@ -213,6 +214,7 @@ def pull_comments(auditid: int, section: str):
 def upload_image(audit_id: int, section: str,comment_id: int, image_path: list):
     initialize()
     current_path = 0
+    out = []
     #image_path should be a list
     for x in image_path:
         storage_path = str(audit_id) + "/" + section + "/" + str(comment_id) + "/" + str(current_path)
@@ -220,7 +222,16 @@ def upload_image(audit_id: int, section: str,comment_id: int, image_path: list):
         file_name = x
         blob = bucket.blob(storage_path)
         blob.upload_from_filename(file_name)
+        out.append(blob.public_url)
+        policy = bucket.get_iam_policy(requested_policy_version=3)
+        policy.bindings.append(
+            {"role": "roles/storage.objectViewer", "members": {"allUsers"}}
+        )
+        bucket.set_iam_policy(policy)
         current_path += 1
+    comment = Comments.query.get(comment_id)
+    comment.image_path = str(out)
+    db.session.commit()
 
 ##add comments
 def add_to_database(audit_id: int, body: str, section: str, image_path: list, sender_id: int, receiver_id: int, parent_id: int = None):
@@ -233,16 +244,22 @@ def add_to_database(audit_id: int, body: str, section: str, image_path: list, se
 ##download images
 def get_images(auditid: int, section:str):
     initialize()
+    image_list = []
     for comment in Comments.query.filter(db.and_(Comments.audit_id == auditid, Comments.section == section)).order_by(Comments.path):
         image_path = comment.image_path
         comment_id = comment.id
-        print(comment_id, image_path)
-        download_image(auditid, section, comment_id, image_path)
-    path = "downloads/" + str(auditid) + "/" + section
-    return path
+        #print(comment_id, image_path)
+        if image_path != "[]":
+            list_of_paths = image_path.split(",")
+            for x in list_of_paths:
+                path = x.strip("[' ]")
+                print(path)
+                image_list.append(path)
+    return image_list
 
 def download_image(audit_id: int, section: str, comment_id: int, image_path: str):
     initialize()
+    image_list = []
     list_of_paths = image_path.split(",")
     print("downloading images from:" + str(comment_id))
     current_path = 0
@@ -250,15 +267,16 @@ def download_image(audit_id: int, section: str, comment_id: int, image_path: str
     if not os.path.exists(folder_name):
             os.makedirs(folder_name)
     for x in list_of_paths:
-        print(x)
-        print("gotcha")
+        #print(x)
+        #print("gotcha")
         storage_path = str(audit_id) + "/" + section + "/" + str(comment_id) + "/" + str(current_path) #should just be x but i'll double check once yansiew gets back to me
         image_name = folder_name+ "/" + str(current_path) + ".jpg"
         bucket = storage.bucket()
         blob = bucket.blob(storage_path)
         blob.download_to_filename(image_name)
+        image_list.append(image_name)
         current_path += 1
-    return folder_name
+    return image_list
 
 ##get tenant list
 def getTenants():

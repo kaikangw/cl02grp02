@@ -236,6 +236,7 @@ def get_images(auditid: int, section:str):
     for comment in Comments.query.filter(db.and_(Comments.audit_id == auditid, Comments.section == section)).order_by(Comments.path):
         image_path = comment.image_path
         comment_id = comment.id
+        print(comment_id, image_path)
         download_image(auditid, section, comment_id, image_path)
     path = "downloads/" + str(auditid) + "/" + section
     return path
@@ -243,6 +244,7 @@ def get_images(auditid: int, section:str):
 def download_image(audit_id: int, section: str, comment_id: int, image_path: str):
     initialize()
     list_of_paths = image_path.split(",")
+    print("downloading images from:" + str(comment_id))
     current_path = 0
     folder_name = "downloads/" + str(audit_id) + "/" + section + "/" + str(comment_id)
     if not os.path.exists(folder_name):
@@ -250,8 +252,8 @@ def download_image(audit_id: int, section: str, comment_id: int, image_path: str
     for x in list_of_paths:
         print(x)
         print("gotcha")
-        storage_path = str(audit_id) + "/" + section + "/" + str(comment_id) + str(current_path) #should just be x but i'll double check once yansiew gets back to me
-        image_name = folder_name + str(current_path) + ".jpg"
+        storage_path = str(audit_id) + "/" + section + "/" + str(comment_id) + "/" + str(current_path) #should just be x but i'll double check once yansiew gets back to me
+        image_name = folder_name+ "/" + str(current_path) + ".jpg"
         bucket = storage.bucket()
         blob = bucket.blob(storage_path)
         blob.download_to_filename(image_name)

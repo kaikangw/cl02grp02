@@ -531,7 +531,7 @@ def audit_result(audit_id):
     remarks = pull_comments("1", "hygene")
     audit_details = {result.tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":remarks, "Due":result.rectification}}
    # images = os.listdir('./app/static/images')
-    images = get_images(audit.id, "PSH")
+    images = get_images(result.id, "PSH")
     return render_template('audit/audit_result.html', results = audit_details, images = images )
 
 

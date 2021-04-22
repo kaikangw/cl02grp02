@@ -565,7 +565,11 @@ def audit_result(audit_id):
 
 @app.route("/view-all")
 def view_audits():
-    audits = getaudits()
+    if session["clearance"] == "tenant":
+        audits = getTaudits(session["username"])
+        print(audits)
+    else:
+        audits = getaudits()
     return render_template("audit/view_audits.html", audits = audits)
 
 

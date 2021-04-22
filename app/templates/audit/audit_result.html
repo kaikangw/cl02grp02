@@ -8,189 +8,202 @@
 
 {% for tenant, results in results.items() %}
 <div id="results_card" class="card" style="border-color: darkorange;">
-    <div class="card-header" style="background-color: rgba(128, 128, 128, 0.089); border-color: darkorange;">
-        <h2>{{tenant}}</h2>
-        <ul class="nav nav-tabs card-header-tabs" id="results-list" role="tablist" >    
-            <li class="nav-item" style="border-color: darkorange;">
-                <a class="nav-link active" role="tab" href="#results_details" aria-controls="results_details" aria-selected="true">Details</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" role="tab" href="#results_remarks" aria-controls="results_remarks" aria-selected="false">Additional Remarks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" role="tab" href="#results_images" aria-controls="results_images" aria-selected="false"> Images</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" role="tab" href="#new_comment" aria-controls="new_comment" aria-selected="false"> Add Comment</a>
-            </li>
-        </ul>
-    </div>
-    <div class="card-body" >
-        <div class="tab-content mt-2">
-            <div id="results_details" class="tab-pane active" role="tabpanel">
-                <p class="card-text text-left"><strong>1. Professionalism & Staff Hygiene (10%): </strong>{{
-                    results["PSH"] }}</p>
-                <p class="card-text text-left"><strong>2. Housekeeping & General Cleanliness (20%): </strong>{{
-                    results["HGC"] }}</p>
-                <p class="card-text text-left"><strong>3. Food Hygiene (35%): </strong>{{ results["FH"] }}</p>
-                <p class="card-text text-left"><strong>4. Public & Safety Healthcare (15%): </strong>{{ results["HEI"]
-                    }}</p>
-                <p class="card-text text-left"><strong>5. Work & Safety Healthcare(20%): </strong>{{ results["WSH"] }}
-                </p>
-                <br>
-                <br>
-                <h2 class="card-text text-left"><strong>Total: </strong>{{ results["Total"] }}/100</h2>
-            </div>
-            <div id="results_remarks" class="tab-pane" role="tabpanel">
-                <p class="card-text text-left"><strong>Additional Remarks: </strong></p>
-                {% for section, c in remarks.items() %}
-                        {% if section == "PSH" %}
-                        <h4 id="img-header">Professionalism & Staff Hygiene</h4><br>
-                        {% for comment in c %}
-                        <h6 class="card-text text-left">{{ comment }}</h6>
-                        {% endfor %}
-                        {% endif %}
+	<div class="card-header" style="background-color: rgba(128, 128, 128, 0.089); border-color: darkorange;">
+		<h2>{{tenant}}</h2>
+		<ul class="nav nav-tabs card-header-tabs" id="results-list" role="tablist">
+			<li class="nav-item" style="border-color: darkorange;">
+				<a class="nav-link active" role="tab" href="#results_details" aria-controls="results_details"
+					aria-selected="true">Details</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" role="tab" href="#results_remarks" aria-controls="results_remarks"
+					aria-selected="false">Additional Remarks</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" role="tab" href="#results_images" aria-controls="results_images"
+					aria-selected="false"> Images</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" role="tab" href="#new_comment" aria-controls="new_comment" aria-selected="false">
+					Add Comment</a>
+			</li>
+		</ul>
+	</div>
+	<div class="card-body">
+		<div class="tab-content mt-2">
+			<div id="results_details" class="tab-pane active" role="tabpanel">
+				<p class="card-text text-left"><strong>1. Professionalism & Staff Hygiene (10%): </strong>{{
+					results["PSH"] }}</p>
+				<p class="card-text text-left"><strong>2. Housekeeping & General Cleanliness (20%): </strong>{{
+					results["HGC"] }}</p>
+				<p class="card-text text-left"><strong>3. Food Hygiene (35%): </strong>{{ results["FH"] }}</p>
+				<p class="card-text text-left"><strong>4. Public & Safety Healthcare (15%): </strong>{{ results["HEI"]
+					}}</p>
+				<p class="card-text text-left"><strong>5. Work & Safety Healthcare(20%): </strong>{{ results["WSH"] }}
+				</p>
+				<br>
+				<br>
+				<h2 class="card-text text-left"><strong>Total: </strong>{{ results["Total"] }}/100</h2>
+			</div>
+			<div id="results_remarks" class="tab-pane" role="tabpanel">
+				<p class="card-text text-left"><strong>Additional Remarks: </strong></p>
+				{% for section, c in remarks.items() %}
+				{% if section == "PSH" %}
+				<h4 id="img-header">Professionalism & Staff Hygiene</h4><br>
+				{% for comment in c %}
+				{% if comment|length %}
+				<h6 class="card-text text-left">{{ comment }}</h6>
+				{% endif %}
+				{% endfor %}
+				{% endif %}
 
-                        {% if section == "HGC" %}
-                        <h4 id="img-header">Housekeeping & General Cleanliness</h4><br>
-                        {% for comment in c %}
-                        
-                        <h6 class="card-text text-left">{{ comment }}</h6>
-                        {% endfor %}
-                        {% endif %}
+				{% if section == "HGC" %}
+				<h4 id="img-header">Housekeeping & General Cleanliness</h4><br>
+				{% for comment in c %}
 
-                        {% if section == "FH" %}
-                        <h4 id="img-header">Food Hygiene</h4><br>
-                        {% for comment in c %}
-                            <h6 class="card-text text-left">{{ comment }}</h6>
-                        {% endfor %}
-                        {% endif %}
+				{% if comment|length %}
+				<h6 class="card-text text-left">{{ comment }}</h6>
+				{% endif %}
+				{% endfor %}
+				{% endif %}
 
-                        {% if section == "HC" %}
-                        <h4 id="cmt-header">Healthier Choice</h4><br>
-                        {% for comment in c %}
-                            <h6 class="card-text text-left">{{ comment }}</h6>
-                           
-                        {% endfor %}
-                        {% endif %}
+				{% if section == "FH" %}
+				<h4 id="img-header">Food Hygiene</h4><br>
+				{% for comment in c %}
+				{% if comment|length %}
+				<h6 class="card-text text-left">{{ comment }}</h6>
+				{% endif %}
+				{% endfor %}
+				{% endif %}
 
-                        {% if section == "WSH" %}
-                        <h4 id="cmt-header">Workhplace Safety & Health</h4><br>
-                        {% for comment in c %}
-                        <h6 class="card-text text-left">{{ comment }}</h6>
-                           
-                        {% endfor %}
-                        {% endif %}
+				{% if section == "HC" %}
+				<h4 id="cmt-header">Healthier Choice</h4><br>
+				{% for comment in c %}
+				{% if comment|length %}
+				<h6 class="card-text text-left">{{ comment }}</h6>
+				{% endif %}
+				{% endfor %}
+				{% endif %}
 
-                    {% endfor %}
+				{% if section == "WSH" %}
+				<h4 id="cmt-header">Workhplace Safety & Health</h4><br>
+				{% for comment in c %}
+				{% if comment|length %}
+				<h6 class="card-text text-left">{{ comment }}</h6>
+				{% endif %}
+				{% endfor %}
+				{% endif %}
+
+				{% endfor %}
 
 
-            </div>
-            <div id="results_images" class="tab-pane" role="tabpanel">
-                <p class="card-text text-left"><strong>Images</strong></p>
-                <div class="audit-gallery">
-                    {% for section, i in images.items() %}
-                        {% if section == "PSH" %}
-                        <h2 id="img-header">Professionalism & Staff Hygiene</h2><br>
-                        {% for name in i %}
-                            <image style="width: 60%; height: 30%" src={{name}}></image>
-                            <br>
-                            <br>
-                        {% endfor %}
-                        {% endif %}
+			</div>
+			<div id="results_images" class="tab-pane" role="tabpanel">
+				<p class="card-text text-left"><strong>Images</strong></p>
+				<div class="audit-gallery">
+					{% for section, i in images.items() %}
+					{% if section == "PSH" %}
+					<h2 id="img-header">Professionalism & Staff Hygiene</h2><br>
+					{% for name in i %}
+					<image style="width: 60%; height: 30%" src={{name}}></image>
+					<br>
+					<br>
+					{% endfor %}
+					{% endif %}
 
-                        {% if section == "HGC" %}
-                        <h2 id="img-header">Housekeeping & General Cleanliness</h2><br>
-                        {% for name in i %}
-                        
-                            <image style="width: 60%; height: 30%" src={{name}}></image>
-                            <br>
-                            <br>
-                        {% endfor %}
-                        {% endif %}
+					{% if section == "HGC" %}
+					<h2 id="img-header">Housekeeping & General Cleanliness</h2><br>
+					{% for name in i %}
 
-                        {% if section == "FH" %}
-                        <h2 id="img-header">Food Hygiene</h2><br>
-                        {% for name in i %}
-                            <image style="width: 60%; height: 30%" src={{name}}></image>
-                            <br>
-                            <br>
-                        {% endfor %}
-                        {% endif %}
+					<image style="width: 60%; height: 30%" src={{name}}></image>
+					<br>
+					<br>
+					{% endfor %}
+					{% endif %}
 
-                        {% if section == "HC" %}
-                        <h2 id="img-header">Healthier Choice</h2><br>
-                        {% for name in i %}
-                            <image style="width: 60%; height: 30%" src={{name}}></image>
-                            <br>
-                            <br>
-                        {% endfor %}
-                        {% endif %}
+					{% if section == "FH" %}
+					<h2 id="img-header">Food Hygiene</h2><br>
+					{% for name in i %}
+					<image style="width: 60%; height: 30%" src={{name}}></image>
+					<br>
+					<br>
+					{% endfor %}
+					{% endif %}
 
-                        {% if section == "WSH" %}
-                        <h2 id="img-header">Workplace Safety & Health</h2><br>
-                        {% for name in i %}
-                            <image style="width: 60%; height: 30%" src={{name}}></image>
-                            <br>
-                            <br>
-                        {% endfor %}
-                        {% endif %}
+					{% if section == "HC" %}
+					<h2 id="img-header">Healthier Choice</h2><br>
+					{% for name in i %}
+					<image style="width: 60%; height: 30%" src={{name}}></image>
+					<br>
+					<br>
+					{% endfor %}
+					{% endif %}
 
-                    {% endfor %}
-                </div>
-            </div>
-            
-            <div id="new_comment" class="tab-pane" role="tabpanel">
-                <form id="new_comment" enctype="multipart/form-data" method="POST">
-                   <h4>Section to be updated:  </h4> <select id="sectionComment" name="sectionComment">
-                        {% for s in sections %}
-                        <option value="{{ s }}">{{ s }}</option>
-                        {% endfor%}
-                    </select><br>
-                    <div>
-                        <p class="card-text text-left"><strong>Images</strong></p>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="upload-file">
-                                    <div class="upload-wrapper" id="uploadbox">
-                                        <label>
-                                            <input type="file" name="files[]" id="files" multiple
-                                                accept="image/jpeg, image/png, image/gif,">
-                                            <p>Drop your files here. <br>or <a>Browse</a></p>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12" style="margin: 0 0 10px 0;">
-                                <output id="image-gallery"></output>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="card-text text-left"><strong>Additional Remarks: </strong></p>
-                        <p class="card-text text-left"><input type="text" style="width: 100%; height: 200px;" id="audit-comments" name="audit-comments"><br><br></p>
-                    </div>
-                    <button type="submit" id="new_comment">Submit</button>
-                </form>
+					{% if section == "WSH" %}
+					<h2 id="img-header">Workplace Safety & Health</h2><br>
+					{% for name in i %}
+					<image style="width: 60%; height: 30%" src={{name}}></image>
+					<br>
+					<br>
+					{% endfor %}
+					{% endif %}
 
-            </div>
+					{% endfor %}
+				</div>
+			</div>
 
-        </div>
-        
-    </div>
+			<div id="new_comment" class="tab-pane" role="tabpanel">
+				<form id="new_comment" enctype="multipart/form-data" method="POST">
+					<h4>Section to be updated: </h4> <select id="sectionComment" name="sectionComment">
+						{% for s in sections %}
+						<option value="{{ s }}">{{ s }}</option>
+						{% endfor%}
+					</select><br>
+					<div>
+						<p class="card-text text-left"><strong>Images</strong></p>
+					</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<div class="upload-file">
+									<div class="upload-wrapper" id="uploadbox">
+										<label>
+											<input type="file" name="files[]" id="files" multiple
+												accept="image/jpeg, image/png, image/gif,">
+											<p>Drop your files here. <br>or <a>Browse</a></p>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-12" style="margin: 0 0 10px 0;">
+								<output id="image-gallery"></output>
+							</div>
+						</div>
+					</div>
+					<div>
+						<p class="card-text text-left"><strong>Additional Remarks: </strong></p>
+						<p class="card-text text-left"><input type="text" style="width: 100%; height: 200px;"
+								id="audit-comments" name="audit-comments"><br><br></p>
+					</div>
+					<button type="submit" id="new_comment">Submit</button>
+				</form>
 
-    <div class="card-footer text-muted" style="background-color: rgba(128, 128, 128, 0.089); border-color: darkorange;">
-        Rectification Timeframe: {{ results["Due"] }} days left
-    </div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="card-footer text-muted" style="background-color: rgba(128, 128, 128, 0.089); border-color: darkorange;">
+		Rectification Timeframe: {{ results["Due"] }} days left
+	</div>
 </div>
 
 <script>
-    $('#results-list a').on('click', function (e) {
-        e.preventDefault()
-        $(this).tab('show')
-    })
+	$('#results-list a').on('click', function (e) {
+		e.preventDefault()
+		$(this).tab('show')
+	})
 </script>
 <script>
 	//I added event handler for the file upload control to access the files properties.

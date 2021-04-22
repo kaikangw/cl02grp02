@@ -15,7 +15,10 @@ def initialize():
         app = firebase_admin.get_app()
         
     except ValueError as e:
-        cred=credentials.Certificate("app\Firebase_Service_Account_Key.json")
+        #for heroku
+        #cred=credentials.Certificate("/app/app/Firebase_Service_Account_Key.json")
+        #for local
+        cred=credentials.Certificate("app/Firebase_Service_Account_Key.json")
         firebase_admin.initialize_app(cred, {
             'storageBucket': 'ezcheck-aa2cc.appspot.com',
             'databaseURL': 'https://ezcheck-aa2cc-default-rtdb.firebaseio.com/'
@@ -63,7 +66,6 @@ def get_user_details(username: str):
 
 def change_details(userid:int, username: str,  email: str, accountType:str, instituition:str, tenancy:int, description:str, location:str, password:str):
     initialize()
-    print(userid)
     user = User.query.get(userid)
     user.tenancy = tenancy
     user.instituition = instituition
@@ -118,7 +120,6 @@ def getusername(userid):
     return name 
 
 def getuserid(username):
-    print(username) 
     thisid = User.query.filter(User.username == username).first()
     return thisid.id
 
@@ -164,8 +165,7 @@ def pull_msg(my_id: int, their_id: int):
     return convo
 
 def makeList(userid: int):
-    print("reached user id")
-    print(userid)
+
     output = []
     checksender = Messages.query.filter(Messages.sender_id == userid)
     for message in checksender:
@@ -248,12 +248,10 @@ def get_images(auditid: int, section:str):
     for comment in Comments.query.filter(db.and_(Comments.audit_id == auditid, Comments.section == section)).order_by(Comments.path):
         image_path = comment.image_path
         comment_id = comment.id
-        #print(comment_id, image_path)
         if image_path != "[]":
             list_of_paths = image_path.split(",")
             for x in list_of_paths:
                 path = x.strip("[' ]")
-                print(path)
                 image_list.append(path)
     return image_list
 
@@ -261,7 +259,6 @@ def download_image(audit_id: int, section: str, comment_id: int, image_path: str
     initialize()
     image_list = []
     list_of_paths = image_path.split(",")
-    print("downloading images from:" + str(comment_id))
     current_path = 0
     folder_name = "downloads/" + str(audit_id) + "/" + section + "/" + str(comment_id)
     if not os.path.exists(folder_name):

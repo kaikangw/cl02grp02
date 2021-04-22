@@ -331,7 +331,6 @@ def download():
     result = []
     for tenant in tenants:
         if len(result) >= 4 and len(result)<13:
-            print("hi")
             result.append(0)
         elif len(result) >11:
             break
@@ -374,8 +373,7 @@ def choose_tenant():
         tags = ["PSH", "HGC", "FH", "HC", "WSH"]
 
         for t in tags:
-            session[t] = {"section":t, "images":"", "comments":""}
-            print(t)
+            session[t] = {"section":t, "images":"", "comments":"No Comment"}
 
         tenant = request.form.get("availTenants")
         session["currentT"] = tenant

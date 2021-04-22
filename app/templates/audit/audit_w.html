@@ -10,7 +10,7 @@
     <form action="{{ url_for('create_audit') }}" method="post" novalidate>
         {{ form.hidden_tag() }}
 
-        <p>Doing audit for: {{tenant}}</p>
+        <h2>Doing audit for: <strong>{{tenant}}</strong></h2>
 
         <table id="audit-checklist">
             <thead id="checklist-head">

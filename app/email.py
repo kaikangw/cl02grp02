@@ -5,6 +5,17 @@ from app import mail
 from flask import render_template
 from app import app
 
+def find_path():
+    if 'DYNO' in os.environ:
+        print ('loading wkhtmltopdf path on heroku')
+        WKHTMLTOPDF_CMD = subprocess.Popen(
+            ['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf-pack')], # Note we default to 'wkhtmltopdf' as the binary name
+            stdout=subprocess.PIPE).communicate()[0].strip()
+    else:
+        print ('loading wkhtmltopdf path on localhost')
+        MYDIR = os.path.dirname(__file__)    
+        WKHTMLTOPDF_CMD = os.path.join(MYDIR + "/static/executables/bin/", "wkhtmltopdf.exe")
+
 def send_email(subject, sender, recipients, html_body):
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.html = html_body

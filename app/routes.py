@@ -500,18 +500,19 @@ def audit_comments(heading):
     section = {"Professionalism & Staff Hygiene":"PSH", "Housekeeping & General Cleanliness":"HGC", "Food Hygiene":"FH", "Healthier Choice":"HC","Workplace Safety & Health":"WSH"}
     
     if request.method == "POST":
-        images_list = request.files.getlist("files[]")
+        images_list = request.files.getlist("files")
         comments = request.form["audit-comments"]   
         images_path = []
         images_names = []
-        info = {"section":section.get(heading), "images":"", "comments":""}
+        info = {"section":section.get(heading), "images":"", "comments":"No Comment"}
 
         if images_list:
             for each in images_list:
-                images_names.append(each.filename)
-                path = os.path.join(app.config['UPLOAD_FOLDER'], each.filename)
-                images_path.append(path)
-                each.save(path)
+                if each.filename != '':
+                    images_names.append(each.filename)
+                    path = os.path.join(app.config['UPLOAD_FOLDER'], each.filename)
+                    images_path.append(path)
+                    each.save(path)
                 
         info["images"] = images_path
         info["comments"] = comments
@@ -541,12 +542,10 @@ def audit_result(audit_id):
 
     if request.method == "POST":
         section = request.form["sectionComment"]
-        images_list = request.files.getlist("files[]")
+        images_list = request.files.getlist("files")
         comments = request.form["audit-comments"]   
         images_path = []
         images_names = []
-        print("original")
-        print(images_list)
         if images_list:
             for each in images_list:
                 images_names.append(each.filename)
@@ -555,8 +554,7 @@ def audit_result(audit_id):
                 each.save(path)
                 
         cid = add_to_database(audit_id, comments, section, images_path, session["userId"], auditTenant(audit_id))
-        print("getting path for images")
-        print(images_path)
+ 
         upload_image(audit_id, section, cid, images_path)
         return redirect(url_for("audit_result", audit_id = audit_id))
 
@@ -567,7 +565,7 @@ def audit_result(audit_id):
 def view_audits():
     if session["clearance"] == "tenant":
         audits = getTaudits(session["username"])
-        print(audits)
+
     else:
         audits = getaudits()
     return render_template("audit/view_audits.html", audits = audits)

@@ -267,8 +267,6 @@ def download_image(audit_id: int, section: str, comment_id: int, image_path: str
     if not os.path.exists(folder_name):
             os.makedirs(folder_name)
     for x in list_of_paths:
-        #print(x)
-        #print("gotcha")
         storage_path = str(audit_id) + "/" + section + "/" + str(comment_id) + "/" + str(current_path) #should just be x but i'll double check once yansiew gets back to me
         image_name = folder_name+ "/" + str(current_path) + ".jpg"
         bucket = storage.bucket()
@@ -298,6 +296,27 @@ def getaudits():
             "auditor" : audit.auditor,
             "non-compliance" : audit.rectification,
             "tenant" : audit.tenant
+        }
+        out.update({uid:dic})
+    return out
+
+###tenant from audit id
+def auditTenant(auditid):
+    audit = Audit.query.get(auditid)
+    return audit.tenant
+
+#get all audits that are done on this tenant
+def getTaudits(username):
+    out = {}
+    query = Audit.query.filter(Audit.tenant == username)
+    for x in query:
+        uid = x.id
+        date = x.timestamp.strftime("%m/%d/%Y")
+        dic = {
+            "date" : date,
+            "auditor" : x.auditor,
+            "non-compliance" : x.rectification,
+            "tenant" : x.tenant
         }
         out.update({uid:dic})
     return out

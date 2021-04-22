@@ -11,7 +11,7 @@ from app.forms import AuditForm, ResultForm, NewForm, ShopForm, GraphForm
 from datetime import datetime
 from sqlalchemy import func, extract
 from app.email import send_audit_mail
-from app.generalFunctions import create_account, accountType, getusername, getuserid, login, send_msg, pull_msg, makeList, get_user_list, new_broadcast, get_broadcast_list, getinstitution, gettenancy, add_to_database, upload_image, pull_comments,get_images, getaudits, getTenants
+from app.generalFunctions import create_account, accountType, getusername, getuserid, login, send_msg, pull_msg, makeList, get_user_list, new_broadcast, get_broadcast_list, getinstitution, gettenancy, add_to_database, upload_image, pull_comments,get_images, getaudits, getTenants, auditTenant, getTaudits
 
 #Images Folder
 UPLOAD_FOLDER = join(dirname(realpath(__file__)), 'static','images')
@@ -181,7 +181,7 @@ def data_page():
                 tenant_list4.append(t4)           
             for tenant in tenants_part5:
                 t5 = {'score':tenant.part5_score,'tenant':tenant.tenant}
-                tenant_list5.append(t5)
+                tenant_list5.append(t5) 
             return render_template("audit/individual.html", title = title, part1 = part1, part2 = part2, part3 = part3, part4 = part4, part5 = part5,tenant_list1=tenant_list1,tenant_list2=tenant_list2,tenant_list3=tenant_list3,tenant_list4=tenant_list4,tenant_list5=tenant_list5)  
 
         elif option == 'institution':
@@ -296,19 +296,6 @@ def data_frequency():
 
     return render_template("frequency.html", form = form, title1=title1, title2=title2, title3=title3, title4=title4, cgh = cgh[-5:], kkh = kkh, sgh = sgh, skh = skh)
 
-'''
-
-    return render_template("data.html", form=form)
-    
-    else:
-        alert = ["You don't have the clearance to view this!"]
-        broadcast_message = {"Auditor 1":{"title":"Reminder", "timestamp":"19:00:00", "content":"jgsdjiojfs"},
-            "Auditor 2":{"title":"Warning", "timestamp":"20:00:00", "content":"Please comply!!"}, 
-            "Auditor 3": {"title":"Time to Eat", "timestamp":"22:00:00", "content":"Food's ready!"},
-            "Auditor 4":{"title":"Tellonme", "timestamp":"19:00:00", "content":"hello world, I am here"},
-            "Auditor 5":{"title":"Alert", "timestamp":"19:00:00", "content":"hello world, I am here"}}
-            
-        return render_template("main/main.html",broadcast= broadcast_message, alert = alert)'''
 
 @app.route('/saved', methods=['GET', 'POST'])
 def saved_audit():
@@ -490,32 +477,33 @@ def create_audit():
         upload_image(audit.id, WSH.get("section"), WSH_additional, WSH.get("images"))
 
         section_list = ["PSH","HGC","FH","HC","WSH"]
-        remarks_list = []
+        remarks_list = {}
         for section in section_list:
             remarks = pull_comments(result.id, section)
-            remarks_list.append(remarks)
+            remarks_list.update({section:remarks})
+ 
         latest_audit = {tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":remarks_list, "Due":result.rectification}}
-        image_list =[]
+
+        image_list = {}
+
         for section in section_list:
             images = get_images(result.id, section)
-            image_list = image_list + images
+            image_list.update({section: images})
         
-        print(image_list)
-        return render_template("audit/audit_result.html",results = latest_audit, images = image_list)
+        return render_template("audit/audit_result.html",results = latest_audit, images = image_list, remarks = remarks_list, sections = section_list)
         
-    return render_template('audit/audit_w.html', form=form, auditor = auditor, tenant = tenant)
+    return render_template('audit/audit_w.html', form=form, auditor = auditor, tenant = tenant,)
 
 @app.route("/comments-for-<heading>", methods=["GET", "POST"])
 def audit_comments(heading):
     #Making information to be passed
     section = {"Professionalism & Staff Hygiene":"PSH", "Housekeeping & General Cleanliness":"HGC", "Food Hygiene":"FH", "Healthier Choice":"HC","Workplace Safety & Health":"WSH"}
-
+    
     if request.method == "POST":
         images_list = request.files.getlist("files[]")
         comments = request.form["audit-comments"]   
-        images_names = []
         images_path = []
-
+        images_names = []
         info = {"section":section.get(heading), "images":"", "comments":""}
 
         if images_list:
@@ -528,36 +516,57 @@ def audit_comments(heading):
         info["images"] = images_path
         info["comments"] = comments
         session[section.get(heading)] = info
+
         return redirect(url_for("create_audit"))
 
     return render_template("audit/audit_additional_info.html", heading = heading)
     
 
-@app.route("/result/<audit_id>", methods=["GET"])
+@app.route("/result/<audit_id>", methods=["GET", "POST"])
 def audit_result(audit_id):
     result = Audit.query.get(audit_id)
     section_list = ["PSH","HGC","FH","HC","WSH"]
-    remarks_list = []
+    remarks_list = {}
     for section in section_list:
-        remarks = pull_comments(audit_id, section)
-        remarks_list.append(remarks)
+        remarks = pull_comments(result.id, section)
+        remarks_list.update({section:remarks})
+       
     audit_details = {result.tenant:{"PSH": result.part1_score, "HGC":result.part2_score, "FH":result.part3_score, "HEI": result.part4_score, "WSH":result.part5_score, "Total": result.total_score, "Remarks":remarks_list, "Due":result.rectification}}
-   # images = os.listdir('./app/static/images')
-    image_list =[]
+   
+    image_list = {}
+
     for section in section_list:
         images = get_images(result.id, section)
-        image_list = image_list + images
-    
-    print(image_list)
-    return render_template('audit/audit_result.html', results = audit_details, images = image_list )
+        image_list.update({section: images})
 
+    if request.method == "POST":
+        section = request.form["sectionComment"]
+        images_list = request.files.getlist("files[]")
+        comments = request.form["audit-comments"]   
+        images_path = []
+        images_names = []
+        print("original")
+        print(images_list)
+        if images_list:
+            for each in images_list:
+                images_names.append(each.filename)
+                path = os.path.join(app.config['UPLOAD_FOLDER'], each.filename)
+                images_path.append(path)
+                each.save(path)
+                
+        cid = add_to_database(audit_id, comments, section, images_path, session["userId"], auditTenant(audit_id))
+        print("getting path for images")
+        print(images_path)
+        upload_image(audit_id, section, cid, images_path)
+        return redirect(url_for("audit_result", audit_id = audit_id))
+
+    return render_template('audit/audit_result.html', results = audit_details, images = image_list, remarks = remarks_list, sections = section_list, audit_id = audit_id )
 
 
 @app.route("/view-all")
 def view_audits():
     audits = getaudits()
     return render_template("audit/view_audits.html", audits = audits)
-
 
 
 #blues

@@ -9,7 +9,7 @@
 {% for tenant, results in results.items() %}
 <div id="results_card" class="card" style="border-color: darkorange;">
     <div class="card-header" style="background-color: rgba(128, 128, 128, 0.089); border-color: darkorange;">
-        <h1>{{tenant}}</h1>
+        <h2>{{tenant}}</h2>
         <ul class="nav nav-tabs card-header-tabs" id="results-list" role="tablist" >    
             <li class="nav-item" style="border-color: darkorange;">
                 <a class="nav-link active" role="tab" href="#results_details" aria-controls="results_details" aria-selected="true">Details</a>
@@ -19,6 +19,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" role="tab" href="#results_images" aria-controls="results_images" aria-selected="false"> Images</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" role="tab" href="#new_comment" aria-controls="new_comment" aria-selected="false"> Add Comment</a>
             </li>
         </ul>
     </div>
@@ -40,19 +43,138 @@
             </div>
             <div id="results_remarks" class="tab-pane" role="tabpanel">
                 <p class="card-text text-left"><strong>Additional Remarks: </strong></p>
+                {% for section, c in remarks.items() %}
+                        {% if section == "PSH" %}
+                        <h4 id="img-header">Professionalism & Staff Hygiene</h4><br>
+                        {% for comment in c %}
+                        <h6 class="card-text text-left">{{ comment }}</h6>
+                        {% endfor %}
+                        {% endif %}
 
-                {% for each in results["Remarks"] %}
-                <p class="card-text text-left">{{ each }}</p>
-                {% endfor %}
-                
+                        {% if section == "HGC" %}
+                        <h4 id="img-header">Housekeeping & General Cleanliness</h4><br>
+                        {% for comment in c %}
+                        
+                        <h6 class="card-text text-left">{{ comment }}</h6>
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if section == "FH" %}
+                        <h4 id="img-header">Food Hygiene</h4><br>
+                        {% for comment in c %}
+                            <h6 class="card-text text-left">{{ comment }}</h6>
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if section == "HC" %}
+                        <h4 id="cmt-header">Healthier Choice</h4><br>
+                        {% for comment in c %}
+                            <h6 class="card-text text-left">{{ comment }}</h6>
+                           
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if section == "WSH" %}
+                        <h4 id="cmt-header">Workhplace Safety & Health</h4><br>
+                        {% for comment in c %}
+                        <h6 class="card-text text-left">{{ comment }}</h6>
+                           
+                        {% endfor %}
+                        {% endif %}
+
+                    {% endfor %}
+
+
             </div>
             <div id="results_images" class="tab-pane" role="tabpanel">
                 <p class="card-text text-left"><strong>Images</strong></p>
                 <div class="audit-gallery">
-                    {% for name in images %}
-                        <image src={{name}}></image>
+                    {% for section, i in images.items() %}
+                        {% if section == "PSH" %}
+                        <h2 id="img-header">Professionalism & Staff Hygiene</h2><br>
+                        {% for name in i %}
+                            <image style="width: 60%; height: 30%" src={{name}}></image>
+                            <br>
+                            <br>
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if section == "HGC" %}
+                        <h2 id="img-header">Housekeeping & General Cleanliness</h2><br>
+                        {% for name in i %}
+                        
+                            <image style="width: 60%; height: 30%" src={{name}}></image>
+                            <br>
+                            <br>
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if section == "FH" %}
+                        <h2 id="img-header">Food Hygiene</h2><br>
+                        {% for name in i %}
+                            <image style="width: 60%; height: 30%" src={{name}}></image>
+                            <br>
+                            <br>
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if section == "HC" %}
+                        <h2 id="img-header">Healthier Choice</h2><br>
+                        {% for name in i %}
+                            <image style="width: 60%; height: 30%" src={{name}}></image>
+                            <br>
+                            <br>
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if section == "WSH" %}
+                        <h2 id="img-header">Workplace Safety & Health</h2><br>
+                        {% for name in i %}
+                            <image style="width: 60%; height: 30%" src={{name}}></image>
+                            <br>
+                            <br>
+                        {% endfor %}
+                        {% endif %}
+
                     {% endfor %}
                 </div>
+            </div>
+            
+            <div id="new_comment" class="tab-pane" role="tabpanel">
+                <form id="new_comment" enctype="multipart/form-data" method="POST">
+                   <h4>Section to be updated:  </h4> <select id="sectionComment" name="sectionComment">
+                        {% for s in sections %}
+                        <option value="{{ s }}">{{ s }}</option>
+                        {% endfor%}
+                    </select><br>
+                    <div>
+                        <p class="card-text text-left"><strong>Images</strong></p>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="upload-file">
+                                    <div class="upload-wrapper" id="uploadbox">
+                                        <label>
+                                            <input type="file" name="files[]" id="files" multiple
+                                                accept="image/jpeg, image/png, image/gif,">
+                                            <p>Drop your files here. <br>or <a>Browse</a></p>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12" style="margin: 0 0 10px 0;">
+                                <output id="image-gallery"></output>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="card-text text-left"><strong>Additional Remarks: </strong></p>
+                        <p class="card-text text-left"><input type="text" style="width: 100%; height: 200px;" id="audit-comments" name="audit-comments"><br><br></p>
+                    </div>
+                    <button type="submit" id="new_comment">Submit</button>
+                </form>
+
             </div>
 
         </div>
@@ -70,10 +192,244 @@
         $(this).tab('show')
     })
 </script>
+<script>
+	//I added event handler for the file upload control to access the files properties.
+	document.addEventListener("DOMContentLoaded", init, false);
 
+	//To save an array of attachments
+	var AttachmentArray = [];
+
+	//counter for attachment array
+	var arrCounter = 0;
+
+	//to make sure the error message for number of files will be shown only one time.
+	var filesCounterAlertStatus = false;
+
+	var path = location.pathname;
+
+
+	//un ordered list to keep attachments thumbnails
+	var ul = document.createElement("ul");
+	ul.className = "thumb-Images";
+	ul.id = "imgList";
+
+	function init() {
+		//add javascript handlers for the file upload event
+		document
+			.querySelector("#files")
+			.addEventListener("change", handleFileSelect, false);
+	}
+
+	//the handler for file upload event
+	function handleFileSelect(e) {
+		//to make sure the user select file/files
+		if (!e.target.files) return;
+
+		//To obtaine a File reference
+		var files = e.target.files;
+
+		// Loop through the FileList and then to render image files as thumbnails.
+		for (var i = 0, f; (f = files[i]); i++) {
+			//instantiate a FileReader object to read its contents into memory
+			var fileReader = new FileReader();
+
+			// Closure to capture the file information and apply validation.
+			fileReader.onload = (function (readerEvt) {
+				return function (e) {
+					//Apply the validation rules for attachments upload
+					ApplyFileValidationRules(readerEvt);
+
+					//Render attachments thumbnails.
+					RenderThumbnail(e, readerEvt);
+
+					//Fill the array of attachment
+					FillAttachmentArray(e, readerEvt);
+				};
+			})(f);
+
+			// Read in the image file as a data URL.
+			// readAsDataURL: The result property will contain the file/blob's data encoded as a data URL.
+			// More info about Data URI scheme https://en.wikipedia.org/wiki/Data_URI_scheme
+			fileReader.readAsDataURL(f);
+		}
+		document
+			.getElementById("files")
+			.addEventListener("change", handleFileSelect, false);
+	}
+
+	//To remove attachment once user click on x button
+	jQuery(function ($) {
+		$("div").on("click", ".img-wrap .close", function () {
+			var id = $(this)
+				.closest(".img-wrap")
+				.find("img")
+				.data("id");
+
+			//to remove the deleted item from array
+			var elementPos = AttachmentArray.map(function (x) {
+				return x.FileName;
+			}).indexOf(id);
+			if (elementPos !== -1) {
+				AttachmentArray.splice(elementPos, 1);
+			}
+
+			//to remove image tag
+			$(this)
+				.parent()
+				.find("img")
+				.not()
+				.remove();
+
+			//to remove div tag that contain the image
+			$(this)
+				.parent()
+				.find("div")
+				.not()
+				.remove();
+
+			//to remove div tag that contain caption name
+			$(this)
+				.parent()
+				.parent()
+				.find("div")
+				.not()
+				.remove();
+
+			//to remove li tag
+			var lis = document.querySelectorAll("#imgList li");
+			for (var i = 0; (li = lis[i]); i++) {
+				if (li.innerHTML == "") {
+					li.parentNode.removeChild(li);
+				}
+			}
+		});
+	});
+
+	//Apply the validation rules for attachments upload
+	function ApplyFileValidationRules(readerEvt) {
+		//To check file type according to upload conditions
+		if (CheckFileType(readerEvt.type) == false) {
+			alert(
+				"The file (" +
+				readerEvt.name +
+				") does not match the upload conditions, You can only upload jpg/png/gif files"
+			);
+			e.preventDefault();
+			return;
+		}
+
+		//To check file Size according to upload conditions
+		if (CheckFileSize(readerEvt.size) == false) {
+			alert(
+				"The file (" +
+				readerEvt.name +
+				") does not match the upload conditions, The maximum file size for uploads should not exceed 300 KB"
+			);
+			e.preventDefault();
+			return;
+		}
+
+		//To check files count according to upload conditions
+		if (CheckFilesCount(AttachmentArray) == false) {
+			if (!filesCounterAlertStatus) {
+				filesCounterAlertStatus = true;
+				alert(
+					"You have added more than 10 files. According to upload conditions you can upload 10 files maximum"
+				);
+			}
+			e.preventDefault();
+			return;
+		}
+	}
+
+	//To check file type according to upload conditions
+	function CheckFileType(fileType) {
+		if (fileType == "image/jpeg") {
+			return true;
+		} else if (fileType == "image/png") {
+			return true;
+		} else if (fileType == "image/gif") {
+			return true;
+		} else {
+			return false;
+		}
+		return true;
+	}
+
+	//To check file Size according to upload conditions
+	function CheckFileSize(fileSize) {
+		if (fileSize < 300000) {
+			return true;
+		} else {
+			return false;
+		}
+		return true;
+	}
+
+	//To check files count according to upload conditions
+	function CheckFilesCount(AttachmentArray) {
+		//Since AttachmentArray.length return the next available index in the array,
+		//I have used the loop to get the real length
+		var len = 0;
+		for (var i = 0; i < AttachmentArray.length; i++) {
+			if (AttachmentArray[i] !== undefined) {
+				len++;
+			}
+		}
+		//To check the length does not exceed 10 files maximum
+		if (len > 9) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	//Render attachments thumbnails.
+	function RenderThumbnail(e, readerEvt) {
+		var li = document.createElement("li");
+		ul.appendChild(li);
+		li.innerHTML = [
+			'<div class="img-wrap img-wrapper">' +
+			'<a href="', e.target.result, '"><img class="thumb" src="',
+			e.target.result,
+			'" title="',
+			escape(readerEvt.name),
+			'" data-id="',
+			readerEvt.name,
+			'"/></a>' + "<span class=\"close\"><i class=\"fa fa-trash-o\"></i></span></div>"
+		].join("");
+
+		var div = document.createElement("div");
+		div.className = "file-info";
+		li.appendChild(div);
+		div.innerHTML = [readerEvt.name].join("");
+		document.getElementById("image-gallery").insertBefore(ul, null);
+	}
+
+	//Fill the array of attachment
+	function FillAttachmentArray(e, readerEvt) {
+		AttachmentArray[arrCounter] = {
+			AttachmentType: 1,
+			ObjectType: 1,
+			FileName: readerEvt.name,
+			FileDescription: "Attachment",
+			NoteText: "",
+			MimeType: readerEvt.type,
+			Content: e.target.result.split("base64,")[1],
+			FileSizeInBytes: readerEvt.size,
+			Pathname: path,
+			Section: y,
+		};
+		arrCounter = arrCounter + 1;
+	}
+
+</script>
 
 
 
 {% endfor %}
+
+
+
 
 {% endblock %}

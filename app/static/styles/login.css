@@ -8,25 +8,29 @@
 }
 
 body{
-  padding-top:10%;
+  max-height: 250vh;
   align-content: center;
-}
+  min-height: 250vh;
+
+ }
 
 .login-form{
-  /* width:40%; */
+  width: 500px;
   background: #f1f1f1;
-  padding: 80px 40px;
+  padding: 80px 60px;
   border-radius: 10px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
+  margin-top: 10%;
 }
 
 .login-form h1{
   text-align: center;
   margin-bottom: 20px;
   position: relative;
+
 }
 
 .txtb{
@@ -111,4 +115,3 @@ span.txtb{
   display: block;
   margin: 0 auto 0 auto;
 }
-

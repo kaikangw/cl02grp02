@@ -27,20 +27,21 @@ def initialize():
 
 #Adminstrator
 ##Account Creation
-def create_account(username: str, email: str, usertype: str, password:str):
+def create_account(username: str, email: str, usertype: str, password:str, institution: str, description: str, location: str, tenancy: int):
     initialize()
     try:
-        auth.create_user(email = email, uid = userid)
-        auth.update_user(userid, password = password)
-        user1 = User(username = username, email = email, type = usertype)
+        user1 = User(username = username, email = email, type = usertype, institution = institution, description = description, location = location, tenancy = tenancy)
         db.session.add(user1)
         db.session.commit()
         userid = str(user1.id)
+        auth.create_user(email = email, uid = userid)
+        auth.update_user(userid, password = password)
         return True
-    except exc.IntegrityError:
+    except:
         db.session.rollback()
         print("User already exists.")
         return False 
+   
 
 ##Account Edit
 def get_alluser_list():

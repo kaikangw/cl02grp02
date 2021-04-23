@@ -24,12 +24,37 @@
             <label id="icon" for="password"><i class="fas fa-shield-alt"></i></label>
             <input type="text" class="form-input" name="password" id="password" placeholder="Password" required />
         </div>
+        
+        <div id="input-group">
+            <label id="icon" for="tenancy"><i class="far fa-calendar-alt"></i></label>
+            <input type="number" class="form-input" name="tenancy" id="tenancy" placeholder="Days Left" required />
+        </div> 
+        <div id="input-group">
+            <label id="icon" for="location"><i class="fas fa-map-marker-alt"></i></label>
+            <input type="text" class="form-input" name="location" id="location" placeholder="Location of Stall" required />
+        </div>
         <div id="input-group"><label for="accountType" id="icon"><i class="far fa-user-circle"></i></label>
             <select class="form-input" name="accountType" id="accountType">
                 <option value="admin">Admin</option>
                 <option value="auditor">Auditor</option>
                 <option value="tenant">Tenant</option>
             </select>
+        </div>
+        <div id="input-group"><label for="instituition" id="icon"><i class="fas fa-university"></i></label>
+            <select class="form-input" name="instituition" id="instituition">
+                <option value="CGH">CGH</option>
+                <option value="KKH">KKH</option>
+                <option value="SGH">SGH</option>
+                <option value="SKH">SKH</option>
+                <option value="NCCS">NCCS</option>
+                <option value="NHCS">NHCS</option>
+                <option value="BVH">BVH</option>
+                <option value="OCH">OCH</option>
+                <option value="Academia">Academia</option>
+            </select>
+        </div>
+        <div id="input-group">
+            <textarea class="form-input" name="description" id="description" placeholder="Short description here" rows="5"></textarea>
         </div>
         <hr>
         <button id="registerBtn" type="submit" value="register">Register</button>

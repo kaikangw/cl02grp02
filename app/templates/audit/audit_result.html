@@ -168,7 +168,7 @@
 								<div class="upload-file">
 									<div class="upload-wrapper" id="uploadbox">
 										<label>
-											<input type="file" name="files[]" id="files" multiple
+											<input type="file" name="files" id="files" multiple
 												accept="image/jpeg, image/png, image/gif,">
 											<p>Drop your files here. <br>or <a>Browse</a></p>
 										</label>
@@ -371,7 +371,7 @@
 
 	//To check file Size according to upload conditions
 	function CheckFileSize(fileSize) {
-		if (fileSize < 300000) {
+		if (fileSize < 300000000) {
 			return true;
 		} else {
 			return false;

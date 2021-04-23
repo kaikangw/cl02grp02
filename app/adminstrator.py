@@ -18,7 +18,16 @@ def createAccount():
         username = request.form['username']
         password = request.form['password']
         accountType = request.form["accountType"]
-        if create_account(username,email,accountType,password):
+        instituition = request.form["instituition"]
+        description = request.form["description"]
+        tenancy = request.form["tenancy"]
+        location = request.form["location"]
+
+        print(instituition)
+        print(description)
+        print(tenancy)
+        print(location)
+        if create_account(username,email,accountType,password,instituition, description, location, tenancy):
             flash("Successful Account Creation!")
             return render_template("admin/admin_create.html")
         else:

@@ -546,10 +546,11 @@ def audit_result(audit_id):
         images_names = []
         if images_list:
             for each in images_list:
-                images_names.append(each.filename)
-                path = os.path.join(app.config['UPLOAD_FOLDER'], each.filename)
-                images_path.append(path)
-                each.save(path)
+                if each.filename != '':
+                    images_names.append(each.filename)
+                    path = os.path.join(app.config['UPLOAD_FOLDER'], each.filename)
+                    images_path.append(path)
+                    each.save(path)
                 
         cid = add_to_database(audit_id, comments, section, images_path, session["userId"], auditTenant(audit_id))
  
@@ -566,6 +567,7 @@ def view_audits():
 
     else:
         audits = getaudits()
+
     return render_template("audit/view_audits.html", audits = audits)
 
 

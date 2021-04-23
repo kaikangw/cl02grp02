@@ -87,7 +87,8 @@ h2#account, h5{
 .testbox {
   margin: 20px auto;
   width: 50%; 
-  height: 90%; 
+  height: 90%;
+  overflow-y: auto;
   -webkit-border-radius: 8px/7px; 
   -moz-border-radius: 8px/7px; 
   border-radius: 8px/7px; 
@@ -229,4 +230,8 @@ a#chooseUser{
 
 select#type{
   border-radius: 2px black solid;
+}
+
+textarea#description{
+  width: 90%;
 }

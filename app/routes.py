@@ -428,7 +428,7 @@ def create_audit():
         audit = Audit(part1_score = int(part1_score), part2_score = int(part2_score), part3_score= int(part3_score), part4_score = int(part4_score), part5_score = int(part5_score), total_score = int(total), auditor = auditor, tenant = tenant, rectification = form.rectification.data, timestamp = datetime.now(), remarks = form.remarks.data)
         db.session.add(audit)
         db.session.commit()
-        #send_audit_mail('audit/audit_w.html', form)
+        send_audit_mail('audit/audit_w.html', form)
         result =  Audit.query.order_by(Audit.id.desc()).first()
 
         PSH = session["PSH"]

@@ -246,31 +246,7 @@ def search_query():
 
 @app.route('/data/frequency', methods=['GET', 'POST'])
 def data_frequency():
-    form = NewForm()
-    if form.validate_on_submit():
-        auditor = form.auditor.data
-        auditor = Audit.query.filter(Audit.auditor==auditor).order_by(Audit.timestamp.desc()).all() 
-        month = datetime.now().month
-        auditor_dict = []
-        audit_list = []   
-        small_list = []
-        for a in auditor:
-            if a.timestamp.month != month :
-                small_list.append(month)
-                month = a.timestamp.month
-                auditor_dict.append( audit_list)
-                audit_list = []
-                if a == auditor[len(auditor)-1]:
-                    audit_list.append([a.tenant,a.timestamp])
-                    month = a.timestamp.month
-                    small_list.append(month)
-                    auditor_dict.append( audit_list)
-                    break
-            audit_list.append([a.tenant,a.timestamp])
-        auditor_dict[0] = auditor_dict[0][-5:]
-
-        return render_template("auditor_data.html", auditor = auditor_dict, title = form.auditor.data ) 
-
+    
     title1 = "CGH"
     title2 = "KKH"
     title3 = "SGH"
@@ -284,7 +260,7 @@ def data_frequency():
     audits = audits[:-1]
     for a in audits:
         tenant = a.tenant
-        user = User.query.filter(User.username == tenant).first()
+        user = User.query.filter(User.username == a.tenant).first()
         if user.institution == title1:
             cgh.append([a.timestamp,a.auditor, a.tenant])
         if user.institution == title2:
@@ -294,7 +270,7 @@ def data_frequency():
         if user.institution== title4:
             skh.append([a.timestamp,a.auditor, a.tenant])
 
-    return render_template("frequency.html", form = form, title1=title1, title2=title2, title3=title3, title4=title4, cgh = cgh[-5:], kkh = kkh, sgh = sgh, skh = skh)
+    return render_template("frequency.html",  title1=title1, title2=title2, title3=title3, title4=title4, cgh = cgh, kkh = kkh, sgh = sgh, skh = skh)
 
 
 @app.route('/saved', methods=['GET', 'POST'])
@@ -341,6 +317,8 @@ def download():
     data = []
     for i in range(len(month)):
         data.append([month[i], result[i]])
+        if i == (len(result)-1):
+            break
     df_1 = pd.DataFrame(data, columns=["Month", "Result"])
 
     #create an output stream
